@@ -1,6 +1,5 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
-import PublicHomePage from './components/PublicHomePage/PublicHomePage'
 import Layout from './components/Layout/Layout'
 import Login from './components/Login/Login'
 import Register from './components/Register/Register'
@@ -12,13 +11,13 @@ function App() {
   return (
   <Routes>
     <Route path='/' element={<Layout />}>
-      <Route path='/' element={<PublicHomePage />}/>
       <Route path='login' element={<Login />}/>
       <Route path='register' element={<Register />} />
       <Route path='/' element={<PrivateRoute />}>
-        <Route path='/' element={<UserHomePage />}/>
+        <Route index element={<UserHomePage />}/>
         {/* Tutaj dodamy kolejne routy dla zalogowanych userów  */}
       </Route>
+      <Route path='*' element={<Navigate to={'/'} />} /> 
     </Route>
   </Routes>
     
