@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const PublicHomePage = () => {
-  return (
-    <div>PublicHomePage</div>
-  )
-}
+  return <div>PublicHomePage</div>;
+};
 
-export default PublicHomePage
+export default PublicHomePage;
