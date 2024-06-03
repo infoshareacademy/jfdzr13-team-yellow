@@ -1,4 +1,5 @@
 import React from "react";
+
 import styles from "./PublicHomePage.module.css";
 
 import Vector1 from "./assets/Vector1.png";
@@ -75,6 +76,8 @@ const PublicHomePage = () => {
       </div>
     </div>
   );
-};
+
+
+
 
 export default PublicHomePage;
