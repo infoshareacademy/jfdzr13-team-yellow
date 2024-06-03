@@ -1,6 +1,10 @@
 import React from "react";
 import styles from "./PublicHomePage.module.css";
 
+import Vector1 from "./assets/Vector1.png";
+import Vector2 from "./assets/Vector2.png";
+import Vector3 from "./assets/Vector3.png";
+
 const PublicHomePage = () => {
   return (
     <div>
@@ -19,6 +23,9 @@ const PublicHomePage = () => {
               <button className={styles.heroButton}>Zacznij teraz</button>
             </div>
           </div>
+          <img className={styles.herovector1} src={Vector1} alt="" />
+          <img className={styles.herovector2} src={Vector2} alt="" />
+          <img className={styles.herovector3} src={Vector3} alt="" />
           <div className={styles.herohalfcircle1}></div>
           <div className={styles.herohalfcircle2}></div>
         </section>
