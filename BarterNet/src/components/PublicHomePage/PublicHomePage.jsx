@@ -78,6 +78,6 @@ const PublicHomePage = () => {
   );
 
 
-
+}
 
 export default PublicHomePage;
