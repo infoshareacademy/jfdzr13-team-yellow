@@ -1,5 +1,5 @@
 import React from "react";
-
+import { NavLink } from "react-router-dom";
 import styles from "./PublicHomePage.module.css";
 
 import HeroBackground from "./assets/hero-background.png";
@@ -18,9 +18,9 @@ const PublicHomePage = () => {
             </p>
             <div className={styles.heroButtonWrapper}>
               <div>
-                <a href="/register">
+                <NavLink to="/login">
                   <button className={styles.heroButton}>Zacznij teraz</button>
-                </a>
+                </NavLink>
               </div>
             </div>
           </div>
