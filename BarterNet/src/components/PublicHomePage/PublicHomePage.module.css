@@ -1,19 +1,22 @@
 * {
   font-family: var(--font-secondary);
+  color: var(--light-text-color);
 }
 
 body {
   margin: 0;
 }
+
+/* Hero section */
 .hero {
-  position: relative;
   text-align: center;
   padding: 10vh 30vw 0 30vw;
-
-  background-color: #023853;
-  color: var(--background-color);
-  z-index: 0;
-  overflow: hidden;
+  margin-bottom: 100px;
+  background-image: url("./assets/hero-background.png");
+  background-size: cover;
+  background-position: center bottom; /* Center the background image */
+  background-repeat: no-repeat;
+  height: 50vh;
 }
 
 h1 {
@@ -26,109 +29,92 @@ h1 {
   font-size: 1.3rem;
 }
 
+.heroButtonContainer {
+  position: relative;
+  height: 100%;
+}
+
 .heroButtonWrapper {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  bottom: -25px;
+  text-align: center;
   display: inline-block;
-  background: linear-gradient(to bottom, #01152b, var(--primary-color));
+  background: radial-gradient(
+    circle at 55% 55%,
+    #023853 65%,
+    #739cb5 70%,
+    #023853 75%
+  );
   padding: 3px;
   padding: 10px;
-  height: 220px;
-  width: 220px;
+  height: 350px;
+  width: 350px;
   border-radius: 50%;
-  z-index: 20;
-  overflow: hidden;
+  box-shadow: 1px 16px 82px -2px rgba(2, 56, 83, 1);
+  transition: box-shadow 4s;
 }
 
 .heroButtonWrapper div {
   margin: 5%;
   padding: 5%;
-  background-color: var(--primary-color);
+  background: linear-gradient(-30deg, #5c7b9e 5%, #739cb5 30%, #5c7b9e 100%);
   height: 80%;
   width: 80%;
   border-radius: 50%;
   display: flex;
   justify-content: center;
 }
+.heroButtonWrapper div a {
+  margin: auto 0;
+}
 
 .heroButton {
   width: 100%;
-  margin: auto 0;
   background-color: var(--background-color);
-  color: var(--primary-color);
+  color: var(--text-color);
   border: none;
-  padding: 0.8rem;
+  padding: 20px 30px;
   cursor: pointer;
   transition: var(--button-hover-effect);
-  border-radius: 25px;
-  height: 50px;
-  font-weight: 900;
-  z-index: 20;
+  border-radius: 35px;
+  font-weight: bold;
   text-transform: uppercase;
+  font-size: 1.7rem;
 }
 
 .heroButton:hover {
-  opacity: 0.8;
+  color: var(--light-text-color);
+  background: var(--accent-color);
 }
 
-.herovector1 {
-  position: absolute;
-  z-index: -3;
-  left: 0;
-  bottom: 0;
-  max-width: 60vw;
+body:has(.heroButton:hover) .heroButtonWrapper {
+  background: radial-gradient(
+    circle at 45% 45%,
+    #023853 65%,
+    #739cb5 70%,
+    #023853 75%
+  );
+}
+body:has(.heroButton:hover) .heroButtonWrapper div {
+  background: linear-gradient(-30deg, #5c7b9e 15%, #739cb5 85%, #5c7b9e 100%);
 }
 
-.herovector2 {
-  position: absolute;
-  z-index: -3;
-  left: 0;
-  bottom: 50px;
-  max-width: 30vw;
-  width: 150px;
-}
-
-.herovector3 {
-  position: absolute;
-  z-index: -3;
-  left: 0;
-  bottom: 50px;
-  max-width: 20vw;
-  width: 80px;
-}
-
-.herohalfcircle1 {
-  background-color: var(--highlight-color);
-  width: 55vw;
-  height: 200px;
-  position: absolute;
-  bottom: -100px;
-  left: -5vw;
-  border-radius: 50%;
-  z-index: -1;
-}
-
-.herohalfcircle2 {
-  background-color: var(--highlight-color);
-  width: 55vw;
-  height: 200px;
-  position: absolute;
-  bottom: -100px;
-  right: -5vw;
-  border-radius: 50%;
-  z-index: -1;
-}
+/* Section 2 */
 
 .buttonsSection {
-  display: block;
-  position: relative;
-  z-index: 10;
+  margin: var(--default-margin);
+  padding: var(--default-padding);
 }
 
 .buttonscontainer {
   display: flex;
   gap: 1rem;
   margin: 0;
-  margin: 2rem;
-  background-color: #4a91e24b;
+  background-color: #e5e5df;
   border-radius: 25px;
 }
 
@@ -136,12 +122,13 @@ h1 {
   width: 33%;
   background: transparent;
   color: var(--primary-color);
-  font-weight: 700;
+  font-weight: var(--button-font-weight);
+  font-size: var(--button-font-size);
   border: none;
-  padding: 1rem 2rem;
+  padding: var(--button-padding);
   cursor: pointer;
   transition: var(--button-hover-effect);
-  border-radius: 25px;
+  border-radius: var(--button-border-radius);
   text-transform: uppercase;
 }
 
@@ -150,40 +137,54 @@ h1 {
   color: var(--button-text-color);
 }
 
+/* Section 3 */
+
 .articles {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  justify-content: space-around;
-  height: 450px;
+  justify-content: space-between;
+  height: 500px;
+  margin: var(--default-margin);
+  padding: var(--default-padding);
 }
 
 .article {
+  position: relative; /* Added position relative for absolute positioning */
   background-image: url("https://images.unsplash.com/photo-1583339972074-a01b1a10b693?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   background-repeat: no-repeat;
   background-size: cover;
   background-color: var(--secondary-color);
-
   box-shadow: var(--box-shadow);
-  width: 30%;
+  width: 32%;
   height: 100%;
   display: flex;
   align-items: end;
   border-radius: 25px;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+}
+
+.article:hover {
+  transform: scale(1.05);
 }
 
 .article__container {
-  height: 40%;
   background-color: var(--primary-color);
   padding: 30px;
   border-radius: 25px;
   color: var(--button-text-color);
   width: 100%;
-  transition: 0.3s;
+  overflow: hidden;
+}
+.article__container p {
+  display: none;
+  opacity: 0;
 }
 
-.article__container:hover {
-  height: 70%;
+.article:hover .article__container p {
+  display: block;
+  opacity: 1;
 }
 
 h2 {
@@ -195,14 +196,15 @@ h2 {
   background-color: var(--background-color);
   color: var(--primary-color);
   border: none;
-  padding: 0 30px;
+  padding: var(--button-padding);
   cursor: pointer;
   transition: var(--button-hover-effect);
-  border-radius: 25px;
-  height: 50px;
-  font-weight: 900;
+  border-radius: var(--button-border-radius);
+  font-weight: var(--button-font-weight);
+  font-size: var(--button-font-size);
 }
 
 .articleButton:hover {
-  opacity: 0.8;
+  background: var(--accent-color);
+  color: var(--button-text-color);
 }
