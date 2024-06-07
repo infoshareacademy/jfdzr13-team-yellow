@@ -4,13 +4,14 @@
 
 .footer {
   background-color: #d1c0a8;
-  padding: 2rem var(--default-padding);
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
 
 .footerColumn {
+  margin: var(--default-margin);
+  padding: var(--default-padding);
   flex: 1;
 }
 
