@@ -10,16 +10,22 @@ const Header = () => {
     <header>
       <nav className={styles.nav}>
         <div className={styles.navLeft}>
-          <img src={logo1} alt="Logo1" className={styles.logo1} />
+          <a href="/">
+            <img src={logo1} alt="Logo1" className={styles.logo1} />
+          </a>
         </div>
         <div className={styles.navCenter}>
           <img src={logo2} alt="Logo2" className={styles.logo2} />
         </div>
         <div className={styles.navRight}>
-          <button className={styles.navButton1}>
-            Zarejestruj się | Zaloguj
-          </button>
-          <button className={styles.navButton2}>Dodaj ogłoszenie</button>
+          <a href="/register">
+            <button className={styles.navButton1}>
+              Zarejestruj się | Zaloguj
+            </button>
+          </a>
+          <a href="/register">
+            <button className={styles.navButton2}>Dodaj ogłoszenie</button>
+          </a>
         </div>
       </nav>
     </header>
