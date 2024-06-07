@@ -2,33 +2,28 @@ import React from "react";
 
 import styles from "./PublicHomePage.module.css";
 
-import Vector1 from "./assets/Vector1.png";
-import Vector2 from "./assets/Vector2.png";
-import Vector3 from "./assets/Vector3.png";
+import HeroBackground from "./assets/hero-background.png";
 
 const PublicHomePage = () => {
   return (
     <div>
-      <div>PublicHomePage</div>
-
       <div>
         <section className={styles.hero}>
-          <h1>Wymień się!</h1>
-          <p>
-            Znajdź najlepsze oferty i wymieniaj się usługami, na te, których
-            potrzebujesz. Dołącz do nas i zacznij korzystać z możliwości, jakie
-            daje nowoczesny barter.
-          </p>
-          <div className={styles.heroButtonWrapper}>
-            <div>
-              <button className={styles.heroButton}>Zacznij teraz</button>
+          <div className={styles.heroButtonContainer}>
+            <h1>Wymień się!</h1>
+            <p>
+              Znajdź najlepsze oferty i wymieniaj się usługami, na te, których
+              potrzebujesz. Dołącz do nas i zacznij korzystać z możliwości,
+              jakie daje nowoczesny barter.
+            </p>
+            <div className={styles.heroButtonWrapper}>
+              <div>
+                <a href="/register">
+                  <button className={styles.heroButton}>Zacznij teraz</button>
+                </a>
+              </div>
             </div>
           </div>
-          <img className={styles.herovector1} src={Vector1} alt="" />
-          <img className={styles.herovector2} src={Vector2} alt="" />
-          <img className={styles.herovector3} src={Vector3} alt="" />
-          <div className={styles.herohalfcircle1}></div>
-          <div className={styles.herohalfcircle2}></div>
         </section>
 
         {/* Sekcja 2 */}
@@ -76,8 +71,6 @@ const PublicHomePage = () => {
       </div>
     </div>
   );
-
-
-}
+};
 
 export default PublicHomePage;
