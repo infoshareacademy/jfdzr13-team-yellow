@@ -5,14 +5,26 @@
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  margin: 10px;
+  margin: var(--default-margin);
 }
 
-.navLeft,
-.navCenter,
-.navRight {
+.navCenter {
+  width: 33%;
   display: flex;
+  justify-content: center;
   align-items: center;
+}
+
+.navLeft {
+  width: 33%;
+  display: flex;
+  justify-content: left;
+}
+
+.navRight {
+  width: 33%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .logo1 {
@@ -20,39 +32,47 @@
 }
 
 .logo2 {
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  width: 150px;
   object-fit: fill;
   border-radius: 50%;
   background-color: #d1c0a8;
   padding: 10px;
   position: absolute;
-  box-shadow: 2px 10px 15px rgb(41, 41, 41);
-  top: 40px;
+  box-shadow: 2px 20px 15px rgb(41, 41, 41);
+  top: 30px;
   margin: 0 1rem;
 }
 
 .navButton1 {
   background: transparent;
-  color: #023b56;
-  font-weight: 700;
+  color: var(--primary-color);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
   border: none;
   padding: 1rem 2rem;
   cursor: pointer;
   transition: var(--button-hover-effect);
   border-radius: 25px;
   text-transform: uppercase;
+  align-items: center;
+}
+
+.navButton1 img {
+  margin: 0 5px;
+  height: 19px;
 }
 
 .navButton2 {
   background: #023b56;
-  color: white;
-  font-weight: 700;
+  color: var(--button-text-color);
+  font-weight: var(--button-font-weight);
+  font-size: var(--button-font-size);
   border: none;
-  padding: 1rem 2rem;
+  padding: var(--button-padding);
   cursor: pointer;
   transition: var(--button-hover-effect);
-  border-radius: 25px;
+  border-radius: var(--button-border-radius);
   text-transform: uppercase;
 }
 
@@ -61,6 +81,6 @@
 }
 
 .navButton2:hover {
-  background: var(--primary-color);
+  background: var(--accent-color);
   color: var(--button-text-color);
 }
