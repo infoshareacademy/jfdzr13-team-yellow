@@ -1,28 +1,29 @@
 .nav {
+  margin: 0 auto;
+  max-width: 1600px;
   background-color: transparent;
   padding: var(--default-padding);
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  margin: var(--default-margin);
 }
 
 .navCenter {
-  width: 33%;
+  width: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .navLeft {
-  width: 33%;
+  width: 40%;
   display: flex;
   justify-content: left;
 }
 
 .navRight {
-  width: 33%;
+  width: 40%;
   display: flex;
   justify-content: flex-end;
 }
@@ -83,4 +84,41 @@
 .navButton2:hover {
   background: var(--accent-color);
   color: var(--button-text-color);
+}
+
+@media (max-width: 1024px) {
+  .navLeft {
+    width: 40%;
+  }
+  .navRight {
+    width: 60%;
+  }
+  .navCenter {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .navLeft,
+  .navCenter,
+  .navRight {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .navButton1,
+  .navButton2 {
+    margin: 5px 0;
+    padding: 6px 12px;
+    width: 100%;
+    text-align: center;
+  }
 }

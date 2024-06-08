@@ -7,7 +7,7 @@ import HeroBackground from "./assets/hero-background.png";
 const PublicHomePage = () => {
   return (
     <div>
-      <div>
+      <div className={styles.site}>
         <section className={styles.hero}>
           <div className={styles.heroButtonContainer}>
             <h1>Wymień się!</h1>
