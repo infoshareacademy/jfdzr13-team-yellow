@@ -1,8 +1,10 @@
 import { signOut } from "firebase/auth";
 import React from "react";
+
 import { NavLink } from "react-router-dom";
 import { auth } from "../../config/firebase";
 import { useAuth } from "../../contex/AuthProvider";
+
 import logo1 from "./assets/logo1.png";
 import logo2 from "./assets/logo2.png";
 import styles from "./header.module.css";
@@ -26,6 +28,7 @@ const Header = () => {
           <img src={logo2} alt="Logo2" className={styles.logo2} />
         </div>
         <div className={styles.navRight}>
+
           {(() => {
             if (currentUser) {
               return (
@@ -64,9 +67,12 @@ const Header = () => {
               );
             }
           })()}
+
         </div>
       </nav>
     </header>
   );
 };
+
 export default Header;
+
