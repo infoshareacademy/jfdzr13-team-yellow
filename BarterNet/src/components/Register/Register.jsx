@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../config/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../../config/firebase";
 import styles from "./Register.module.css";
 
 function Register() {
@@ -14,21 +14,47 @@ function Register() {
     city: "",
     phone: "",
     description: "",
+    termsAccepted: false, // Checkbox state
   });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, type, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
+  };
+
+  const validatePassword = (password) => {
+    return (
+      password.length >= 8 && /[a-zA-Z]/.test(password) && /\d/.test(password)
+    );
+  };
+
+  const validatePhone = (phone) => {
+    return /^\d{3}-\d{3}-\d{4}$/.test(phone);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.termsAccepted) {
+      setError("Musisz zaakceptować warunki świadczenia usług.");
+      return;
+    }
     if (formData.password !== formData.confirmPassword) {
-      alert("Hasła nie są takie same!");
+      setError("Hasła nie są takie same!");
+      return;
+    }
+    if (!validatePassword(formData.password)) {
+      setError(
+        "Hasło musi zawierać co najmniej 8 znaków, w tym litery i cyfry."
+      );
+      return;
+    }
+    if (!validatePhone(formData.phone)) {
+      setError("Numer telefonu musi być w formacie XXX-XXX-XXXX.");
       return;
     }
 
@@ -41,20 +67,19 @@ function Register() {
       const user = userCredential.user;
 
       await updateProfile(user, {
-        displayName: formData.firstName + " " + formData.lastName,
+        displayName: `${formData.firstName} ${formData.lastName}`,
       });
 
-      console.log("User registered and profile updated");
-      navigate("/");
+      navigate("/UserHomePage");
     } catch (error) {
-      console.error("Error in registration: ", error.message);
-      alert("Błąd rejestracji: " + error.message);
+      console.error("Error in registration: ", error);
+      setError("Błąd rejestracji: " + error.message);
     }
   };
 
-
   return (
     <div className={styles.registerContainer}>
+      <h1>Rejestracja</h1>
       <form onSubmit={handleSubmit} className={styles.registerForm}>
         <input
           type="text"
@@ -114,10 +139,22 @@ function Register() {
         />
         <textarea
           name="description"
-          placeholder="Opis (opcjonalnie)"
+          placeholder="Twój opis"
           value={formData.description}
           onChange={handleChange}
         />
+
+        <label>
+          <input
+            type="checkbox"
+            name="termsAccepted"
+            checked={formData.termsAccepted}
+            onChange={handleChange}
+          />
+          Akceptuję warunki świadczenia usług.
+        </label>
+
+        {error && <p className={styles.error}>{error}</p>}
         <button type="submit">Zarejestruj się</button>
       </form>
     </div>
