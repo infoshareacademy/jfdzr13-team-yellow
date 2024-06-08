@@ -55,6 +55,12 @@
   transition: var(--button-hover-effect);
   border-radius: 25px;
   text-transform: uppercase;
+  align-items: center;
+}
+
+.navButton1 img {
+  margin: 0 5px;
+  height: 19px;
 }
 
 .navButton2 {
