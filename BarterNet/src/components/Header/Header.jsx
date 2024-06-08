@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import styles from "./header.module.css";
 
 import logo1 from "./assets/logo1.png";
@@ -16,9 +16,9 @@ const Header = () => {
           <img src={logo2} alt="Logo2" className={styles.logo2} />
         </div>
         <div className={styles.navRight}>
-          <button className={styles.navButton1}>
+          <Link to="/login" className={styles.navButton1}>
             Zarejestruj się | Zaloguj
-          </button>
+          </Link>
           <button className={styles.navButton2}>Dodaj ogłoszenie</button>
         </div>
       </nav>
