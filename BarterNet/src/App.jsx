@@ -4,6 +4,7 @@ import Layout from './components/Layout/Layout'
 import Login from './components/Login/Login'
 import Register from './components/Register/Register'
 import UserHomePage from './components/UserHomePage/UserHomePage'
+import PasswordsReset from './components/PasswordsReset/PasswordsReset';
 import PrivateRoute from './utils/PrivateRoute'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     <Route path='/' element={<Layout />}>
       <Route path='login' element={<Login />}/>
       <Route path='register' element={<Register />} />
+      <Route path='passwordreset' element={<PasswordsReset />} /> {/* Trasa do resetowania hasła */}
       <Route path='/' element={<PrivateRoute />}>
         <Route index element={<UserHomePage />}/>
         {/* Tutaj dodamy kolejne routy dla zalogowanych userów  */}
