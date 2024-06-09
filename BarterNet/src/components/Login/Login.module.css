@@ -27,7 +27,7 @@
 }
 
 .loginTitle {
-  font-size: 2rem;
+  font-size: 3rem;
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
@@ -44,6 +44,11 @@
 .loginForm {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
 }
 
 .loginForm label {
@@ -111,4 +116,33 @@
 
 .loginFooter a:hover {
   text-decoration: underline;
+}
+
+
+/* Responsywność dla urządzeń mobilnych */
+@media (max-width: 768px) {
+  .loginContainer {
+    flex-direction: column;
+  }
+
+  .loginLeft {
+    min-height: 200px;
+  }
+
+  .loginRight {
+    width: 90%; 
+    padding: 20px;
+  }
+
+  .loginTitle, .loginSubtitle {
+    font-size: 1.2rem;
+  }
+
+  .loginForm input, .loginForm button {
+    padding: 10px;
+  }
+
+  .loginFooter {
+    font-size: 0.65rem; 
+  }
 }
