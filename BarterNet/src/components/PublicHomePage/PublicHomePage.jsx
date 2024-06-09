@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./PublicHomePage.module.css";
 import ListingItem from "../ListingItem/ListingItem.jsx";
 
-import HeroBackground from "./assets/hero-background.png";
+import HeroBackground from "./assets/hero-1600-background.webp";
 
 const articles = [
   {
