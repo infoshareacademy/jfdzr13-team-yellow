@@ -4,11 +4,14 @@ import { useAuth } from "../../contex/AuthProvider";
 
 import styles from "./ListingItem.module.css";
 
-const ListingItem = ({ index, title, content }) => {
+const ListingItem = ({ index, title, content, image }) => {
   const { currentUser } = useAuth();
 
   return (
-    <div className={styles.article}>
+    <div
+      className={styles.article}
+      style={{ backgroundImage: `url(${image})` }}
+    >
       <div className={styles.article__container}>
         <h2>{title}</h2>
         <p>{content}</p>
