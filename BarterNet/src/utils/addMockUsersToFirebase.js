@@ -28,4 +28,4 @@ export const addMockUsersToFirebase = async () => {
 };
 
 
-addMockUsersToFirebase();
+// addMockUsersToFirebase();
