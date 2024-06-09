@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./PublicHomePage.module.css";
 
-import HeroBackground from "./assets/hero-background.png";
+import HeroBackground from "./assets/hero-1600-background.webp";
 
 const PublicHomePage = () => {
   return (
