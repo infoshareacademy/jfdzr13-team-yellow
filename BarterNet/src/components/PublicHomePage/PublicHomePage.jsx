@@ -1,6 +1,7 @@
 import React from "react";
 
 import styles from "./PublicHomePage.module.css";
+import ListingItem from "../ListingItem/ListingItem.jsx";
 
 import HeroBackground from "./assets/hero-background.png";
 
@@ -36,37 +37,12 @@ const PublicHomePage = () => {
         </section>
 
         {/* Sekcja 3 */}
-        <section className={styles.articles}>
-          <article className={styles.article}>
-            <div className={styles.article__container}>
-              <h2>Nauka angielskiego online</h2>
-              <p>
-                Chętnie naucze Cię języka angielskiego. Przez 20 lat mieszkałam
-                w Angli i mam doświadczenie w...
-              </p>
-              <button className={styles.articleButton}>Wymień się</button>
-            </div>
-          </article>
-          <article className={styles.article}>
-            <div className={styles.article__container}>
-              <h2>Wyprowadzanie psa</h2>
-              <p>
-                Nie masz czasu na poranne spacery ze swoim pupuliem, chętnie Ci
-                w tym pomogę, bo...
-              </p>
-              <button className={styles.articleButton}>Wymień się</button>
-            </div>
-          </article>
-          <article className={styles.article}>
-            <div className={styles.article__container}>
-              <h2>Nauka gry na gitarze</h2>
-              <p>
-                Zawsze marzyłeś o tym, żeby grać na gitarze, ale rodzice
-                zapisali Cię na karate, skorzystaj z...
-              </p>
-              <button className={styles.articleButton}>Wymień się</button>
-            </div>
-          </article>
+        <section className={styles.gridSection}>
+          <div className={styles.gridContainer}>
+            <ListingItem />
+            <ListingItem />
+            <ListingItem />
+          </div>
         </section>
       </div>
     </div>
