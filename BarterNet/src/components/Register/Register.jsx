@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../../config/firebase";
+import { auth, db} from "../../config/firebase";
 import styles from "./Register.module.css";
+import { setDoc, doc } from "firebase/firestore";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -65,6 +66,20 @@ function Register() {
         formData.password
       );
       const user = userCredential.user;
+   
+// Dodanie użytkownika do bazy
+  await setDoc(doc(db, "users", user.uid), {
+  email: formData.email,
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    city: formData.city,
+    phone: formData.phone,
+    description: formData.description,
+    listings: [
+      {offer: []},
+      {search: []},
+      ],
+  })
 
       await updateProfile(user, {
         displayName: `${formData.firstName} ${formData.lastName}`,
