@@ -1,22 +1,24 @@
-* {
-  font-family: var(--font-secondary);
-  color: var(--light-text-color);
-}
-
 body {
   margin: 0;
+}
+
+.site {
+  font-family: var(--font-secondary);
+  color: var(--light-text-color);
+  margin: 0 auto;
+  max-width: 1600px;
 }
 
 /* Hero section */
 .hero {
   text-align: center;
-  padding: 10vh 30vw 0 30vw;
+  padding: 10% 25% 0 25%;
   margin-bottom: 100px;
   background-image: url("./assets/hero-background.png");
   background-size: cover;
   background-position: center bottom; /* Center the background image */
   background-repeat: no-repeat;
-  height: 50vh;
+  height: 600px;
 }
 
 h1 {
@@ -51,8 +53,8 @@ h1 {
   );
   padding: 3px;
   padding: 10px;
-  height: 350px;
-  width: 350px;
+  height: 250px;
+  width: 250px;
   border-radius: 50%;
   box-shadow: 1px 16px 82px -2px rgba(2, 56, 83, 1);
   transition: box-shadow 4s;
@@ -77,13 +79,13 @@ h1 {
   background-color: var(--background-color);
   color: var(--text-color);
   border: none;
-  padding: 20px 30px;
+  padding: 20px 15px;
   cursor: pointer;
   transition: var(--button-hover-effect);
   border-radius: 35px;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
 }
 
 .heroButton:hover {
@@ -144,7 +146,6 @@ body:has(.heroButton:hover) .heroButtonWrapper div {
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: space-between;
-  height: 500px;
   margin: var(--default-margin);
   padding: var(--default-padding);
 }
@@ -157,7 +158,7 @@ body:has(.heroButton:hover) .heroButtonWrapper div {
   background-color: var(--secondary-color);
   box-shadow: var(--box-shadow);
   width: 32%;
-  height: 100%;
+  height: 450px;
   display: flex;
   align-items: end;
   border-radius: 25px;
@@ -207,4 +208,46 @@ h2 {
 .articleButton:hover {
   background: var(--accent-color);
   color: var(--button-text-color);
+}
+
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 4rem;
+  }
+
+  .article {
+    width: 48%;
+  }
+}
+
+@media (max-width: 720px) {
+  h1 {
+    font-size: 2rem;
+  }
+  .hero {
+    padding: 10% 12% 0 12%;
+    height: 400px;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+  .heroButtonWrapper {
+    width: 200px;
+    height: 200px;
+  }
+
+  .heroButton {
+    font-size: 1rem;
+  }
+  .buttonscontainer {
+    flex-direction: column;
+  }
+  .button {
+    width: 100%;
+  }
+
+  .article {
+    width: 100%;
+  }
 }
