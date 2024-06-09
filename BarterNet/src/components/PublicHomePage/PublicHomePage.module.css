@@ -141,82 +141,20 @@ body:has(.heroButton:hover) .heroButtonWrapper div {
 
 /* Section 3 */
 
-.articles {
-  display: flex;
+.gridContainer {
+  display: grid;
   gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  grid-template-columns: 1fr 1fr 1fr;
   margin: var(--default-margin);
   padding: var(--default-padding);
-}
-
-.article {
-  position: relative; /* Added position relative for absolute positioning */
-  background-image: url("https://images.unsplash.com/photo-1583339972074-a01b1a10b693?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: var(--secondary-color);
-  box-shadow: var(--box-shadow);
-  width: 32%;
-  height: 450px;
-  display: flex;
-  align-items: end;
-  border-radius: 25px;
-  overflow: hidden;
-  transition: transform 0.6s ease-in-out;
-}
-
-.article:hover {
-  transform: scale(1.05);
-}
-
-.article__container {
-  background-color: var(--primary-color);
-  padding: 30px;
-  border-radius: 25px;
-  color: var(--button-text-color);
-  width: 100%;
-  overflow: hidden;
-}
-.article__container p {
-  display: none;
-  opacity: 0;
-}
-
-.article:hover .article__container p {
-  display: block;
-  opacity: 1;
-}
-
-h2 {
-  font-family: var(--font-primary);
-}
-
-.articleButton {
-  margin: 0;
-  background-color: var(--background-color);
-  color: var(--primary-color);
-  border: none;
-  padding: var(--button-padding);
-  cursor: pointer;
-  transition: var(--button-hover-effect);
-  border-radius: var(--button-border-radius);
-  font-weight: var(--button-font-weight);
-  font-size: var(--button-font-size);
-}
-
-.articleButton:hover {
-  background: var(--accent-color);
-  color: var(--button-text-color);
 }
 
 @media (max-width: 1024px) {
   h1 {
     font-size: 4rem;
   }
-
-  .article {
-    width: 48%;
+  .gridContainer {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -247,7 +185,7 @@ h2 {
     width: 100%;
   }
 
-  .article {
-    width: 100%;
+  .gridContainer {
+    grid-template-columns: 1fr;
   }
 }
