@@ -6,6 +6,7 @@
   min-height: 100vh;
   padding: 20px;
   background: var(--background-color);
+  margin-top: 100px;
 }
 
 .registerForm {
@@ -23,6 +24,7 @@
   color: var(--text-color);
   margin-bottom: 20px;
   text-align: center;
+  font-size: 20px;
 }
 
 .registerForm input,

@@ -18,7 +18,7 @@ const PublicHomePage = () => {
             </p>
             <div className={styles.heroButtonWrapper}>
               <div>
-                <a href="/register">
+                <a href="/login">
                   <button className={styles.heroButton}>Zacznij teraz</button>
                 </a>
               </div>
