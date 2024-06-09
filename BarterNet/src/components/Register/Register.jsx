@@ -14,7 +14,7 @@ function Register() {
     city: "",
     phone: "",
     description: "",
-    termsAccepted: false, // Checkbox state
+    termsAccepted: false,
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ function Register() {
   };
 
   const validatePhone = (phone) => {
-    return /^\d{3}-\d{3}-\d{4}$/.test(phone);
+    return /^\d{3}-\d{3}-\d{3}$/.test(phone);
   };
 
   const handleSubmit = async (e) => {
@@ -54,7 +54,7 @@ function Register() {
       return;
     }
     if (!validatePhone(formData.phone)) {
-      setError("Numer telefonu musi być w formacie XXX-XXX-XXXX.");
+      setError("Numer telefonu musi być w formacie XXX-XXX-XXX.");
       return;
     }
 
@@ -100,7 +100,7 @@ function Register() {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="example@example.pl"
           value={formData.email}
           onChange={handleChange}
           required
@@ -108,7 +108,7 @@ function Register() {
         <input
           type="password"
           name="password"
-          placeholder="Hasło"
+          placeholder="Wpisz hasło"
           value={formData.password}
           onChange={handleChange}
           required
