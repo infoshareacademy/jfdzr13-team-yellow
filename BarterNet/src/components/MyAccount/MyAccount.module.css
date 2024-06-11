@@ -1,0 +1,83 @@
+/* MyAccount.module.css */
+.accountContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: var(--background-color);
+}
+
+.header {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+
+.tileContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.accountTile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 140px;
+    background: var(--primary-color);
+    border-radius: 10px;
+    color: var(--light-text-color);
+    text-decoration: none;
+    padding: 10px;
+    box-shadow: var(--box-shadow);
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.tileLabel {
+    font-size: 1rem;
+}
+
+.modalContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--form-background-color);
+    border: none;
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.modalHeader {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.modalButton {
+    padding: 10px 20px;
+    margin: 10px;
+    background: var(--button-background);
+    color: var(--button-text-color);
+    border-radius: var(--button-border-radius);
+    cursor: pointer;
+    font-weight: var(--button-font-weight);
+    text-transform: uppercase;
+}
+
+.logout, .cancel {
+    transition: background-color 0.3s;
+}
+
+.logout:hover, .cancel:hover {
+    opacity: var(--button-hover-effect);
+}
