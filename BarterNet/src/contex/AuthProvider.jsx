@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import React, { useEffect, useState, createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import Spinner from '../components/Spinner/Spinner';
 import { auth } from '../config/firebase';
-import Spinner from '../utils/Spinner';
 
 const AuthContext = createContext({});
 export const useAuth = () => useContext(AuthContext);
