@@ -1,8 +1,6 @@
-import { signOut } from "firebase/auth";
-import React from "react";
 
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { auth } from "../../config/firebase";
 import { useAuth } from "../../contex/AuthProvider";
 
 import logo1 from "./assets/logo1.png";
@@ -12,9 +10,6 @@ import styles from "./header.module.css";
 const Header = () => {
   const { currentUser } = useAuth();
 
-  const handleLogOut = () => {
-    return signOut(auth);
-  };
 
   return (
     <header>
@@ -45,9 +40,7 @@ const Header = () => {
                     </button>
                   </NavLink>
 
-                  <button onClick={handleLogOut} className={styles.navButton1}>
-                    Wyloguj
-                  </button>
+              
                 </>
               );
             } else {
