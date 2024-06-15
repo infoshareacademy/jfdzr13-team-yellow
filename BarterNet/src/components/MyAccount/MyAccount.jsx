@@ -1,15 +1,38 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contex/AuthProvider";
 import Modal from "react-modal";
 import styles from "./MyAccount.module.css";
-import myAdsIcon from "../..//assets/icons/myAdsIcon.png";
+import myAdsIcon from "../../assets/icons/myAdsIcon.png";
 import myProfileIcon from "../../assets/icons/myProfileIcon.png";
 import logoutIcon from "../../assets/icons/logoutIcon.png";
 import deleteUserIcon from "../../assets/icons/deleteUserIcon.png";
 
 const MyAccount = () => {
+  const { logout, deleteAccount } = useAuth();
+  const navigate = useNavigate();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setIsLogoutModalOpen(false);
+      navigate("/PublicHomePage");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      await deleteAccount();
+      setIsDeleteModalOpen(false);
+      navigate("/PublicHomePage");
+    } catch (error) {
+      console.error("Delete account failed", error);
+    }
+  };
 
   return (
     <div className={styles.accountContainer}>
@@ -75,18 +98,8 @@ const MyAccount = () => {
           />
           Czy na pewno chcesz się wylogować?
         </h2>
-        <button
-          onClick={() => setIsLogoutModalOpen(false)}
-          className={`${styles.modalButton} ${styles.cancel}`}
-        >
-          Nie
-        </button>
-        <button
-          onClick={() => setIsLogoutModalOpen(false)}
-          className={`${styles.modalButton} ${styles.logout}`}
-        >
-          Tak, wyloguj
-        </button>
+        <button onClick={() => setIsLogoutModalOpen(false)} className={`${styles.modalButton} ${styles.cancel}`}>Nie</button>
+        <button onClick={handleLogout} className={`${styles.modalButton} ${styles.logout}`}>Tak, wyloguj</button>
       </Modal>
 
       <Modal
@@ -111,7 +124,7 @@ const MyAccount = () => {
           Nie
         </button>
         <button
-          onClick={() => setIsDeleteModalOpen(false)}
+          onClick={handleDeleteAccount}
           className={`${styles.modalButton} ${styles.logout}`}
         >
           Tak, usuń
