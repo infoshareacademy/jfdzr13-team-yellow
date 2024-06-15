@@ -1,0 +1,65 @@
+.accountContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  background: var(--background-color);
+}
+
+.tileContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 20px;
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 300px;
+  margin-bottom: 200px;
+  align-items: stretch;
+}
+
+.accountTile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--primary-color);
+  border-radius: 20px;
+  color: white;
+  text-decoration: none;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+
+.accountTile:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.tileLabel {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.tileDescription {
+  font-size: 10px;
+  color: var(--light-text-color);
+  opacity: 0.6;
+  line-height: 1.5;
+  margin-top: 10px;
+  text-align: center;
+}
