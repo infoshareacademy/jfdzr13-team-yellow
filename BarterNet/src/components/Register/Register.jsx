@@ -24,6 +24,22 @@ function Register() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    let formattedValue = value;
+    if (name === "phone") {
+      formattedValue = value.replace(/\D/g, "");  
+      formattedValue = formattedValue.slice(0, 9);  
+  
+      formattedValue = formattedValue.replace(/(\d{1,3})(\d{1,3})(\d{1,3})/, (match, p1, p2, p3) => {
+        return [p1, p2, p3].filter(Boolean).join('-');
+      });
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : formattedValue,
+    }));
     if (e.target) {
       const { name, value, type, checked } = e.target;
       setFormData((prev) => ({
