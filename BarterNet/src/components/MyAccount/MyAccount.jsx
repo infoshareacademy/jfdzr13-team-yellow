@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contex/AuthProvider";
+import { auth, db } from "../../config/firebase";
+import { deleteUser, getAuth } from "firebase/auth";
+import { doc, deleteDoc } from "firebase/firestore";
 import Modal from "react-modal";
 import styles from "./MyAccount.module.css";
 import myAdsIcon from "../../assets/icons/myAdsIcon.png";
@@ -24,10 +27,17 @@ const MyAccount = () => {
     }
   };
 
+  const deleteUserData = async (uid) => {
+    const userRef = doc(db, "users", uid);
+    await deleteDoc(userRef);
+  };
+  
+
   const handleDeleteAccount = async () => {
+    const user = auth.currentUser;
     try {
-      await deleteAccount();
-      setIsDeleteModalOpen(false);
+      await deleteUser(user);  // Usuwa użytkownika z Authentication
+      await deleteUserData(user.uid);  // Usuwa dane użytkownika z Firestore
       navigate("/PublicHomePage");
     } catch (error) {
       console.error("Delete account failed", error);
