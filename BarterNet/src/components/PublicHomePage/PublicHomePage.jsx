@@ -1,9 +1,10 @@
 import React from "react";
 
 import styles from "./PublicHomePage.module.css";
-import ListingItem from "../ListingItem/ListingItem.jsx";
+import ListingItem from "../ListingItem/ListingItem.tsx";
 
 import HeroBackground from "./assets/hero-1600-background.webp";
+import {mockUsers} from "../../utils/db.js";
 
 const articles = [
   {
@@ -87,11 +88,35 @@ const articles = [
 ];
 
 const PublicHomePage = () => {
+  console.log('--------------RENDER KOMPONENTU----------')
   // Shuffle the articles array
-  const shuffledArticles = articles.sort(() => 0.5 - Math.random());
+  const shuffledUsers = mockUsers.sort(() => 0.5 - Math.random());
 
-  // Get the first 3 random articles
-  const randomArticles = shuffledArticles.slice(0, 3);
+  // Get first 3 random users with at least one offer
+  const randomUsersWithAtLeastOneOffer = shuffledUsers.reduce((acc, curr) => {
+
+    const {listings} = curr
+    const [offersObject, searchesObject] = listings
+    const {offer} = offersObject
+
+    if(offer.length > 0 && acc.length < 3) {
+      acc.push(curr)
+    }
+
+    // sprawdź czy user ma jakąś ofertę
+    // jeśli tak? to dodaj do naszej tablicy JEŚLI jest tam mniej niż 3 element
+    // jeśli nie? to nei dodawaj tego, fuj
+    return acc
+  },[])
+
+  const threeRandomOffers = randomUsersWithAtLeastOneOffer.map((user) => {
+    const {  listings} = user;
+    const [offersObject, searchesObject] = listings
+    const {offer} = offersObject
+    // const {search} = searchesObject
+
+    return offer[0]
+  })
 
   return (
     <div>
@@ -126,13 +151,10 @@ const PublicHomePage = () => {
         {/* Sekcja 3 */}
         <section className={styles.gridSection}>
           <div className={styles.gridContainer}>
-            {randomArticles.map((article, index) => (
+            {threeRandomOffers.map((oneOffer ) => (
               <ListingItem
-                key={index}
-                index={article.id}
-                title={article.title}
-                content={article.content}
-                image={article.image}
+                key={oneOffer.title}
+                oneOffer={oneOffer}
               />
             ))}
           </div>
@@ -143,3 +165,7 @@ const PublicHomePage = () => {
 };
 
 export default PublicHomePage;
+
+//TODO 1: logika zwracajaca 3 randomowe searche
+//TODO 2*: połączyć logikę zwracania offert i searchy w jednej funkcji
+//TODO 3**: wyniesienie tej logiki do customowego Hooka
