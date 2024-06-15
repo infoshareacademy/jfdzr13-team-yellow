@@ -1,11 +1,14 @@
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db} from "../../config/firebase";
-import styles from "./Register.module.css";
-import { setDoc, doc } from "firebase/firestore";
+import { auth, db } from "../../config/firebase";
+import Spinner from "../Spinner/Spinner"
+import SelectLocation from "../../utils/SelectLocation/SelectLocation";
+import styles from "./Register.module.css"
 
 function Register() {
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -37,7 +40,20 @@ function Register() {
       ...prev,
       [name]: type === "checkbox" ? checked : formattedValue,
     }));
+    if (e.target) {
+      const { name, value, type, checked } = e.target;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: type === "checkbox" ? checked : value,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        city: e.value,
+      }));
+    }
   };
+  
 
   const validatePassword = (password) => {
     return (
@@ -71,6 +87,7 @@ function Register() {
     }
 
     try {
+      setLoading(true);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
@@ -100,9 +117,12 @@ function Register() {
     } catch (error) {
       console.error("Error in registration: ", error);
       setError("Błąd rejestracji: " + error.message);
+    } finally {
+      setLoading(false)
     }
   };
 
+  if (!loading) {
   return (
     <div className={styles.registerContainer}>
       <h1>Rejestracja</h1>
@@ -148,14 +168,6 @@ function Register() {
           required
         />
         <input
-          type="text"
-          name="city"
-          placeholder="Miasto"
-          value={formData.city}
-          onChange={handleChange}
-          required
-        />
-        <input
           type="tel"
           name="phone"
           placeholder="Telefon"
@@ -163,11 +175,18 @@ function Register() {
           onChange={handleChange}
           required
         />
+          <SelectLocation 
+          name="city"
+          placeholder="Miasto"
+          value={formData.city ? { value: formData.city, label: formData.city } : null}
+          onChange={handleChange}
+          />
         <textarea
           name="description"
-          placeholder="Twój opis"
+          placeholder="Napisz kilka słów o sobie ..."
           value={formData.description}
           onChange={handleChange}
+
         />
 
         <label>
@@ -184,7 +203,12 @@ function Register() {
         <button type="submit">Zarejestruj się</button>
       </form>
     </div>
-  );
+  )
+} else {
+ return <Spinner />
 }
+} 
+
+
 
 export default Register;
