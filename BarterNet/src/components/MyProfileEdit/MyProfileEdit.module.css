@@ -1,79 +1,109 @@
 .editContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    max-width: 600px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.header {
+  color: var(--text-color);
+  font-size: 28px;
+  margin: 40px 0 40px 20px;
+  font-weight: bold;
+  width: 100%;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e0e1dd;
+}
+
+.editForm {
+  width: 100%;
+  max-width: 500px;
+}
+
+.editForm label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+  color: var(--text-color);
+}
+
+.editForm input[type="text"],
+.editForm input[type="email"],
+.editForm input[type="tel"],
+.editForm textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e0e1dd;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  color: #778da9;
+}
+
+.editForm input[type="file"] {
+  border: none;
+  margin-bottom: 15px;
+  padding-left: 10px;
+}
+
+.saveButton {
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: var(--button-background);
+  border-radius: var(--button-border-radius);
+  color: var(--button-text-color);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: block;
+  text-align: center;
+}
+
+.saveButton:hover {
+  background-color: #004085;
+}
+
+.saveButton:disabled {
+  background-color: #ccc;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Media Queries */
+
+@media (max-width: 768px) {
   .header {
-    color: var(--text-color);
-    font-weight: bold;
-    margin: 40px 0 40px 20px;
-    width: 100%;
-    font-size: 28px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .editForm{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    font-size: 24px;
+    margin: 20px 0;
   }
 
-  
-  .avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+  .editForm {
+    width: 90%;
+    max-width: none;
   }
-  
+
+  .editForm input[type="text"],
+  .editForm input[type="email"],
+  .editForm input[type="tel"],
+  .editForm textarea,
+  .editForm input[type="file"] {
+    padding: 8px;
+  }
+
   .saveButton {
-    padding: 15px 30px;
-    margin-top: 20px;
-    background-color: var(--button-background);
-    border-radius: var(--button-border-radius);
-    color: var(--button-text-color);
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: block;
-    text-align: center;
+    padding: 8px 16px;
   }
-  
-  .editButton:hover {
-    background-color: #0056b3;
+}
+
+@media (max-width: 480px) {
+  .editContainer {
+    padding: 10px;
   }
-  
-  
-  /* Style responsywne */
-  @media (max-width: 768px) {
-    .header {
-      font-size: 24px; 
-    }
-  
-    .details p {
-      font-size: 14px;
-    }
-  
-    .editButton {
-      padding: 8px 16px;
-    }
+
+  .editForm label {
+    font-size: 14px;
   }
-  
-  @media (max-width: 480px) {
-    .profileContainer {
-      padding: 10px; 
-    }
-  
-    .avatar img {
-      width: 50px; 
-      height: 50px;
-    }
-  }
+}
