@@ -56,26 +56,23 @@ const [error, setError] = useState('');
 
   return (
     <div className={styles.profileContainer}>
-        <h1 className={styles.header}>Mój profil</h1>
-        <div className={styles.profileDetalis}>
-        <div className={styles.avatar}>
+    <h1 className={styles.header}>Mój profil</h1>
+    <div className={styles.profileDetails}>
+      <div className={styles.avatar}>
         <img src={profileData.avatarUrl || '/path/to/default/avatar.png'} alt="Avatar" />
-        </div>
-
-        <div className={styles.detalis}>
-            <p>Imię: {profileData.firstName}</p>
-            <p>Nazwisko: {profileData.lastName}</p>
-            <p>Email: {profileData.email}</p>
-            <p>Hasło: *********</p> 
-            <p>Miejscowość: {profileData.city}</p>
-            <p>Telefon: {profileData.phone}</p>
-            <p>Opis: {profileData.description}</p>
-
-        </div>
-        </div>
-
-        <button  onClick={handleEdit} className={styles.editButton}>Edytuj profil</button>
+      </div>
+      <div className={styles.details}>
+        <p><span className={styles.label}>Imię:</span> {profileData.firstName}</p>
+        <p><span className={styles.label}>Nazwisko:</span> {profileData.lastName}</p>
+        <p><span className={styles.label}>Email:</span> {profileData.email}</p>
+        <p><span className={styles.label}>Hasło:</span> *********</p>
+        <p><span className={styles.label}>Miejscowość:</span> {profileData.city}</p>
+        <p><span className={styles.label}>Telefon:</span> {profileData.phone}</p>
+        <p><span className={styles.label}>Opis:</span> {profileData.description}</p>
+      </div>
     </div>
+    <button onClick={handleEdit} className={styles.editButton}>Edytuj profil</button>
+  </div>
   )
 }
 

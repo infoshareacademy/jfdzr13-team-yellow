@@ -23,7 +23,7 @@ function App() {
         <Route index element={<UserHomePage />}/>
         <Route path='/myAccount' element={<MyAccount />} /> 
         <Route path="/myProfile" element={<MyProfile />} />
-        <Route path="/myProfileEdit" element={<MyProfileEdit />} />
+        <Route path="/myProfile/edit" element={<MyProfileEdit />} />
         {/* Tutaj dodamy kolejne routy dla zalogowanych userów  */}
       </Route>
       <Route path='*' element={<Navigate to={'/'} />} /> 
