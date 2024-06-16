@@ -55,7 +55,9 @@ function Register() {
     );
   };
 
-
+  const validatePhone = (phone) => {
+    return /^\d{3}-\d{3}-\d{3}$/.test(phone);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
