@@ -142,6 +142,7 @@ body:has(.heroButton:hover) .heroButtonWrapper div {
 /* Section 3 */
 
 .gridContainer {
+  color: black;
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr;

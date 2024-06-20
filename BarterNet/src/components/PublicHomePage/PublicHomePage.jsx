@@ -1,100 +1,89 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contex/AuthProvider";
+import { doc, getDoc, collection, getDocs } from "firebase/firestore"; // Updated to include getDocs
+import { db } from "../../config/firebase";
 
 import styles from "./PublicHomePage.module.css";
 import ListingItem from "../ListingItem/ListingItem.jsx";
-
 import HeroBackground from "./assets/hero-1600-background.webp";
 
-const articles = [
-  {
-    id: 1,
-    title: "Nauka angielskiego online",
-    content:
-      "Chętnie naucze Cię języka angielskiego. Przez 20 lat mieszkałam w Angli i mam doświadczenie w...",
-    image: "https://picsum.photos/400/600?random=1",
-  },
-
-  {
-    id: 2,
-    title: "Wyprowadzanie psa",
-    content:
-      "Nie masz czasu na poranne spacery ze swoim pupuliem, chętnie Ci w tym pomogę, bo...",
-    image: "https://picsum.photos/400/600?random=2",
-  },
-  {
-    id: 3,
-    title: "Nauka gry na gitarze",
-    content:
-      "Zawsze marzyłeś o tym, żeby grać na gitarze, ale rodzice zapisali Cię na karate, skorzystaj z...",
-    image: "https://picsum.photos/400/600?random=3",
-  },
-  {
-    id: 4,
-    title: "Korepetycje z matematyki",
-    content:
-      "Potrzebujesz pomocy w zrozumieniu matematyki? Jestem do Twojej dyspozycji. Pomożemy Ci przejść przez zagadnienia od podstaw do bardziej zaawansowanych.",
-    image: "https://picsum.photos/400/600?random=4",
-  },
-  {
-    id: 5,
-    title: "Kurs gotowania wegetariańskiego",
-    content:
-      "Chcesz nauczyć się przygotowywać pyszne wegetariańskie potrawy? Zapraszam na kurs gotowania, gdzie nauczymy się przyrządzać zdrowe i smaczne dania bez mięsa.",
-    image: "https://picsum.photos/400/600?random=5",
-  },
-  {
-    id: 6,
-    title: "Usługi opiekuńcze dla osób starszych",
-    content:
-      "Potrzebujesz wsparcia w opiece nad osobą starszą? Oferuję profesjonalne usługi opiekuńcze, w tym pomoc w codziennych czynnościach oraz towarzyszenie na spacerach i wizytach lekarskich.",
-    image: "https://picsum.photos/400/600?random=6",
-  },
-  {
-    id: 7,
-    title: "Zajęcia jogi dla początkujących",
-    content:
-      "Chcesz zacząć praktykować jogę, ale nie wiesz od czego zacząć? Zapraszam na zajęcia dla początkujących, gdzie nauczysz się podstawowych pozycji i technik oddechowych.",
-    image: "https://picsum.photos/400/600?random=7",
-  },
-  {
-    id: 8,
-    title: "Pranie i prasowanie",
-    content:
-      "Brakuje Ci czasu na pranie i prasowanie? Oferuję profesjonalne usługi prania oraz prasowania, abyś mógł cieszyć się czystą i wyprasowaną odzieżą bez trudu.",
-    image: "https://picsum.photos/400/600?random=8",
-  },
-  {
-    id: 9,
-    title: "Remontowanie mebli",
-    content:
-      "Twoje meble potrzebują odświeżenia? Przynieś je do mnie, a z przyjemnością pomaluję, wypoleruję lub naprawię uszkodzenia, abyś mógł cieszyć się pięknym wyglądem swojego mieszkania.",
-    image: "https://picsum.photos/400/600?random=9",
-  },
-  {
-    id: 10,
-    title: "Instrukcje z zakresu pierwszej pomocy",
-    content:
-      "Chcesz nauczyć się udzielać pierwszej pomocy w nagłych wypadkach? Oferuję instrukcje z zakresu udzielania pomocy przedmedycznej, abyś mógł być gotowy na każdą sytuację.",
-    image: "https://picsum.photos/400/600?random=10",
-  },
-  {
-    id: 11,
-    title: "Nauka tańca towarzyskiego",
-    content:
-      "Chcesz nauczyć się tańczyć w stylu latynoamerykańskim lub standardowym? Zapraszam na zajęcia z tańca towarzyskiego, gdzie nauczysz się eleganckich i efektownych figur pod okiem doświadczonych instruktorów.",
-    image: "https://picsum.photos/400/600?random=11",
-  },
-];
-
 const PublicHomePage = () => {
-  // Shuffle the articles array
-  const shuffledArticles = articles.sort(() => 0.5 - Math.random());
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  const [profileData, setProfileData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "Resetuj hasło",
+    city: "",
+    phone: "",
+    description: "",
+  });
 
-  // Get the first 3 random articles
-  const randomArticles = shuffledArticles.slice(0, 3);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setIsLoading(true);
+      try {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        const usersData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setUsers(usersData);
+      } catch (err) {
+        console.error("Error fetching users:", err);
+        setError("Błąd podczas pobierania danych użytkowników.");
+      }
+      setIsLoading(false);
+    };
+
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      setIsLoading(true);
+      const fetchData = async () => {
+        try {
+          const docRef = doc(db, "users", currentUser.uid);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            setProfileData(docSnap.data());
+          } else {
+            console.log("No such document!");
+            setError("Nie znaleziono dokumentu.");
+          }
+        } catch (err) {
+          console.error("Error fetching data:", err);
+          setError("Błąd podczas pobierania danych.");
+        }
+        setIsLoading(false);
+      };
+
+      fetchData();
+    }
+  }, [currentUser]);
+
+  if (isLoading) return <p>Ładowanie...</p>;
+  if (error) return <p>Błąd: {error}</p>;
+
+  // Filter users with at least one offer
+  const usersWithOffers = users.filter((user) =>
+    user.listings.some((listing) => listing.offer && listing.offer.length > 0)
+  );
+
+  // Shuffle the filtered users array and get the first 3 random users
+  const shuffledUsers = usersWithOffers.sort(() => 0.5 - Math.random());
+  const randomUsers = shuffledUsers.slice(0, 3);
 
   return (
     <div>
+      <p>{profileData.firstName}</p>
       <div className={styles.site}>
         <section className={styles.hero}>
           <div className={styles.heroButtonContainer}>
@@ -126,13 +115,12 @@ const PublicHomePage = () => {
         {/* Sekcja 3 */}
         <section className={styles.gridSection}>
           <div className={styles.gridContainer}>
-            {randomArticles.map((article, index) => (
+            {randomUsers.map((user, index) => (
               <ListingItem
-                key={index}
-                index={article.id}
-                title={article.title}
-                content={article.content}
-                image={article.image}
+                key={user.id} // Use a unique identifier as the key
+                title={user.listings[0].offer[0].title}
+                content={user.listings[0].offer[0].description}
+                image={user.listings[0].offer[0].foto[0]}
               />
             ))}
           </div>
