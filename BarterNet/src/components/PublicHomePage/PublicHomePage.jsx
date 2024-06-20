@@ -83,7 +83,6 @@ const PublicHomePage = () => {
 
   return (
     <div>
-      <p>{profileData.firstName}</p>
       <div className={styles.site}>
         <section className={styles.hero}>
           <div className={styles.heroButtonContainer}>
