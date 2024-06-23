@@ -139,14 +139,39 @@ body:has(.heroButton:hover) .heroButtonWrapper div {
   color: var(--button-text-color);
 }
 
+.active {
+  background: var(--primary-color);
+  color: var(--button-text-color);
+}
+
 /* Section 3 */
 
 .gridContainer {
+  color: black;
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr;
   margin: var(--default-margin);
   padding: var(--default-padding);
+}
+
+.gridContainer2 {
+  color: black;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  margin: var(--default-margin);
+  padding: var(--default-padding);
+}
+
+/* Section 4 */
+.article__container {
+  text-align: center;
+  background-color: var(--primary-color);
+  padding: 30px;
+  border-radius: 25px;
+  color: var(--button-text-color);
+  overflow: hidden;
 }
 
 @media (max-width: 1024px) {
@@ -186,6 +211,10 @@ body:has(.heroButton:hover) .heroButtonWrapper div {
   }
 
   .gridContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .gridContainer2 {
     grid-template-columns: 1fr;
   }
 }
