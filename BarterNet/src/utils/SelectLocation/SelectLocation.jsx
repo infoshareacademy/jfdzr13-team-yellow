@@ -1,11 +1,12 @@
 import { collection, onSnapshot } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { db } from '../../config/firebase';
 import styles from './SelectLocation.module.css'
 
 const SelectLocation = ({placeholder, onChange, name, value}) => {
   const [options, setOptions] = useState([]);
+  const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, 'locations'), (querySnapshot) => {
@@ -13,7 +14,7 @@ const SelectLocation = ({placeholder, onChange, name, value}) => {
         const data = doc.data();
         return { value: `${data.city}, ${data.voivodeship}`, label: `${data.city}, ${data.voivodeship}` };
       });
-      setOptions(optionsData);
+      setOptions([{value: 'ZDALNIE', label: 'ZDALNIE'}, ...optionsData]);
     }, (error) => {
       console.error('Error fetching data:', error);
     });
@@ -21,7 +22,20 @@ const SelectLocation = ({placeholder, onChange, name, value}) => {
     return () => unsubscribe();
   }, []);
 
-  return <Select className={styles.select} options={options} placeholder={placeholder} onChange={onChange} name={name} value={value}/>;
+  const handleInputChange = (inputValue) => {
+    setInputValue(inputValue);
+  };
+
+  const handleChange = (selectedOption) => {
+    if (selectedOption) {
+      onChange(selectedOption);
+    } else if (inputValue.toLowerCase() === 'zdalnie') {
+      onChange({ value: 'ZDALNIE', label: 'ZDALNIE' });
+    }
+  };
+
+  return <Select className={styles.select} options={options} placeholder={placeholder} onChange={onChange} onInputChange={handleInputChange} name={name} value={value} inputValue={inputValue}
+  isClearable/>;
 };
 
 export default SelectLocation;

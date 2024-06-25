@@ -9,6 +9,7 @@ import MyAccount from "./components/MyAccount/MyAccount";
 import MyProfile from "./components/MyProfile/MyProfile";
 import MyProfileEdit from "./components/MyProfileEdit/MyProfileEdit";
 import SingleAd from "./components/SingleAd/SingleAd";
+import AddListing from "./components/AddListing/AddListing";
 import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/myProfile" element={<MyProfile />} />
           <Route path="/ad/:adId" element={<SingleAd />} />
           <Route path="/myProfile/edit" element={<MyProfileEdit />} />
+          <Route path="/addListing" element={<AddListing />} />
           {/* Tutaj dodamy kolejne routy dla zalogowanych userów  */}
         </Route>
         <Route path="*" element={<Navigate to={"/"} />} />
