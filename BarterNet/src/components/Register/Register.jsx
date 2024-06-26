@@ -59,6 +59,10 @@ function Register() {
     return /^\d{3}-\d{3}-\d{3}$/.test(phone);
   };
 
+  const validateLocation = (location) => {
+    return location !== "";
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.termsAccepted) {
@@ -79,6 +83,10 @@ function Register() {
       setError("Numer telefonu musi być w formacie XXX-XXX-XXX.");
       return;
     }
+    if (!validateLocation(formData.city)) {
+      setError("Musisz wybrać miasto");
+      return;
+    }
 
     try {
       setLoading(true);
@@ -97,12 +105,8 @@ function Register() {
     city: formData.city,
     phone: formData.phone,
     description: formData.description,
-    listings: [
-      {offer: []},
-      {search: []},
-      ],
   })
-
+  
       await updateProfile(user, {
         displayName: `${formData.firstName} ${formData.lastName}`,
       });
