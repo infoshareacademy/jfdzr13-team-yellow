@@ -24,6 +24,7 @@ function Register() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    if (e.target) {
     const { name, value, type, checked } = e.target;
 
     let formattedValue = value;
@@ -40,21 +41,14 @@ function Register() {
       ...prev,
       [name]: type === "checkbox" ? checked : formattedValue,
     }));
-    if (e.target) {
-      const { name, value, type, checked } = e.target;
-      setFormData((prev) => ({
-        ...prev,
-        [name]: type === "checkbox" ? checked : value,
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        city: e.value,
-      }));
-    }
-  };
-  
-
+  } else {
+    // This assumes that the only non-targeted handleChange call comes from SelectLocation
+    setFormData((prev) => ({
+      ...prev,
+      city: e.value,
+    }));
+  }
+};
   const validatePassword = (password) => {
     return (
       password.length >= 8 && /[a-zA-Z]/.test(password) && /\d/.test(password)
