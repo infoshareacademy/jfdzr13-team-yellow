@@ -24,6 +24,7 @@ function AddListing() {
   });
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
   const handleChange = (event) => {
@@ -78,6 +79,8 @@ function AddListing() {
       );
       await addDoc(listingsCollectionRef, newListing);
 
+      setMessage("Twoje ogłoszenie zostało dodane pomyślnie!");
+
       setFormData({
         category: "",
         location: "",
@@ -88,7 +91,7 @@ function AddListing() {
       setFiles([]);
       navigate("/myAccount");
     } catch (err) {
-      setError(err.message);
+      setMessage(`Wystąpił błąd: ${err.message}`);
       console.error("Error adding listing: ", err);
     }
     setLoading(false);
@@ -190,58 +193,78 @@ function AddListing() {
         <label className={styles.addListingLabel}>
           Zdjęcia:
           <div className={styles.predefinedImages}>
-          
-          
-          <button
-  type="button"
-  className={`${styles.imageOption} ${
-    formData.images.includes("/src/assets/other/image1.png")
-      ? styles.selected
-      : ""
-  }`}
-  onClick={() => handlePredefinedImageClick("/src/assets/other/image1.png")}
->
-  <img src="/src/assets/other/image1.png" alt="Image 1" className={styles.predefinedImage} />
-</button>
-<button
-  type="button"
-  className={`${styles.imageOption} ${
-    formData.images.includes("/src/assets/other/image2.png")
-      ? styles.selected
-      : ""
-  }`}
-  onClick={() => handlePredefinedImageClick("/src/assets/other/image2.png")}
->
-  <img src="/src/assets/other/image2.png" alt="Image 2" className={styles.predefinedImage}/>
-</button>
-<button
-  type="button"
-  className={`${styles.imageOption} ${
-    formData.images.includes("/src/assets/other/image3.png")
-      ? styles.selected
-      : ""
-  }`}
-  onClick={() => handlePredefinedImageClick("/src/assets/other/image3.png")}
->
-  <img src="/src/assets/other/image3.png" alt="Image 3" className={styles.predefinedImage}/>
-</button>
+            <button
+              type="button"
+              className={`${styles.imageOption} ${
+                formData.images.includes("/src/assets/other/image1.png")
+                  ? styles.selected
+                  : ""
+              }`}
+              onClick={() =>
+                handlePredefinedImageClick("/src/assets/other/image1.png")
+              }
+            >
+              <img
+                src="/src/assets/other/image1.png"
+                alt="Image 1"
+                className={styles.predefinedImage}
+              />
+            </button>
+            <button
+              type="button"
+              className={`${styles.imageOption} ${
+                formData.images.includes("/src/assets/other/image2.png")
+                  ? styles.selected
+                  : ""
+              }`}
+              onClick={() =>
+                handlePredefinedImageClick("/src/assets/other/image2.png")
+              }
+            >
+              <img
+                src="/src/assets/other/image2.png"
+                alt="Image 2"
+                className={styles.predefinedImage}
+              />
+            </button>
+            <button
+              type="button"
+              className={`${styles.imageOption} ${
+                formData.images.includes("/src/assets/other/image3.png")
+                  ? styles.selected
+                  : ""
+              }`}
+              onClick={() =>
+                handlePredefinedImageClick("/src/assets/other/image3.png")
+              }
+            >
+              <img
+                src="/src/assets/other/image3.png"
+                alt="Image 3"
+                className={styles.predefinedImage}
+              />
+            </button>
           </div>
+        </label>
+        <label className={styles.customFileUpload}>
           <input
             type="file"
             multiple
             onChange={handleFileChange}
-            // className={styles.addListingFileInput}
+            className={styles.addListingFileInput}
           />
+          Wybierz pliki
         </label>
+
         <button
           type="submit"
           disabled={loading}
           className={styles.addListingButton}
         >
-          Dodaj Ogłoszenie
+          DODAJ OGŁOSZENIE
         </button>
       </form>
-      {error && <div className={styles.error}>{error}</div>}
+      {message && <div className={styles.message}>{message}</div>}
     </div>
   );
 }
