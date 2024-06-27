@@ -8,11 +8,13 @@ import PasswordsReset from './components/PasswordsReset/PasswordsReset';
 import MyAccount from './components/MyAccount/MyAccount';
 import MyProfile from './components/MyProfile/MyProfile';
 import MyProfileEdit from './components/MyProfileEdit/MyProfileEdit';
+import SingleAd from './components/SingleAd/SingleAd';
+import AddListing from './components/AddListing/AddListing';
 import PrivateRoute from './utils/PrivateRoute';
 import TermsPage from './components/TermsPage/TermsPage';
 import HelpPage from './components/HelpPage/HelpPage';
 import ContactForm from './components/ContactForm/ContactForm';
-import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy'; // Importuj nowy komponent
+import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
   return (
@@ -24,14 +26,17 @@ function App() {
         <Route path='terms' element={<TermsPage />} />
         <Route path='help' element={<HelpPage />} />
         <Route path='contact' element={<ContactForm />} />
-        <Route path='privacy-policy' element={<PrivacyPolicy />} /> {/* Nowa trasa do polityki prywatności */}
+        <Route path='privacy-policy' element={<PrivacyPolicy />} />
+        
         <Route path='/' element={<PrivateRoute />}>
           <Route index element={<UserHomePage />} />
           <Route path='/myAccount' element={<MyAccount />} />
           <Route path='/myProfile' element={<MyProfile />} />
           <Route path='/myProfile/edit' element={<MyProfileEdit />} />
-          {/* Tutaj dodamy kolejne routy dla zalogowanych userów */}
+          <Route path='/ad/:adId' element={<SingleAd />} />
+          <Route path='/addListing' element={<AddListing />} />
         </Route>
+        
         <Route path='*' element={<Navigate to={'/'} />} />
       </Route>
     </Routes>

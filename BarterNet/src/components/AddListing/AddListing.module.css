@@ -1,0 +1,116 @@
+.addListingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.header {
+  color: var(--text-color);
+  font-size: 24px;
+  margin: 40px 0 40px 20px;
+  font-weight: bold;
+  width: 100%;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e0e1dd;
+}
+
+.toggleButtons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.toggleButton {
+  padding: 10px 20px;
+  border: none;
+  background-color: #e0e1dd;
+  color: #333;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  border-radius: var(--button-border-radius);
+  margin: 0 5px;
+}
+
+.toggleButton.active {
+  background-color: #004085;
+  color: white;
+}
+
+.addListingForm {
+  width: 100%;
+}
+
+.addListingLabel {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+  color: var(--text-color);
+}
+
+.addListingInput,
+.addListingTextarea,
+.addListingFileInput,
+.addListingSelect {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.addListingFileInput {
+  padding-left: 10px;
+}
+
+.addListingTextarea {
+  height: 100px;
+  resize: none;
+}
+
+.addListingButton {
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: var(--button-background);
+  border-radius: var(--button-border-radius);
+  color: var(--button-text-color);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: auto;
+}
+
+.addListingButton:hover {
+  background-color: #004085;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Style responsywne */
+@media (max-width: 768px) {
+  .addListingContainer {
+    padding: 15px;
+  }
+
+  .header {
+    font-size: 24px;
+  }
+
+  .toggleButton {
+    margin: 0 5px;
+    padding: 8px 16px;
+  }
+
+  .addListingButton {
+    padding: 8px 16px;
+  }
+}
