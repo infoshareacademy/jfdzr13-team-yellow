@@ -11,6 +11,7 @@ import Register from "./components/Register/Register";
 import SingleAd from "./components/SingleAd/SingleAd";
 import UserHomePage from "./components/UserHomePage/UserHomePage";
 import PrivateRoute from "./utils/PrivateRoute";
+import SearchPage from "./components/SearchPage/SearchPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/ad/:adId" element={<SingleAd />} />
           <Route path="/myProfile/edit" element={<MyProfileEdit />} />
           <Route path="/addListing" element={<AddListing />} />
+          <Route path="/searchPage" element={<SearchPage />} />
           {/* Tutaj dodamy kolejne routy dla zalogowanych userów  */}
         </Route>
         <Route path="*" element={<Navigate to={"/"} />} />
