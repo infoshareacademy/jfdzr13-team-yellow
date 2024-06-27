@@ -11,6 +11,7 @@
   /* Tło */
   --background-color: #fffef8; /* Jasne tło dla większości UI */
   --footer-background-color: var(--secondary-color); /* Beżowe tło stopki */
+
   /* Typografia */
   --font-primary: "Roboto", Arial, sans-serif; /* Główna czcionka */
   --font-secondary: "Lato", "Open Sans", sans-serif; /* Czcionka akcentowa */
@@ -27,14 +28,36 @@
   --button-font-weight: 700;
   --form-background-color: #ffffff;
   --form-border-color: rgba(0, 0, 0, 0.1);
+
   /* Ikony i grafika */
   --icon-color: var(--primary-color);
+
   /* Efekty */
   --link-hover-effect: underline;
   --button-hover-effect: opacity 0.8;
+
   /* Marginesy i paddingi */
   --default-margin: 20px;
   --default-padding: 20px;
+
   /* Cienie */
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: var(--default-padding);
 }
