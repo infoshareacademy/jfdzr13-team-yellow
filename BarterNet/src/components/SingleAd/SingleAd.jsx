@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getAdDetails } from "../../utils/firebaseUtils";
+import MessageForm from "../MessageForm/MessageForm";
 import styles from "./SingleAd.module.css";
 
 function SingleAd() {
@@ -9,6 +10,7 @@ function SingleAd() {
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [showMessageForm, setShowMessageForm] = useState(false);
 
   useEffect(() => {
     const fetchAdAndUser = async () => {
@@ -56,11 +58,25 @@ function SingleAd() {
           alt="Avatar"
           className={styles.avatar}
         />
-        <p>
+          <Link to={`/user/${userId}`} className={styles.userName}>
           {userDetails.firstName} {userDetails.lastName}
-        </p>
-        <button className={styles.exchangeButton}>Wymień się</button>
+        </Link>
+        {/* <p>
+          {userDetails.firstName} {userDetails.lastName}
+        </p> */}
+        <button
+          onClick={() => setShowMessageForm(true)}
+          className={styles.exchangeButton}
+        >
+          Wymień się
+        </button>
       </div>
+      {showMessageForm && (
+        <MessageForm
+          recipientEmail={userDetails.email}
+          recipientName={`${userDetails.firstName} ${userDetails.lastName}`}
+        />
+      )}
     </div>
   );
 }

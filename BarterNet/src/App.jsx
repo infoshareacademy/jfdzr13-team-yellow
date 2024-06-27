@@ -24,7 +24,7 @@ function App() {
           <Route index element={<UserHomePage />} />
           <Route path="/myAccount" element={<MyAccount />} />
           <Route path="/myProfile" element={<MyProfile />} />
-          <Route path="/ad/:adId" element={<SingleAd />} />
+          <Route path="/ad/:userId/:adId" element={<SingleAd />} />
           <Route path="/myProfile/edit" element={<MyProfileEdit />} />
           <Route path="/addListing" element={<AddListing />} />
           {/* Tutaj dodamy kolejne routy dla zalogowanych userów  */}

@@ -18,7 +18,7 @@
 
 .toggleButtons {
   display: flex;
-  width: 100%;
+  width: 50%;
   justify-content: space-between;
   margin-bottom: 20px;
 }
@@ -44,6 +44,7 @@
 
 .addListingForm {
   width: 100%;
+  max-width: 500px;
 }
 
 .addListingLabel {

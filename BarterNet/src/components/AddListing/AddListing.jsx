@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contex/AuthProvider";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { collection, addDoc} from "firebase/firestore";
 import { db, storage } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import SelectLocation from "../../utils/SelectLocation/SelectLocation";
@@ -25,10 +25,6 @@ function AddListing() {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  const handleTypeChange = (event) => {
-    setListingType(event.target.value);
-  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -59,12 +55,16 @@ function AddListing() {
         ...formData,
         imageUrls,
         type: listingType,
+        userId: currentUser.uid,
       };
 
-      const userRef = doc(db, "users", currentUser.uid);
-      await updateDoc(userRef, {
-        listings: arrayUnion(newListing),
-      });
+      const listingsCollectionRef = collection(
+        db,
+        'users',
+        currentUser.uid,
+        'listings'
+      );
+      await addDoc(listingsCollectionRef, newListing);
 
       setFormData({
         category: "",

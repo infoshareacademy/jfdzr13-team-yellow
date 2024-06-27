@@ -82,7 +82,7 @@ const PublicHomePage = () => {
 
   // Filter users with at least one offer
   const usersWithOffers = users.filter((user) =>
-    user.listings.some((listing) => listing.offer && listing.offer.length > 0)
+    user.listings?.some((listing) => listing.offer && listing.offer.length > 0)
   );
 
   // Shuffle the filtered users array and get the first 3 random users
