@@ -1,3 +1,6 @@
+header {
+  padding-bottom: 100px;
+}
 .addListingContainer {
   display: flex;
   flex-direction: column;
@@ -38,7 +41,7 @@
 }
 
 .toggleButton.active {
-  background-color: #004085;
+  background-color: var(--button-background);
   color: white;
 }
 
@@ -60,19 +63,46 @@
 .addListingSelect {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
+  border: 2px solid var(--form-border-color);
+  border-radius: 25px;
   margin-bottom: 15px;
   box-sizing: border-box;
 }
 
-.addListingFileInput {
-  padding-left: 10px;
+.addListingSelect {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url('/src/assets/custom-arrow.png') no-repeat right center;
 }
+
+/* .addListingFileInputImg {
+  padding-right: 10px;
+} */
 
 .addListingTextarea {
   height: 100px;
   resize: none;
+}
+
+.predefinedImage {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+.imageOption {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.imageOption.selected img {
+  border: 2px solid #004085;
+  border-radius: 5px;
 }
 
 .addListingButton {

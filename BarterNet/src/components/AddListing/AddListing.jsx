@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contex/AuthProvider";
-import { collection, addDoc} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import SelectLocation from "../../utils/SelectLocation/SelectLocation";
@@ -14,7 +14,7 @@ function AddListing() {
     navigate("/login");
   }
 
-  const [listingType, setListingType] = useState("offer"); // 'offer' or 'search'
+  const [listingType, setListingType] = useState("offer");
   const [formData, setFormData] = useState({
     category: "",
     location: "",
@@ -35,6 +35,18 @@ function AddListing() {
     setFiles([...event.target.files]);
   };
 
+  const handlePredefinedImageClick = (imageUrl) => {
+    setFormData((prevFormData) => {
+      const newImages = prevFormData.images.includes(imageUrl)
+        ? prevFormData.images.filter((img) => img !== imageUrl)
+        : [...prevFormData.images, imageUrl];
+      return {
+        ...prevFormData,
+        images: newImages,
+      };
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -53,16 +65,16 @@ function AddListing() {
 
       const newListing = {
         ...formData,
-        imageUrls,
+        imageUrls: [...formData.images, ...imageUrls],
         type: listingType,
         userId: currentUser.uid,
       };
 
       const listingsCollectionRef = collection(
         db,
-        'users',
+        "users",
         currentUser.uid,
-        'listings'
+        "listings"
       );
       await addDoc(listingsCollectionRef, newListing);
 
@@ -177,11 +189,48 @@ function AddListing() {
         </label>
         <label className={styles.addListingLabel}>
           Zdjęcia:
+          <div className={styles.predefinedImages}>
+          
+          
+          <button
+  type="button"
+  className={`${styles.imageOption} ${
+    formData.images.includes("/src/assets/other/image1.png")
+      ? styles.selected
+      : ""
+  }`}
+  onClick={() => handlePredefinedImageClick("/src/assets/other/image1.png")}
+>
+  <img src="/src/assets/other/image1.png" alt="Image 1" className={styles.predefinedImage} />
+</button>
+<button
+  type="button"
+  className={`${styles.imageOption} ${
+    formData.images.includes("/src/assets/other/image2.png")
+      ? styles.selected
+      : ""
+  }`}
+  onClick={() => handlePredefinedImageClick("/src/assets/other/image2.png")}
+>
+  <img src="/src/assets/other/image2.png" alt="Image 2" className={styles.predefinedImage}/>
+</button>
+<button
+  type="button"
+  className={`${styles.imageOption} ${
+    formData.images.includes("/src/assets/other/image3.png")
+      ? styles.selected
+      : ""
+  }`}
+  onClick={() => handlePredefinedImageClick("/src/assets/other/image3.png")}
+>
+  <img src="/src/assets/other/image3.png" alt="Image 3" className={styles.predefinedImage}/>
+</button>
+          </div>
           <input
             type="file"
             multiple
             onChange={handleFileChange}
-            className={styles.addListingFileInput}
+            // className={styles.addListingFileInput}
           />
         </label>
         <button
