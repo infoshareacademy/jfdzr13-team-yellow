@@ -31,13 +31,12 @@ const MyAccount = () => {
     const userRef = doc(db, "users", uid);
     await deleteDoc(userRef);
   };
-  
 
   const handleDeleteAccount = async () => {
     const user = auth.currentUser;
     try {
-      await deleteUser(user);  // Usuwa użytkownika z Authentication
-      await deleteUserData(user.uid);  // Usuwa dane użytkownika z Firestore
+      await deleteUser(user); // Usuwa użytkownika z Authentication
+      await deleteUserData(user.uid); // Usuwa dane użytkownika z Firestore
       navigate("/PublicHomePage");
     } catch (error) {
       console.error("Delete account failed", error);
@@ -48,7 +47,7 @@ const MyAccount = () => {
     <div className={styles.accountContainer}>
       <h1 className={styles.header}>Moje konto</h1>
       <div className={styles.tileContainer}>
-        <Link to="/myAds" className={styles.accountTile}>
+        <Link to="/MyAds" className={styles.accountTile}>
           <img src={myAdsIcon} alt="My Ads" className={styles.icon} />
           <span className={styles.tileLabel}>Moje ogłoszenia</span>
           <span className={styles.titleDescription}>
@@ -108,8 +107,18 @@ const MyAccount = () => {
           />
           Czy na pewno chcesz się wylogować?
         </h2>
-        <button onClick={() => setIsLogoutModalOpen(false)} className={`${styles.modalButton} ${styles.cancel}`}>Nie</button>
-        <button onClick={handleLogout} className={`${styles.modalButton} ${styles.logout}`}>Tak, wyloguj</button>
+        <button
+          onClick={() => setIsLogoutModalOpen(false)}
+          className={`${styles.modalButton} ${styles.cancel}`}
+        >
+          Nie
+        </button>
+        <button
+          onClick={handleLogout}
+          className={`${styles.modalButton} ${styles.logout}`}
+        >
+          Tak, wyloguj
+        </button>
       </Modal>
 
       <Modal
