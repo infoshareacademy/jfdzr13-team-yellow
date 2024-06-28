@@ -1,58 +1,82 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../config/firebase';
-import styles from './SingleAd.module.css';
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { getAdDetails } from "../../utils/firebaseUtils";
+import MessageForm from "../MessageForm/MessageForm";
+import styles from "./SingleAd.module.css";
 
 function SingleAd() {
-  const { adId } = useParams();
+  const { userId, adId } = useParams();
   const [adDetails, setAdDetails] = useState(null);
+  const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
+  const [showMessageForm, setShowMessageForm] = useState(false);
 
   useEffect(() => {
-    const fetchAd = async () => {
+    const fetchAdAndUser = async () => {
       try {
-        const docRef = doc(db, "ads", adId);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          setAdDetails(docSnap.data());
-        } else {
-          setError('No such ad found.');
-        }
+        const { adDetails, userDetails } = await getAdDetails(userId, adId);
+        setAdDetails(adDetails);
+        setUserDetails(userDetails);
       } catch (err) {
-        setError('Error fetching ad details.');
+        setError("Błąd podczas pobierania szczegółów ogłoszenia.");
         console.error(err);
       }
       setLoading(false);
     };
 
-    fetchAd();
-  }, [adId]);
+    fetchAdAndUser();
+  }, [userId, adId]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div>Ładowanie...</div>;
+  if (error) return <div>Błąd: {error}</div>;
 
   return (
     <div className={styles.singleAdContainer}>
       <div className={styles.generalInfo}>
-        <h2>{adDetails.title}</h2>
-        <p>Kategoria: {adDetails.category}</p>
-        <p>Lokalizacja: {adDetails.location}</p>
+        <h1>{adDetails.title}</h1>
+        <div className={styles.adInfo}>
+          <p>Kategoria: {adDetails.category}</p>
+          <p>Lokalizacja: {adDetails.location}</p>
+        </div>
       </div>
-      <div className={styles.detailedInfo}>
-        <p>{adDetails.description}</p>
-        {/* Assuming images is an array of URLs */}
-        {adDetails.images && adDetails.images.map(url => <img src={url} alt="Ad" key={url} />)}
+      <div className={styles.adContent}>
+        {adDetails.imageUrls && adDetails.imageUrls.length > 0 && (
+          <img
+            src={adDetails.imageUrls[0]}
+            alt="Ad"
+            className={styles.adImage}
+          />
+        )}
+        <div className={styles.description}>
+          <p>{adDetails.description}</p>
+        </div>
       </div>
       <div className={styles.userInfo}>
-        <p>{adDetails.userName}</p>
-        <p>{adDetails.userEmail}</p>
-        <p>{adDetails.userPhone}</p>
-        <p>{adDetails.userDescription}</p>
+        <img
+          src={userDetails.avatarUrl}
+          alt="Avatar"
+          className={styles.avatar}
+        />
+          <Link to={`/user/${userId}`} className={styles.userName}>
+          {userDetails.firstName} {userDetails.lastName}
+        </Link>
+        {/* <p>
+          {userDetails.firstName} {userDetails.lastName}
+        </p> */}
+        <button
+          onClick={() => setShowMessageForm(true)}
+          className={styles.exchangeButton}
+        >
+          Wymień się
+        </button>
       </div>
-      <button className={styles.exchangeButton}>Wymień się</button>
+      {showMessageForm && (
+        <MessageForm
+          recipientEmail={userDetails.email}
+          recipientName={`${userDetails.firstName} ${userDetails.lastName}`}
+        />
+      )}
     </div>
   );
 }

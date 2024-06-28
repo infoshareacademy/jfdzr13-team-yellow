@@ -28,16 +28,16 @@ function App() {
         <Route path='contact' element={<ContactForm />} />
         <Route path='privacy-policy' element={<PrivacyPolicy />} />
         
-        <Route path='/' element={<PrivateRoute />}>
+<Route path="/" element={<PrivateRoute />}>
           <Route index element={<UserHomePage />} />
-          <Route path='/myAccount' element={<MyAccount />} />
-          <Route path='/myProfile' element={<MyProfile />} />
-          <Route path='/myProfile/edit' element={<MyProfileEdit />} />
-          <Route path='/ad/:adId' element={<SingleAd />} />
-          <Route path='/addListing' element={<AddListing />} />
+          <Route path="/myAccount" element={<MyAccount />} />
+          <Route path="/myProfile" element={<MyProfile />} />
+          <Route path="/ad/:userId/:adId" element={<SingleAd />} />
+          <Route path="/myProfile/edit" element={<MyProfileEdit />} />
+          <Route path="/addListing" element={<AddListing />} />
+          {/* Tutaj dodamy kolejne routy dla zalogowanych userów  */}
         </Route>
-        
-        <Route path='*' element={<Navigate to={'/'} />} />
+        <Route path="*" element={<Navigate to={"/"} />} />
       </Route>
     </Routes>
   );
