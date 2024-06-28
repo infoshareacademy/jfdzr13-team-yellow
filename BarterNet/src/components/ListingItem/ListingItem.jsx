@@ -27,7 +27,7 @@ const ListingItem = ({ index, title, content, image }) => {
           } else {
             return (
               <>
-                <a href="/register">
+                <a href="/login">
                   <button className={styles.articleButton}>Wymień się</button>
                 </a>
               </>
