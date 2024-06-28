@@ -1,4 +1,5 @@
-@import "reset-css-complete";
+/* @import "reset-css-complete"; */
+@import "/node_modules/reset-css-complete/reset.css";
 
 :root {
   /* Kolorystyka */
@@ -20,6 +21,7 @@
 
   /* Przyciski i formularze */
   --button-background: var(--primary-color);
+  --button-background-secondary: #cecec9;
   --button-text-color: #fffef8;
   --button-padding: 15px 30px;
   --button-font-size: 1rem;
@@ -37,4 +39,12 @@
   --default-padding: 20px;
   /* Cienie */
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+header {
+  padding-bottom: 100px;
+}
+main {
+  display: grid;
+  place-content: center;
+  width: 100%;
 }
