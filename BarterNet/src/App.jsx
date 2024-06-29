@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import AddListing from "./components/AddListing/AddListing";
+import EditListing from "./components/EditListing/EditListing";
 import ContactForm from "./components/ContactForm/ContactForm";
 import HelpPage from "./components/HelpPage/HelpPage";
 import Layout from "./components/Layout/Layout";
@@ -38,6 +39,7 @@ function App() {
           <Route path="/ad/:userId/:adId" element={<SingleAd />} />
           <Route path="/myProfile/edit" element={<MyProfileEdit />} />
           <Route path="/addListing" element={<AddListing />} />
+          <Route path="/editListing/:id" element={<EditListing />} />
           <Route path="/searchPage" element={<SearchPage />} />
           {/* Tutaj dodamy kolejne routy dla zalogowanych userów  */}
         </Route>
