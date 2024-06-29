@@ -1,5 +1,5 @@
 /* @import "reset-css-complete"; */
-@import "/node_modules/reset-css-complete/reset.css";
+/* @import "/node_modules/reset-css-complete/reset.css"; */
 
 :root {
   /* Kolorystyka */
@@ -30,6 +30,8 @@
   --button-font-weight: 700;
   --form-background-color: #ffffff;
   --form-border-color: rgba(0, 0, 0, 0.1);
+  --input-border: 2px solid var(--form-border-color);
+  --input-border-focus: 3px solid #2684FF;
 
   /* Ikony i grafika */
   --icon-color: var(--primary-color);

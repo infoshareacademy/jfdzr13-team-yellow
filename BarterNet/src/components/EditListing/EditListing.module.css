@@ -1,4 +1,4 @@
-.addListingContainer {
+.editListingContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,48 +16,22 @@
   border-bottom: 1px solid #e0e1dd;
 }
 
-.toggleButtons {
-  display: flex;
-  width: 50%;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.toggleButton {
-  padding: 10px 20px;
-  border: none;
-  background-color: #e0e1dd;
-  color: #333;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  flex: 1;
-  text-align: center;
-  cursor: pointer;
-  border-radius: var(--button-border-radius);
-  margin: 0 5px;
-}
-
-.toggleButton.active {
-  background-color: var(--button-background);
-  color: white;
-}
-
-.addListingForm {
+.editListingForm {
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
 }
 
-.addListingLabel {
+.editListingLabel {
   font-weight: bold;
   margin-bottom: 10px;
   display: block;
   color: var(--text-color);
 }
 
-.addListingInput,
-.addListingTextarea,
-.addListingFileInput,
-.addListingSelect {
+.editListingInput,
+.editListingTextarea,
+.editListingFileInput,
+.editListingSelect {
   width: 100%;
   padding: 10px;
   border: var(--input-border);
@@ -66,21 +40,20 @@
   box-sizing: border-box;
 }
 
-.addListingInput:focus,
-.addListingTextarea:focus,
-.addListingFileInput:focus,
-.addListingSelect:focus {
+.editListingInput:focus,
+.editListingTextarea:focus,
+.editListingFileInput:focus,
+.editListingSelect:focus {
   border: var(--input-border-focus);
-  outline: none;
 }
 
-.addListingSelect {
+.editListingSelect {
   -webkit-appearance: none;
   -moz-appearance: none;
   background: url("/src/assets/custom-arrow.png") no-repeat right center;
 }
 
-.addListingTextarea {
+.editListingTextarea {
   height: 100px;
   resize: none;
 }
@@ -90,6 +63,7 @@
   height: 50px;
   object-fit: contain;
   margin: 10px;
+  padding-bottom: 10px;
   cursor: pointer;
 }
 
@@ -128,7 +102,7 @@
   display: none;
 }
 
-.addListingButton {
+.editListingButton {
   padding: var(--button-padding);
   background-color: var(--button-background);
   border-radius: var(--button-border-radius);
@@ -141,24 +115,8 @@
   margin-top: 20px;
 }
 
-.addListingButton:hover {
+.editListingButton:hover {
   background-color: #004085;
-}
-
-.previewContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.previewImage {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 5px;
-  border: 1px solid #ccc;
 }
 
 .error {
@@ -176,8 +134,9 @@
   text-align: center;
 }
 
+/* Style responsywne */
 @media (max-width: 768px) {
-  .addListingContainer {
+  .editListingContainer {
     padding: 15px;
   }
 
@@ -185,12 +144,7 @@
     font-size: 24px;
   }
 
-  .toggleButton {
-    margin: 0 5px;
-    padding: 8px 16px;
-  }
-
-  .addListingButton {
+  .editListingButton {
     padding: 8px 16px;
   }
 }
