@@ -14,6 +14,7 @@ const SelectLocation = ({placeholder, onChange, name, value}) => {
         setOptions([{ value: 'ZDALNIE', label: 'ZDALNIE, Cała Polska' }, ...optionsData]);
       }, []);
 
+
   const handleInputChange = (inputValue) => {
     const isValid = options.some(option => 
       option.label.toLowerCase().includes(inputValue.toLowerCase())
@@ -31,3 +32,5 @@ const SelectLocation = ({placeholder, onChange, name, value}) => {
 };
 
 export default SelectLocation;
+
+

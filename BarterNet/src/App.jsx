@@ -1,21 +1,22 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
+import AddListing from "./components/AddListing/AddListing";
+import ContactForm from "./components/ContactForm/ContactForm";
+import HelpPage from "./components/HelpPage/HelpPage";
 import Layout from "./components/Layout/Layout";
 import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
-import UserHomePage from "./components/UserHomePage/UserHomePage";
-import PasswordsReset from "./components/PasswordsReset/PasswordsReset";
 import MyAccount from "./components/MyAccount/MyAccount";
 import MyAds from "./components/MyAds/MyAds";
 import MyProfile from "./components/MyProfile/MyProfile";
 import MyProfileEdit from "./components/MyProfileEdit/MyProfileEdit";
-import SingleAd from "./components/SingleAd/SingleAd";
-import AddListing from "./components/AddListing/AddListing";
-import PrivateRoute from "./utils/PrivateRoute";
-import TermsPage from "./components/TermsPage/TermsPage";
-import HelpPage from "./components/HelpPage/HelpPage";
-import ContactForm from "./components/ContactForm/ContactForm";
+import PasswordsReset from "./components/PasswordsReset/PasswordsReset";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
+import Register from "./components/Register/Register";
+import SearchPage from "./components/SearchPage/SearchPage";
+import SingleAd from "./components/SingleAd/SingleAd";
+import TermsPage from "./components/TermsPage/TermsPage";
+import UserHomePage from "./components/UserHomePage/UserHomePage";
+import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/ad/:userId/:adId" element={<SingleAd />} />
           <Route path="/myProfile/edit" element={<MyProfileEdit />} />
           <Route path="/addListing" element={<AddListing />} />
+          <Route path="/searchPage" element={<SearchPage />} />
           {/* Tutaj dodamy kolejne routy dla zalogowanych userów  */}
         </Route>
         <Route path="*" element={<Navigate to={"/"} />} />
