@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "downshift": "^9.0.6",
+    "emailjs-com": "^3.2.0",
     "firebase": "^10.12.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.2.1",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.23.1",
     "react-select": "^5.8.0",

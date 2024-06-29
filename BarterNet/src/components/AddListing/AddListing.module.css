@@ -1,3 +1,6 @@
+header {
+  padding-bottom: 100px;
+}
 .addListingContainer {
   display: flex;
   flex-direction: column;
@@ -18,7 +21,7 @@
 
 .toggleButtons {
   display: flex;
-  width: 100%;
+  width: 50%;
   justify-content: space-between;
   margin-bottom: 20px;
 }
@@ -38,12 +41,13 @@
 }
 
 .toggleButton.active {
-  background-color: #004085;
+  background-color: var(--button-background);
   color: white;
 }
 
 .addListingForm {
   width: 100%;
+  max-width: 500px;
 }
 
 .addListingLabel {
@@ -59,14 +63,16 @@
 .addListingSelect {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
+  border: 2px solid var(--form-border-color);
+  border-radius: 25px;
   margin-bottom: 15px;
   box-sizing: border-box;
 }
 
-.addListingFileInput {
-  padding-left: 10px;
+.addListingSelect {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url("/src/assets/custom-arrow.png") no-repeat right center;
 }
 
 .addListingTextarea {
@@ -74,9 +80,32 @@
   resize: none;
 }
 
-.addListingButton {
-  padding: 10px 20px;
-  margin-top: 20px;
+.predefinedImage {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+.imageOption {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.imageOption.selected img {
+  border: 2px solid #004085;
+  border-radius: 5px;
+}
+
+.customFileUpload {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-family: var(--secondary-font);
   background-color: var(--button-background);
   border-radius: var(--button-border-radius);
   color: var(--button-text-color);
@@ -84,6 +113,28 @@
   cursor: pointer;
   transition: background-color 0.3s;
   width: auto;
+  margin-bottom: 20px;
+}
+
+.customFileUpload:hover {
+  background-color: #004085;
+}
+
+.customFileUpload input[type="file"] {
+  display: none;
+}
+
+.addListingButton {
+  padding: var(--button-padding);
+  background-color: var(--button-background);
+  border-radius: var(--button-border-radius);
+  color: var(--button-text-color);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: auto;
+  display: block;
+  margin-top: 20px;
 }
 
 .addListingButton:hover {
@@ -93,6 +144,16 @@
 .error {
   color: red;
   margin-top: 10px;
+}
+
+.message {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f0f4c3;
+  color: #388e3c;
+  font-weight: bold;
+  text-align: center;
 }
 
 /* Style responsywne */

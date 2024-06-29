@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./Footer.module.css";
+import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -8,13 +10,16 @@ const Footer = () => {
         <h3>O nas</h3>
         <ul>
           <li>
-            <a href="#">Polityka Prywatności</a>
+            <Link to="/privacy-policy">Polityka Prywatności</Link>
           </li>
           <li>
-            <a href="#">Regulamin</a>
+            <Link to="/terms">Regulamin</Link>
           </li>
           <li>
-            <a href="#">Pomoc</a>
+            <Link to="/help">Pomoc</Link>
+          </li>
+          <li>
+            <Link to="/contact">Kontakt</Link>
           </li>
         </ul>
       </div>
@@ -22,41 +27,33 @@ const Footer = () => {
         <h3>Usługi</h3>
         <ul>
           <li>
-            <a href="#">Rejestracja</a>
+            <Link to="/register">Rejestracja</Link>
           </li>
           <li>
-            <a href="#">Logowanie</a>
+            <Link to="/login">Logowanie</Link>
           </li>
           <li>
-            <a href="#">Twoje Ogłoszenia</a>
-          </li>
-        </ul>
-      </div>
-      <div className={styles.footerColumn}>
-        <h3>Kontakt</h3>
-        <ul>
-          <li>
-            <a href="#">Polityka prywatności</a>
-          </li>
-          <li>
-            <a href="#">Regulamin</a>
-          </li>
-          <li>
-            <a href="#">Pomoc</a>
+            <Link to="/myAccount">Twoje Ogłoszenia</Link>
           </li>
         </ul>
       </div>
       <div className={styles.footerColumn}>
         <h3>Social Media</h3>
-        <ul>
+        <ul className={styles.socialMedia}>
           <li>
-            <a href="#">Facebook</a>
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+              <FaFacebook className={styles.icon} /> Facebook
+            </a>
           </li>
           <li>
-            <a href="#">Twitter</a>
+            <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
+              <FaTwitter className={styles.icon} /> Twitter
+            </a>
           </li>
           <li>
-            <a href="#">LinkedIn</a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin className={styles.icon} /> LinkedIn
+            </a>
           </li>
         </ul>
       </div>

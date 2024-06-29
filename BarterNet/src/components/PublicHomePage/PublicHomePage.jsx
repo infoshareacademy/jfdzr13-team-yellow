@@ -1,93 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contex/AuthProvider";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore"; // Updated to include getDocs
-import { db } from "../../config/firebase";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
+import { db } from "../../config/firebase";
 import styles from "./PublicHomePage.module.css";
 import ListingItem from "../ListingItem/ListingItem.jsx";
 
+import NoImage from "./assets/no-image.png";
 import Icon1 from "./assets/Icon1.png";
 import Icon2 from "./assets/Icon2.png";
 import Icon3 from "./assets/Icon3.png";
 
-const PublicHomePage = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [users, setUsers] = useState([]);
-  const navigate = useNavigate();
-  const { currentUser } = useAuth();
-  const [profileData, setProfileData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "Resetuj hasło",
-    city: "",
-    phone: "",
-    description: "",
-  });
+// Function to fetch random listings from Firebase
+const fetchRandomListings = async (numListings) => {
+  const usersCollection = collection(db, "users");
+  const usersSnapshot = await getDocs(usersCollection);
+  let allListings = [];
 
+  for (const userDoc of usersSnapshot.docs) {
+    const listingsCollection = collection(db, `users/${userDoc.id}/listings`);
+    const listingsSnapshot = await getDocs(listingsCollection);
+
+    listingsSnapshot.forEach((listingDoc) => {
+      allListings.push(listingDoc.data());
+    });
+  }
+
+  let randomListings = [];
+  while (randomListings.length < numListings && allListings.length > 0) {
+    const randomIndex = Math.floor(Math.random() * allListings.length);
+    randomListings.push(allListings.splice(randomIndex, 1)[0]);
+  }
+
+  return randomListings;
+};
+
+// Main App component
+const PublicHomePage = () => {
   const [showSection3, setShowSection3] = useState(true);
   const [showSection4, setShowSection4] = useState(false);
   const [showSection5, setShowSection5] = useState(false);
   const [activeButton, setActiveButton] = useState("section3");
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      setIsLoading(true);
-      try {
-        const querySnapshot = await getDocs(collection(db, "users"));
-        const usersData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setUsers(usersData);
-      } catch (err) {
-        console.error("Error fetching users:", err);
-        setError("Błąd podczas pobierania danych użytkowników.");
-      }
-      setIsLoading(false);
-    };
-
-    fetchUsers();
-  }, []);
-
-  useEffect(() => {
-    if (currentUser) {
-      setIsLoading(true);
-      const fetchData = async () => {
-        try {
-          const docRef = doc(db, "users", currentUser.uid);
-          const docSnap = await getDoc(docRef);
-
-          if (docSnap.exists()) {
-            setProfileData(docSnap.data());
-          } else {
-            console.log("No such document!");
-            setError("Nie znaleziono dokumentu.");
-          }
-        } catch (err) {
-          console.error("Error fetching data:", err);
-          setError("Błąd podczas pobierania danych.");
-        }
-        setIsLoading(false);
-      };
-
-      fetchData();
-    }
-  }, [currentUser]);
-
-  if (isLoading) return <p>Ładowanie...</p>;
-  if (error) return <p>Błąd: {error}</p>;
-
-  // Filter users with at least one offer
-  const usersWithOffers = users.filter((user) =>
-    user.listings.some((listing) => listing.offer && listing.offer.length > 0)
-  );
-
-  // Shuffle the filtered users array and get the first 3 random users
-  const shuffledUsers = usersWithOffers.sort(() => 0.5 - Math.random());
-  const randomUsers = shuffledUsers.slice(0, 3);
 
   const toggleSection3 = () => {
     setShowSection3(true);
@@ -109,6 +61,20 @@ const PublicHomePage = () => {
     setShowSection5(true);
     setActiveButton("section5");
   };
+  const [listings, setListings] = useState([]);
+
+  useEffect(() => {
+    const getRandomListings = async () => {
+      const randomListings = await fetchRandomListings(3);
+      setListings(randomListings);
+    };
+
+    getRandomListings();
+  }, []);
+
+  if (listings.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -160,17 +126,21 @@ const PublicHomePage = () => {
             </button>
           </div>
         </section>
-
         {/* Sekcja 3 */}
+
         {showSection3 && (
           <section className={styles.gridSection}>
             <div className={styles.gridContainer}>
-              {randomUsers.map((user, index) => (
+              {listings.map((listing, index) => (
                 <ListingItem
-                  key={user.id} // Use a unique identifier as the key
-                  title={user.listings[0].offer[0].title}
-                  content={user.listings[0].offer[0].description}
-                  image={user.listings[0].offer[0].foto[0]}
+                  key={listing.id || index} // Use a unique identifier as the key
+                  title={listing.title}
+                  content={listing.description}
+                  image={
+                    listing.foto && listing.foto.length > 0
+                      ? listing.foto[0]
+                      : NoImage
+                  }
                 />
               ))}
             </div>

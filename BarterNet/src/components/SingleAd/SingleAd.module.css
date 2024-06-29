@@ -1,44 +1,95 @@
-.singleAdContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  .generalInfo, .detailedInfo, .userInfo {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .generalInfo h1 {
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .detailedInfo img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
-  }
-  
-  .exchangeButton {
-    padding: 10px 20px;
-    margin-top: 20px;
-    background-color: var(--button-background);
-    border-radius: var(--button-border-radius);
-    color: var(--button-text-color);
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: auto;
-  }
-  
-  .exchangeButton:hover {
-    background-color: #004085;
+header {
+  padding-bottom: 100px;
 }
-  
+.singleAdContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.generalInfo {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.generalInfo h1 {
+  font-size: 28px;
+  color: var(--text-color);
+}
+
+.adInfo {
+  text-align: right;
+}
+
+.adInfo p {
+  font-weight: bold;
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.adContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  background-color: #415a77;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.adImage {
+  width: 200px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.description {
+  color: white;
+  font-size: 18px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.userInfo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.userName {
+  font-size: 18px;
+  color: var(--text-color);
+  padding: 15px;
+}
+
+.exchangeButton {
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: var(--button-background);
+  border-radius: var(--button-border-radius);
+  color: var(--button-text-color);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: block;
+  text-align: center;
+}
+
+.exchangeButton:hover {
+  background-color: var(--button-background-hover);
+}

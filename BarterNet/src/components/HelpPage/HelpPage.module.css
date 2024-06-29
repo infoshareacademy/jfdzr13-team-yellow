@@ -1,0 +1,76 @@
+.helpContainer {
+  padding: 40px;
+  color: var(--text-color);
+  margin: 200px;
+}
+
+.header {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.accordion {
+  margin-top: 10px;
+}
+
+.accordionItem {
+  margin-bottom: 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 25px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.accordionHeader {
+  color: var(--primary-color);
+  padding: 15px 20px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+}
+
+.accordionContent {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.accordionContent.active {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.accordionInnerContent {
+  background-color: white;
+  color: var(--text-color);
+  padding: 15px 20px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: underline;
+  cursor: pointer;
+}
