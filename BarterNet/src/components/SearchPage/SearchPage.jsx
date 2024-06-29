@@ -236,7 +236,8 @@ toastOptions={{
           key={index}
           title={obj.title}
           content={obj.description}
-          index={obj.listingId}
+          userId={obj.userId}
+          listingId={obj.listingId}
           image={obj.foto && obj.foto.length > 0 ? obj.foto[0] : '/src/assets/pictures/no-photo.webp'}
           />
         ))}

@@ -4,7 +4,7 @@ import { useAuth } from "../../contex/AuthProvider";
 
 import styles from "./ListingItem.module.css";
 
-const ListingItem = ({ index, title, content, image }) => {
+const ListingItem = ({ index, title, content, image, userId, listingId }) => {
   const { currentUser } = useAuth();
 
   return (
@@ -19,7 +19,7 @@ const ListingItem = ({ index, title, content, image }) => {
           if (currentUser) {
             return (
               <>
-                <a href={`/article${index}`}>
+                <a href={`/ad/${userId}/${listingId}`}>
                   <button className={styles.articleButton}>Wymień się</button>
                 </a>
               </>
