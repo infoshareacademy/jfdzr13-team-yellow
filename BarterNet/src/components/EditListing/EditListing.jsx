@@ -1,22 +1,20 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../contex/AuthProvider";
-import { collection, addDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import SelectLocation from "../../utils/SelectLocation/SelectLocation";
-import styles from "./AddListing.module.css";
+import styles from "./EditListing.module.css";
 import { ClipLoader } from "react-spinners";
-import pica from "pica";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function AddListing() {
+function EditListing() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
-  if (!currentUser) {
-    navigate("/login");
-  }
+  const { id } = useParams();
 
-  const [listingType, setListingType] = useState("offer");
   const [formData, setFormData] = useState({
     category: "",
     location: "",
@@ -30,56 +28,52 @@ function AddListing() {
   const [error, setError] = useState("");
   const [previewUrls, setPreviewUrls] = useState([]);
 
+  useEffect(() => {
+    if (!currentUser) {
+      navigate("/login");
+      return;
+    }
+
+    const fetchData = async () => {
+      try {
+        console.log(`Fetching listing for ID: ${id}`);
+        const docRef = doc(db, "users", currentUser.uid, "listings", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+          setFormData(docSnap.data());
+        } else {
+          setError("Document does not exist.");
+          console.log("No such document!");
+        }
+      } catch (err) {
+        setError(err.message);
+        console.error("Error fetching document:", err);
+      }
+    };
+
+    fetchData();
+  }, [currentUser, id, navigate]);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = async (event) => {
+  const handleFileChange = (event) => {
     const selectedFiles = [...event.target.files];
-    const resizedFiles = await Promise.all(selectedFiles.map(resizeImage));
-    setFiles(resizedFiles);
+    setFiles(selectedFiles);
 
-    const urls = resizedFiles.map((file) => URL.createObjectURL(file));
+    const urls = selectedFiles.map((file) => URL.createObjectURL(file));
     setPreviewUrls(urls);
-  };
-
-  const resizeImage = async (file) => {
-    const picaResizer = pica();
-    const img = new Image();
-    const canvas = document.createElement("canvas");
-    const maxDimension = 800; // Example max dimension
-
-    return new Promise((resolve, reject) => {
-      img.src = URL.createObjectURL(file);
-      img.onload = async () => {
-        const scaleFactor = Math.min(
-          maxDimension / img.width,
-          maxDimension / img.height
-        );
-        canvas.width = img.width * scaleFactor;
-        canvas.height = img.height * scaleFactor;
-
-        await picaResizer.resize(img, canvas);
-        canvas.toBlob((blob) => {
-          if (blob) {
-            resolve(new File([blob], file.name, { type: file.type }));
-          } else {
-            reject(new Error("Image resizing failed"));
-          }
-        }, file.type);
-      };
-      img.onerror = (err) => {
-        reject(err);
-      };
-    });
   };
 
   const handlePredefinedImageClick = (imageUrl) => {
     setFormData((prevFormData) => {
-      const newFoto = (prevFormData.foto || []).includes(imageUrl)
+      const newFoto = prevFormData.foto.includes(imageUrl)
         ? prevFormData.foto.filter((img) => img !== imageUrl)
-        : [...(prevFormData.foto || []), imageUrl];
+        : [...prevFormData.foto, imageUrl];
       return {
         ...prevFormData,
         foto: newFoto,
@@ -103,36 +97,21 @@ function AddListing() {
         })
       );
 
-      const newListing = {
+      const updatedListing = {
         ...formData,
-        foto: [...(formData.foto || []), ...imageUrls],
-        type: listingType,
-        userId: currentUser.uid,
+        foto: [...formData.foto, ...imageUrls],
       };
 
-      const listingsCollectionRef = collection(
-        db,
-        "users",
-        currentUser.uid,
-        "listings"
-      );
-      await addDoc(listingsCollectionRef, newListing);
+      const docRef = doc(db, "users", currentUser.uid, "listings", id);
+      await updateDoc(docRef, updatedListing);
 
-      setMessage("Twoje ogłoszenie zostało dodane pomyślnie!");
-
-      setFormData({
-        category: "",
-        location: "",
-        title: "",
-        description: "",
-        foto: [],
-      });
-      setFiles([]);
-      setPreviewUrls([]);
+      setMessage("Ogłoszenie zostało zaktualizowane pomyślnie!");
+      toast.success("Ogłoszenie zostało zaktualizowane pomyślnie!");
       navigate("/myAccount");
     } catch (err) {
       setMessage(`Wystąpił błąd: ${err.message}`);
-      console.error("Error adding listing: ", err);
+      toast.error(`Wystąpił błąd: ${err.message}`);
+      console.error("Error updating listing:", err);
     }
     setLoading(false);
   };
@@ -157,37 +136,18 @@ function AddListing() {
   ];
 
   return (
-    <div className={styles.addListingContainer}>
-      <h1 className={styles.header}>Dodaj Ogłoszenie</h1>
-      <div className={styles.toggleButtons}>
-        <button
-          type="button"
-          className={`${styles.toggleButton} ${
-            listingType === "offer" ? styles.active : ""
-          }`}
-          onClick={() => setListingType("offer")}
-        >
-          Oferuję
-        </button>
-        <button
-          type="button"
-          className={`${styles.toggleButton} ${
-            listingType === "search" ? styles.active : ""
-          }`}
-          onClick={() => setListingType("search")}
-        >
-          Potrzebuję
-        </button>
-      </div>
-      <form onSubmit={handleSubmit} className={styles.addListingForm}>
-        <label className={styles.addListingLabel}>
+    <div className={styles.editListingContainer}>
+      <h1 className={styles.header}>Edytuj Ogłoszenie</h1>
+      {error && <p className={styles.error}>{error}</p>}
+      <form onSubmit={handleSubmit} className={styles.editListingForm}>
+        <label className={styles.editListingLabel}>
           Kategoria:
           <select
             name="category"
             value={formData.category}
             onChange={handleChange}
             required
-            className={`${styles.addListingInput} ${styles.addListingSelect}`}
+            className={`${styles.editListingInput} ${styles.editListingSelect}`}
           >
             <option value="">Wybierz kategorię</option>
             {categoryOptions.map((category) => (
@@ -197,7 +157,7 @@ function AddListing() {
             ))}
           </select>
         </label>
-        <label className={styles.addListingLabel}>
+        <label className={styles.editListingLabel}>
           Lokalizacja:
           <SelectLocation
             placeholder="Wybierz miasto lub wpisz 'ZDALNIE'"
@@ -210,7 +170,7 @@ function AddListing() {
             }
           />
         </label>
-        <label className={styles.addListingLabel}>
+        <label className={styles.editListingLabel}>
           Tytuł:
           <input
             type="text"
@@ -218,25 +178,25 @@ function AddListing() {
             value={formData.title}
             onChange={handleChange}
             required
-            className={styles.addListingInput}
+            className={styles.editListingInput}
           />
         </label>
-        <label className={styles.addListingLabel}>
+        <label className={styles.editListingLabel}>
           Opis:
           <textarea
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className={styles.addListingTextarea}
+            className={styles.editListingTextarea}
           />
         </label>
-        <label className={styles.addListingLabel}>
+        <label className={styles.editListingLabel}>
           Zdjęcia:
           <div className={styles.predefinedImages}>
             <button
               type="button"
               className={`${styles.imageOption} ${
-                formData.foto.includes("/src/assets/other/image1.png")
+                formData.foto && formData.foto.includes("/src/assets/other/image1.png")
                   ? styles.selected
                   : ""
               }`}
@@ -253,7 +213,7 @@ function AddListing() {
             <button
               type="button"
               className={`${styles.imageOption} ${
-                formData.foto.includes("/src/assets/other/image2.png")
+                formData.foto && formData.foto.includes("/src/assets/other/image2.png")
                   ? styles.selected
                   : ""
               }`}
@@ -270,7 +230,7 @@ function AddListing() {
             <button
               type="button"
               className={`${styles.imageOption} ${
-                formData.foto.includes("/src/assets/other/image3.png")
+                formData.foto && formData.foto.includes("/src/assets/other/image3.png")
                   ? styles.selected
                   : ""
               }`}
@@ -287,7 +247,7 @@ function AddListing() {
             <button
               type="button"
               className={`${styles.imageOption} ${
-                formData.foto.includes("/src/assets/other/image4.png")
+                formData.foto && formData.foto.includes("/src/assets/other/image4.png")
                   ? styles.selected
                   : ""
               }`}
@@ -304,7 +264,7 @@ function AddListing() {
             <button
               type="button"
               className={`${styles.imageOption} ${
-                formData.foto.includes("/src/assets/other/image5.png")
+                formData.foto && formData.foto.includes("/src/assets/other/image5.png")
                   ? styles.selected
                   : ""
               }`}
@@ -325,7 +285,7 @@ function AddListing() {
             type="file"
             multiple
             onChange={handleFileChange}
-            className={styles.addListingFileInput}
+            className={styles.editListingFileInput}
           />
           Wybierz pliki
         </label>
@@ -342,18 +302,15 @@ function AddListing() {
         <button
           type="submit"
           disabled={loading}
-          className={styles.addListingButton}
+          className={styles.editListingButton}
         >
-          {loading ? (
-            <ClipLoader size={20} color={"#ffffff"} />
-          ) : (
-            "DODAJ OGŁOSZENIE"
-          )}
+          {loading ? <ClipLoader size={20} color={"#ffffff"} /> : "ZAKTUALIZUJ OGŁOSZENIE"}
         </button>
       </form>
       {message && <div className={styles.message}>{message}</div>}
+      <ToastContainer />
     </div>
   );
 }
 
-export default AddListing;
+export default EditListing;
