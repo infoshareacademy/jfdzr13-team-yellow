@@ -8,6 +8,7 @@ import SelectLocation from "../../utils/SelectLocation/SelectLocation";
 import styles from "./AddListing.module.css";
 import { ClipLoader } from "react-spinners";
 import pica from "pica";
+import categories from '../../utils/categoriesList'
 
 function AddListing() {
   const { currentUser } = useAuth();
@@ -144,18 +145,7 @@ function AddListing() {
     }));
   };
 
-  const categoryOptions = [
-    "Pomoc domowa",
-    "Edukacja",
-    "Technologia i IT",
-    "Transport i Logistyka",
-    "Sport i Rekreacja",
-    "Hobby i Rozrywka",
-    "Zwierzęta",
-    "Zdrowie i Uroda",
-    "Inne",
-  ];
-
+const categoryOptions = categories.map((obj) => obj.category)
   return (
     <div className={styles.addListingContainer}>
       <h1 className={styles.header}>Dodaj Ogłoszenie</h1>
