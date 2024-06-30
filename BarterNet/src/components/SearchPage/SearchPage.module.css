@@ -1,15 +1,14 @@
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.search fieldset {
   border: none;
-} */
-
-button,
-input {
+  padding: 0;
+}
+.search button,
+.search input {
+  border: none;
   cursor: pointer;
 }
-main section {
+main .search,
+main .listings {
   margin: 0;
   padding: 0;
   width: 1240px;
@@ -27,14 +26,19 @@ main section {
   gap: 30px;
   justify-content: center;
 }
-section h1 {
-  font-size: 28px;
+.search h1,
+.listings h1 {
+  font-size: 32px;
   font-weight: bold;
+  margin: 0;
+  padding: 0;
 }
-form h2 {
+.search form h2 {
+  margin: 0;
+  padding: 0;
   font-size: 20px;
 }
-form {
+.search form {
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -48,7 +52,7 @@ form {
   border-radius: var(--button-border-radius);
   font-weight: var(--button-font-weight);
 }
-.searchForm__typeBtn {
+.search .searchForm__typeBtn {
   padding: 10px 20px;
   color: #333;
   transition: background-color 0.3s;
@@ -57,7 +61,7 @@ form {
   background-color: inherit;
   font-size: 18px;
 }
-.searchForm__typeBtnActive {
+.search .searchForm__typeBtnActive {
   background-color: var(--button-background);
   color: var(--button-text-color);
 }
@@ -97,13 +101,9 @@ form {
   border-color: #b3b3b3;
 }
 .searchForm__textFields input:focus-visible {
-  /* dopasowanie do domyślnych wartości elementu Select w react-select */
-  outline-color: #2684ff;
-  outline-style: solid;
-  outline-width: 3px;
+  outline: var(--input-border-focus);
   border-width: 0px;
 }
-/* --------------- */
 .searchForm__categoryWrap {
   display: flex;
   flex-direction: column;
@@ -136,7 +136,7 @@ form {
 }
 .searchForm__submitBtn {
   align-self: flex-end;
-  padding: 10px 50px;
+  padding: 10px 20px;
   background-color: var(--button-background);
   border-radius: var(--button-border-radius);
   color: var(--button-text-color);
@@ -145,7 +145,6 @@ form {
   background-color: var(--accent-color);
 }
 .searchForm__submitBtnDisabled {
-  /* display: none; */
   background-color: var(--accent-color);
   cursor: auto;
 }
