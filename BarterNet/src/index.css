@@ -50,7 +50,7 @@ header {
 main {
   display: grid;
   place-content: center;
-  width: 100%;
+  width: auto;
 }
 
 html,

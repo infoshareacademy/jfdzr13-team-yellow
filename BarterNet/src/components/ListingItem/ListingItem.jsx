@@ -10,7 +10,11 @@ const ListingItem = ({ index, title, content, image, userId, listingId }) => {
   return (
     <div
       className={styles.article}
-      style={{ backgroundImage: `url(${image})` }}
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundPosition: "top center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
       <div className={styles.article__container}>
         <h2>{title}</h2>

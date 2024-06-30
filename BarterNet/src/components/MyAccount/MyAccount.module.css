@@ -2,16 +2,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px;
-  background: var(--background-color);
+  padding: 0;
+  margin: 0 auto;
+  max-width: 1600px;
 }
 
 .header {
   color: var(--text-color);
-  font-weight: bold;
-  margin: 40px 0 40px 20px;
+  font-weight: 800;
   width: 100%;
-  font-size: 28px;
+  font-size: 3rem;
+  font-family: var(--font-primary);
+  margin: 10px 0;
 }
 
 .tileContainer {
@@ -20,7 +22,6 @@
   padding: 20px;
   gap: 30px;
   width: 50%;
-  max-width: 600px;
 }
 
 .accountTile {
@@ -54,12 +55,12 @@
 
 .tileLabel {
   margin-top: 10px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
 .titleDescription {
-  font-size: 10px;
+  font-size: 0.9rem;
   color: var(--light-text-color);
   opacity: 0.6;
   line-height: 1.5;
@@ -136,4 +137,17 @@
 .logout:hover,
 .cancel:hover {
   opacity: 0.8;
+}
+
+@media (max-width: 1024px) {
+  .tileContainer {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 720px) {
+  .tileContainer {
+    width: 100%;
+  }
 }

@@ -34,7 +34,7 @@
   opacity: 1;
 }
 
-h2 {
+.article__container h2 {
   font-family: var(--font-primary);
 }
 
