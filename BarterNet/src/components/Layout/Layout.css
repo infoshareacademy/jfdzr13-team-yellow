@@ -9,3 +9,7 @@
   flex: 1;
   padding: var(--default-padding);
 }
+
+.footer {
+  max-width: 1600px;
+}
