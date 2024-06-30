@@ -99,26 +99,25 @@ const MyAccount = () => {
         overlayClassName={styles.modalOverlay}
         contentLabel="Potwierdzenie wylogowania"
       >
-        <h2 className={styles.modalHeader}>
-          <img
-            src={logoutIcon}
-            alt="Logout"
-            className={styles.modalIconContainer}
-          />
-          Czy na pewno chcesz się wylogować?
-        </h2>
-        <button
-          onClick={() => setIsLogoutModalOpen(false)}
-          className={`${styles.modalButton} ${styles.cancel}`}
-        >
-          Nie
-        </button>
-        <button
-          onClick={handleLogout}
-          className={`${styles.modalButton} ${styles.logout}`}
-        >
-          Tak, wyloguj
-        </button>
+        <div className={styles.modalIconContainer}>
+          <img src={logoutIcon} alt="Logout" className={styles.imageIcon} />{" "}
+        </div>
+        <h2>Czy na pewno chcesz się wylogować?</h2>
+
+        <div className={styles.modalButtonContainer}>
+          <button
+            onClick={() => setIsLogoutModalOpen(false)}
+            className={`${styles.modalButton} ${styles.cancel}`}
+          >
+            NIE
+          </button>
+          <button
+            onClick={handleLogout}
+            className={`${styles.modalButton} ${styles.logout}`}
+          >
+            TAK
+          </button>
+        </div>
       </Modal>
 
       <Modal
@@ -128,26 +127,30 @@ const MyAccount = () => {
         overlayClassName={styles.modalOverlay}
         contentLabel="Potwierdzenie usunięcia konta"
       >
-        <h2 className={styles.modalHeader}>
+        <div className={styles.modalIconContainer}>
           <img
             src={deleteUserIcon}
             alt="Delete Account"
-            className={styles.modalIconContainer}
-          />
-          Czy na pewno chcesz usunąć swoje konto?
-        </h2>
-        <button
-          onClick={() => setIsDeleteModalOpen(false)}
-          className={`${styles.modalButton} ${styles.cancel}`}
-        >
-          Nie
-        </button>
-        <button
-          onClick={handleDeleteAccount}
-          className={`${styles.modalButton} ${styles.logout}`}
-        >
-          Tak, usuń
-        </button>
+            className={styles.imageIcon}
+          />{" "}
+        </div>
+        <h2>Czy na pewno chcesz usunąć swoje konto?</h2>
+
+        <div className={styles.modalButtonContainer}>
+          <button
+            onClick={() => setIsDeleteModalOpen(false)}
+            className={`${styles.modalButton} ${styles.cancel}`}
+          >
+            NIE
+          </button>
+
+          <button
+            onClick={handleDeleteAccount}
+            className={`${styles.modalButton} ${styles.logout}`}
+          >
+            TAK
+          </button>
+        </div>
       </Modal>
     </div>
   );
