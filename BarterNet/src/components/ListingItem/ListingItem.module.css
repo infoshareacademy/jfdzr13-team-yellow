@@ -25,13 +25,13 @@
   overflow: hidden;
 }
 .article__container p {
-  display: none;
   opacity: 0;
+  height: 0;
 }
 
 .article:hover .article__container p {
-  display: block;
   opacity: 1;
+  height: auto;
 }
 
 h2 {
