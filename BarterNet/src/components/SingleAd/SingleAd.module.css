@@ -1,59 +1,137 @@
-header {
-  padding-bottom: 100px;
-}
 .singleAdContainer {
+  padding: 20px;
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .generalInfo {
-  text-align: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 20px;
 }
 
-.generalInfo h1 {
-  font-size: 28px;
-  color: var(--text-color);
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
 }
 
-.adInfo {
-  text-align: right;
-}
-
-.adInfo p {
+.title {
+  font-size: 24px;
   font-weight: bold;
+  color: var(--text-color);
   margin: 0;
+}
+
+.adMeta {
+  text-align: right;
   font-size: 14px;
+  font-weight: bold;
   color: var(--text-color);
 }
 
 .adContent {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  background-color: #415a77;
+  flex-direction: column;
+  background-color: var(--primary-color);
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.adImageContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .adImage {
+  max-width: 100%;
   width: 200px;
   height: auto;
-  margin-right: 20px;
   border-radius: 10px;
 }
 
 .description {
+  padding: 10px;
+  background-color: var(--accent-color);
+  border-radius: 10px;
   color: white;
-  font-size: 18px;
+  margin: 10px 0;
+}
+
+.userActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.editButton,
+.deleteButton {
+  padding: var(--button-padding);
+  margin: 0 10px;
+  border: none;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.editButton:hover,
+.deleteButton:hover {
+  background-color:   var(  --accent-color);
+}
+
+
+.editButton {
+  background-color: var(--button-background);
+  color: white;
+}
+
+.deleteButton {
+  background-color: var(--button-background);
+  color: white;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modalContent {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.confirmButton,
+.cancelButton {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.confirmButton {
+  background-color: #28a745;
+  color: white;
+}
+
+.cancelButton {
+  background-color: #dc3545;
+  color: white;
 }
 
 .userInfo {
@@ -64,16 +142,17 @@ header {
   margin-top: 20px;
 }
 
-.userInfo img {
+.avatar {
+  border-radius: 50%;
   width: 50px;
   height: 50px;
-  border-radius: 50%;
   margin-right: 10px;
 }
 
 .userName {
-  font-size: 18px;
+  font-weight: bold;
   color: var(--text-color);
+  text-decoration: none;
   padding: 15px;
 }
 
@@ -91,5 +170,5 @@ header {
 }
 
 .exchangeButton:hover {
-  background-color: var(--button-background-hover);
+  background-color: var(  --accent-color);
 }

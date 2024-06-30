@@ -70,36 +70,40 @@
 /* Modal */
 
 .modalOverlay {
-  background-color: rgba(10, 10, 10, 0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .modalContent {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  background: #023853;
+  color: var(--text-color);
+  background: white;
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.modalHeader {
-  font-size: 1.25rem;
-  color: var(--light-text-color);
-  margin-bottom: 20px;
 }
 
 .modalIconContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
+  width: 100%;
+
+
+}
+
+.imageIcon {
   height: 40px;
-  padding: 10px;
+  width: 40px;
   background-color: var(--accent-color);
   border-radius: 50%;
+  padding: 10px;
 }
 
 .modalButton {
@@ -113,14 +117,20 @@
   transition: background-color 0.3s;
 }
 
+.modalButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .logout {
-  background-color: var(--accent-color);
+  background-color: #28a745; 
   color: white;
 }
 
 .cancel {
-  background-color: white;
-  color: #023853;
+  background-color: #dc3545;
+  color: white;
 }
 
 .logout:hover,
