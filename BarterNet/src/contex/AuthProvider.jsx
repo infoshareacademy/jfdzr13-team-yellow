@@ -1,6 +1,7 @@
 import { onAuthStateChanged, signOut, deleteUser } from "firebase/auth";
-import React, { useEffect, useState, createContext, useContext } from "react";
-import { auth } from "../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState, createContext, useContext } from "react";
+import { auth, db } from "../config/firebase";
 import Spinner from '../components/Spinner/Spinner';
 
 
@@ -12,8 +13,22 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrenUser(user);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          setCurrenUser({
+            uid: user.uid,
+            email: user.email,
+            ...userDocSnap.data()
+          });
+        } else {
+          console.error("Brak danych użytkownika w Firestore.");
+        }
+      } else {
+        setCurrenUser(null);
+      }
       setLoading(false);
     });
     return unsubscribe;

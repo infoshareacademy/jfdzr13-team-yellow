@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getAdDetails, deleteAd } from "../../utils/firebaseUtils";
-import MessageForm from "../MessageForm/MessageForm";
+import MessageForm from "../Message/MessageForm/MessageForm";
 import { useAuth } from "../../contex/AuthProvider";
 import styles from "./SingleAd.module.css";
 
@@ -72,7 +72,7 @@ function SingleAd() {
           <p>{adDetails.description}</p>
         </div>
       </div>
-      {currentUser && currentUser.uid === userId ? (
+      {isOwner ? (
         <div className={styles.userActions}>
           <button onClick={handleEditClick} className={styles.editButton}>
             EDYTUJ
@@ -122,6 +122,7 @@ function SingleAd() {
         <MessageForm
           recipientEmail={userDetails.email}
           recipientName={`${userDetails.firstName} ${userDetails.lastName}`}
+          recipientId={userId}
         />
       )}
     </div>

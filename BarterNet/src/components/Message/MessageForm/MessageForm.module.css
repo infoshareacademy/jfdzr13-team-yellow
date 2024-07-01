@@ -30,6 +30,7 @@
   border-radius: 20px;
   box-sizing: border-box;
   font-size: 16px;
+  color: var(--accent-color);
 }
 
 .messageFormInput:focus,
@@ -64,4 +65,26 @@
   color: red;
   font-weight: bold;
   margin-top: 20px;
+}
+
+/* Responsywność dla urządzeń mobilnych */
+
+@media (max-width: 768px) {
+  .messageFormContainer {
+    padding: 10px;
+  }
+
+  .messageFormHeader {
+    font-size: 20px;
+  }
+
+  .messageFormInput,
+  .messageFormTextarea {
+    font-size: 14px;
+  }
+
+  .messageFormButton {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
 }
