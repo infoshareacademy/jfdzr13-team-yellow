@@ -72,7 +72,7 @@ function SingleAd() {
           <p>{adDetails.description}</p>
         </div>
       </div>
-      {currentUser && currentUser.uid === userId ? (
+      {isOwner ? (
         <div className={styles.userActions}>
           <button onClick={handleEditClick} className={styles.editButton}>
             EDYTUJ

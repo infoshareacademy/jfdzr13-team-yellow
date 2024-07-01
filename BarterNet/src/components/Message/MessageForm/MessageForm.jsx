@@ -20,8 +20,21 @@ function MessageForm({ recipientEmail, recipientName, recipientId }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!currentUser.firstName || !currentUser.lastName) {
+      setFormStatus(
+        "Nie można wysłać wiadomości: brak imienia lub nazwiska użytkownika."
+      );
+      return;
+    }
+
     try {
-      await addMessage(currentUser.uid, `${currentUser.firstName} ${currentUser.lastName}`, recipientId, recipientEmail, formData.message);
+      await addMessage(
+        currentUser.uid,
+        `${currentUser.firstName} ${currentUser.lastName}`,
+        recipientId,
+        recipientEmail,
+        formData.message
+      );
       setFormStatus("Wiadomość została wysłana pomyślnie!");
     } catch (error) {
       console.error("Błąd podczas wysyłania wiadomości: ", error);

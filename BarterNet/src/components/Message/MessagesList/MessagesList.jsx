@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getMessages } from "../../../utils/messageUtils";
 import { useAuth } from "../../../contex/AuthProvider";
+import { Link } from "react-router-dom";
 import styles from "./MessagesList.module.css";
 
 const MessagesList = () => {
@@ -35,10 +36,21 @@ const MessagesList = () => {
       ) : (
         messages.map((msg) => (
           <div key={msg.id} className={styles.messageItem}>
-            <p><strong>Od:</strong> {msg.senderName}</p>
-            <p><strong>Email:</strong> {msg.recipientEmail}</p>
-            <p><strong>Wiadomość:</strong> {msg.message}</p>
-            <p><strong>Data:</strong> {msg.timestamp.toDate().toLocaleString()}</p>
+            <p>
+              <strong>Od:</strong>
+              <Link to={`/user/${msg.senderId}`} className={styles.senderName}>
+                {msg.senderName}
+              </Link>
+            </p>
+            <p>
+              <strong>Email:</strong> {msg.recipientEmail}
+            </p>
+            <p>
+              <strong>Wiadomość:</strong> {msg.message}
+            </p>
+            <p>
+              <strong>Data:</strong> {msg.timestamp.toDate().toLocaleString()}
+            </p>
           </div>
         ))
       )}
