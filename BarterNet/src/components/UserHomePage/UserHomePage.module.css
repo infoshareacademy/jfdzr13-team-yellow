@@ -33,6 +33,7 @@ body {
   width: 100%;
   max-width: 1200px;
   justify-items: center;
+  align-items: stretch;
 }
 
 .accountTile {
