@@ -132,12 +132,34 @@
     margin: -18px;
   }
 
-  .navButton2,
-  .navButton3 {
+  .navButton2 {
     width: 150px;
     border-radius: 25px;
   }
   .navBottom {
+    display: none;
+  }
+}
+@media (max-width: 450px) {
+  .nav {
+    padding: 20px 5px;
+  }
+  .navButton1 {
+    padding: 0;
+    margin-top: 12.5px;
+    align-items: center;
+  }
+  .navButton2 {
+    width: 100px;
+  }
+  .navButton2:hover {
+    width: 100px;
+  }
+  .navButton2:hover span {
+    display: inline;
+    font-size: 13px;
+  }
+  .navButton2:hover .icon {
     display: none;
   }
 }
