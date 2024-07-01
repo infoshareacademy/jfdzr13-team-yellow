@@ -5,8 +5,12 @@ import { useAuth } from "../../contex/AuthProvider";
 
 import logo1 from "./assets/logo1.png";
 import logo2 from "./assets/logo2.png";
-import styles from "./header.module.css";
-// import UserIcon from "./assets/userIcon.svg";
+import styles from "./Header.module.css";
+import addListingIcon from '../../assets/icons/addListingIcon.png'; 
+import searchIcon from '../../assets/icons/searchIcon.png';
+import myProfileIcon from '../../assets/icons/myProfileIcon.png';
+import messagesIcon from '../../assets/icons/messagesIcon.png';
+
 const Header = () => {
   const { currentUser } = useAuth();
 
@@ -22,51 +26,71 @@ const Header = () => {
         <div className={styles.navCenter}>
           <img src={logo2} alt="Logo2" className={styles.logo2} />
         </div>
+      
         <div className={styles.navRight}>
 
           {(() => {
-            if (currentUser) {
+            if (!currentUser) {
               return (
                 <>
-                <NavLink to="/messages">Wiadomości</NavLink>
-                  <NavLink to="/myaccount">
+                <NavLink to="/login">
                     <button className={styles.navButton1}>
-                      {/* <img src={UserIcon} className={styles.icon} /> */}
-                      Moje konto
+                      Zarejestruj się | Zaloguj
                     </button>
                   </NavLink>
-                  <NavLink to="/add">
+                <NavLink to="/login">
                     <button className={styles.navButton2}>
-                      Dodaj ogłoszenie
+                    <img src={addListingIcon} alt="Add icon" className={styles.icon} />
+                    <span>DODAJ OGŁOSZENIE</span>
                     </button>
                   </NavLink>
-
-              
+                  <NavLink to="/login" >
+                    <button className={styles.navButton2}>
+                    <img src={searchIcon} alt="Search icon" className={styles.icon} />
+                      <span>WYSZUKAJ OGŁOSZENIE</span>
+                      </button>
+                  </NavLink>
                 </>
               );
             } else {
               return (
                 <>
-                  <NavLink to="/login">
-                    <button className={styles.navButton1}>
-                      Zarejestruj się | Zaloguj
+                <NavLink to="/addlisting">
+                  <button className={styles.navButton2}>
+                  <img src={addListingIcon} alt="Add icon" className={styles.icon} />
+                  <span>DODAJ OGŁOSZENIE</span>
+                  </button>
+                </NavLink>
+                <NavLink to="/searchpage" >
+                  <button className={styles.navButton2}>
+                  <img src={searchIcon} alt="Search icon" className={styles.icon} />
+                    <span>WYSZUKAJ OGŁOSZENIE</span>
                     </button>
-                  </NavLink>
-                  <NavLink to="/login">
+                </NavLink>
+                <NavLink to="/messages">
                     <button className={styles.navButton2}>
-                      Dodaj ogłoszenie
+                      <img src={messagesIcon} alt="Messages icon" className={styles.icon} />
+                      <span>WIADOMOŚCI</span>
                     </button>
                   </NavLink>
-                </>
+                <NavLink to="/myaccount">
+                  <button className={styles.navButton2}>
+                  <img src={myProfileIcon} alt="My profile" className={styles.icon} />
+                    <span>MOJE<br/>KONTO</span>
+                  </button>
+                </NavLink>
+              </>
               );
             }
           })()}
 
         </div>
       </nav>
+      { (currentUser) && (
+          <div className={styles.navBottom}></div>
+        ) }
     </header>
   );
 };
 
 export default Header;
-
