@@ -28,6 +28,7 @@ const Header = () => {
             if (currentUser) {
               return (
                 <>
+                <NavLink to="/messages">Wiadomości</NavLink>
                   <NavLink to="/myaccount">
                     <button className={styles.navButton1}>
                       {/* <img src={UserIcon} className={styles.icon} /> */}

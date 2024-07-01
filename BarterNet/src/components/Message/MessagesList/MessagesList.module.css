@@ -1,0 +1,33 @@
+.messagesListContainer {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .messageListHeader {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--text-color);
+  }
+
+  .messageItem {
+    padding: 10px;
+    margin: 20px auto;
+    margin-bottom: 10px;
+    border: var(--input-border);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    color: var(--text-color);
+  }
+  
+
+  .messageItem p {
+    padding: 5px;
+    margin: 5px 0;
+  }
+  
+  .messageItem strong {
+    font-weight: bold;
+  }
+  
