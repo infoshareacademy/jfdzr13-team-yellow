@@ -46,6 +46,7 @@ const MyAccount = () => {
   return (
     <div className={styles.accountContainer}>
       <h1 className={styles.header}>Moje konto</h1>
+      <div className={styles.backgroundContainer}>
       <div className={styles.tileContainer}>
         <Link to="/MyAds" className={styles.accountTile}>
           <img src={myAdsIcon} alt="My Ads" className={styles.icon} />
@@ -90,7 +91,7 @@ const MyAccount = () => {
           </span>
         </button>
       </div>
-
+      </div>
       {/* Modale dla potwierdzenia wylogowania i usunięcia konta */}
       <Modal
         isOpen={isLogoutModalOpen}
