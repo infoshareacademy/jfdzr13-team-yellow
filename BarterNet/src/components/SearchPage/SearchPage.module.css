@@ -9,11 +9,9 @@
 }
 main .search,
 main .listings {
-  margin: 0;
-  padding: 0;
+  margin: 20px 0;
   width: 1240px;
   padding: 20px;
-  margin-bottom: 50px;
   color: var(--text-color);
   font-family: var(--font-primary);
   border: var(--input-border);
@@ -23,7 +21,7 @@ main .listings {
 .search {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 15px;
   justify-content: center;
 }
 .search h1,
@@ -41,7 +39,7 @@ main .listings {
 .search form {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
 }
 .searchForm__typeWrap {
   display: flex;
