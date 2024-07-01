@@ -7,6 +7,13 @@
   max-width: 1600px;
 }
 
+.backgroundContainer {
+  background: url("./assets/my_account_background.webp") no-repeat center center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+}
+
 .header {
   color: var(--text-color);
   font-weight: 800;
@@ -36,6 +43,8 @@
   text-decoration: none;
   box-shadow: var(--box-shadow);
   transition: transform 0.3s ease;
+  border: 0;
+  cursor: pointer;
 }
 
 .accountTile:hover {
@@ -95,8 +104,6 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-
-
 }
 
 .imageIcon {
@@ -125,7 +132,7 @@
 }
 
 .logout {
-  background-color: #28a745; 
+  background-color: #28a745;
   color: white;
 }
 
