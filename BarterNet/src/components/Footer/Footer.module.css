@@ -61,3 +61,14 @@
   font-size: 1.2rem;
   vertical-align: middle;
 }
+
+@media (max-width: 450px) {
+  .footerContainer {
+    flex-direction: column;
+  }
+
+  .footerContainer h3 {
+    margin: 8px 0;
+    font-size: 24px;
+  }
+}
