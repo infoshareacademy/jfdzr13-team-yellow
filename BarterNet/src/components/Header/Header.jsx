@@ -61,18 +61,24 @@ const Header = () => {
                   <span>DODAJ OGŁOSZENIE</span>
                   </button>
                 </NavLink>
+
                 <NavLink to="/searchpage" >
                   <button className={styles.navButton2}>
                   <img src={searchIcon} alt="Search icon" className={styles.icon} />
                     <span>WYSZUKAJ OGŁOSZENIE</span>
                     </button>
                 </NavLink>
+
                 <NavLink to="/messages">
                     <button className={styles.navButton2}>
                       <img src={messagesIcon} alt="Messages icon" className={styles.icon} />
                       <span>WIADOMOŚCI</span>
                     </button>
                   </NavLink>
+
+                    </button>
+                </NavLink>
+
                 <NavLink to="/myaccount">
                   <button className={styles.navButton2}>
                   <img src={myProfileIcon} alt="My profile" className={styles.icon} />
