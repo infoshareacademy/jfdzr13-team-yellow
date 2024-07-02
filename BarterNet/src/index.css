@@ -7,7 +7,7 @@
   --highlight-color: #fdedc7; /* Złoty/beżowy akcent */
 
   /* Tło */
-  --background-color: #fffef8; /* Jasne tło dla większości UI */
+  --background-color: #fff; /* Jasne tło dla większości UI */
   --footer-background-color: var(--secondary-color); /* Beżowe tło stopki */
 
   /* Typografia */

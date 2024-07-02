@@ -23,13 +23,14 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.loginContainer}>
+    <div className={styles.wrap}>
       <div className={styles.loginLeft}>
         <img src={bgImage} alt="Background" className={styles.loginImage} />
       </div>
-      <div className={styles.loginRight}>
+      <section className={styles.loginRight}>
+      <div className={styles.loginContainer}>
         <h1 className={styles.loginTitle}>Logowanie</h1>
-        <p className={styles.loginSubtitle}>Wpisz poniżej swój adres email oraz hasło</p>
+        {/* <p className={styles.loginSubtitle}>Wpisz poniżej swój adres email oraz hasło</p> */}
         <form onSubmit={handleLogin} className={styles.loginForm}>
           <div className={styles.inputGroup}>
             <label htmlFor="email">Email</label>
@@ -48,6 +49,7 @@ const Login = () => {
           <Link to="#" className={styles.footerLink}>Warunki świadczenia usług</Link> | <Link to="#" className={styles.footerLink}>Polityka prywatności</Link>
         </div>
       </div>
+      </section>
     </div>
   );
 };
