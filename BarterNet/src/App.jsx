@@ -18,6 +18,7 @@ import SingleAd from "./components/SingleAd/SingleAd";
 import TermsPage from "./components/TermsPage/TermsPage";
 import UserHomePage from "./components/UserHomePage/UserHomePage";
 import MessagesList from "./components/Message/MessagesList/MessagesList";
+import OtherUserPage from "./components/OtherUserPage/OtherUserPage"
 import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route path="/myProfile/edit" element={<MyProfileEdit />} />
           <Route path="/addListing" element={<AddListing />} />
           <Route path="/editListing/:id" element={<EditListing />} />
+          <Route path="/user/:userId" element={<OtherUserPage />} />
           <Route path="/searchPage" element={<SearchPage />} />
           {/* Tutaj dodamy kolejne routy dla zalogowanych userów  */}
         </Route>

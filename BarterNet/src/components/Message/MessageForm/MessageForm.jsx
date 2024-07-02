@@ -3,12 +3,12 @@ import { useAuth } from "../../../contex/AuthProvider";
 import { addMessage } from "../../../utils/messageUtils";
 import styles from "./MessageForm.module.css";
 
-function MessageForm({ recipientEmail, recipientName, recipientId }) {
+function MessageForm({ recipientEmail, recipientName, recipientId, adTitle }) {
   const { currentUser } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: "",
+    message: adTitle ? `W sprawie ogłoszenia: ${adTitle}\n\n` : "",
   });
   const [formStatus, setFormStatus] = useState("");
 
@@ -20,21 +20,8 @@ function MessageForm({ recipientEmail, recipientName, recipientId }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!currentUser.firstName || !currentUser.lastName) {
-      setFormStatus(
-        "Nie można wysłać wiadomości: brak imienia lub nazwiska użytkownika."
-      );
-      return;
-    }
-
     try {
-      await addMessage(
-        currentUser.uid,
-        `${currentUser.firstName} ${currentUser.lastName}`,
-        recipientId,
-        recipientEmail,
-        formData.message
-      );
+      await addMessage(currentUser.uid, `${currentUser.firstName} ${currentUser.lastName}`, recipientId, recipientEmail, formData.message);
       setFormStatus("Wiadomość została wysłana pomyślnie!");
     } catch (error) {
       console.error("Błąd podczas wysyłania wiadomości: ", error);
