@@ -17,6 +17,7 @@ import SearchPage from "./components/SearchPage/SearchPage";
 import SingleAd from "./components/SingleAd/SingleAd";
 import TermsPage from "./components/TermsPage/TermsPage";
 import UserHomePage from "./components/UserHomePage/UserHomePage";
+import MessagesList from "./components/Message/MessagesList/MessagesList";
 import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/myAccount" element={<MyAccount />} />
           <Route path="/myAds" element={<MyAds />} />
           <Route path="/myProfile" element={<MyProfile />} />
+          <Route path="/messages" element={<MessagesList />} />
           <Route path="/ad/:userId/:adId" element={<SingleAd />} />
           <Route path="/myProfile/edit" element={<MyProfileEdit />} />
           <Route path="/addListing" element={<AddListing />} />
