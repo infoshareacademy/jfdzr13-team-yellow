@@ -127,17 +127,27 @@
   }
   .navRight {
     gap: 5px;
+    justify-content: space-around;
   }
   .navButton1 {
     margin: -18px;
   }
 
   .navButton2 {
-    width: 150px;
+    width: 130px;
     border-radius: 25px;
   }
   .navBottom {
     display: none;
+  }
+}
+@media (max-width: 585px) {
+  .nav {
+    padding: 20px 5px;
+  }
+  .navButton2 {
+    width: 105px;
+    /* border-radius: 25px; */
   }
 }
 @media (max-width: 450px) {
@@ -148,9 +158,10 @@
     padding: 0;
     margin-top: 12.5px;
     align-items: center;
+    max-width: 230px;
   }
   .navButton2 {
-    width: 100px;
+    width: 85px;
   }
   .navButton2:hover {
     width: 100px;
