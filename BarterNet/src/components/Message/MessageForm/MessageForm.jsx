@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useAuth } from "../../../contex/AuthProvider";
+import { addMessage } from "../../../utils/messageUtils";
 import styles from "./MessageForm.module.css";
 
-function MessageForm({ recipientEmail, recipientName }) {
+function MessageForm({ recipientEmail, recipientName, recipientId }) {
+  const { currentUser } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,9 +19,22 @@ function MessageForm({ recipientEmail, recipientName }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!currentUser.firstName || !currentUser.lastName) {
+      setFormStatus(
+        "Nie można wysłać wiadomości: brak imienia lub nazwiska użytkownika."
+      );
+      return;
+    }
+
     try {
-      // Dodaj tutaj kod do wysłania wiadomości
-      // Na przykład za pomocą API lub funkcji Firebase
+      await addMessage(
+        currentUser.uid,
+        `${currentUser.firstName} ${currentUser.lastName}`,
+        recipientId,
+        recipientEmail,
+        formData.message
+      );
       setFormStatus("Wiadomość została wysłana pomyślnie!");
     } catch (error) {
       console.error("Błąd podczas wysyłania wiadomości: ", error);
@@ -28,9 +44,9 @@ function MessageForm({ recipientEmail, recipientName }) {
 
   return (
     <div className={styles.messageFormContainer}>
-      <h2 className={styles.messageFormHeader}>
+      <h1 className={styles.messageFormHeader}>
         Wyślij wiadomość do {recipientName}
-      </h2>
+      </h1>
       <form onSubmit={handleSubmit}>
         <label className={styles.messageFormLabel}>Imię i nazwisko:</label>
         <input
