@@ -75,10 +75,6 @@ const Header = () => {
                       <span>WIADOMOŚCI</span>
                     </button>
                   </NavLink>
-
-                    </button>
-                </NavLink>
-
                 <NavLink to="/myaccount">
                   <button className={styles.navButton2}>
                   <img src={myProfileIcon} alt="My profile" className={styles.icon} />
