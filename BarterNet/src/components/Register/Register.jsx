@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import bgImage from '../../assets/backgroundImage/login_background.webp';
 import { auth, db } from "../../config/firebase";
-import SelectLocation from "../../utils/SelectLocation/SelectLocation";
+import SelectLocation from "../../utils/SelectComponents/SelectLocation";
 import Spinner from "../Spinner/Spinner";
 import styles from "./Register.module.css";
 

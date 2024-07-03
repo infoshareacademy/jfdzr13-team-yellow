@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import SelectLocation from '../../utils/SelectLocation/SelectLocation'
+import SelectLocation from '../../utils/SelectComponents/SelectLocation'
 import styles from './SearchPage.module.css'
 import ListingItem from '../ListingItem/ListingItem'
 import categories from '../../utils/categoriesList'
