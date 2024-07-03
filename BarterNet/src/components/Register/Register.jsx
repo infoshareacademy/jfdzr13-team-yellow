@@ -1,11 +1,12 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import bgImage from '../../assets/backgroundImage/login_background.webp';
 import { auth, db } from "../../config/firebase";
-import Spinner from "../Spinner/Spinner"
 import SelectLocation from "../../utils/SelectLocation/SelectLocation";
-import styles from "./Register.module.css"
+import Spinner from "../Spinner/Spinner";
+import styles from "./Register.module.css";
 
 function Register() {
   const [loading, setLoading] = useState(false)
@@ -123,8 +124,12 @@ function Register() {
   if (!loading) {
   return (
     <div className={styles.registerContainer}>
-      <h1>Rejestracja</h1>
+      <section className={styles.sectionImage}>
+      <img src={bgImage} alt="Background" className={styles.sectionImage__img} />
+      </section>
+      <section className={styles.sectionForm}>
       <form onSubmit={handleSubmit} className={styles.registerForm}>
+      <h1>Rejestracja</h1>
         <input
           type="text"
           name="firstName"
@@ -172,13 +177,14 @@ function Register() {
           value={formData.phone}
           onChange={handleChange}
           required
-        />
+        /><div className={styles.selectLocation}>
           <SelectLocation 
           name="city"
           placeholder="Miasto"
           value={formData.city ? { value: formData.city, label: formData.city } : null}
           onChange={handleChange}
           />
+          </div>
         <textarea
           name="description"
           placeholder="Napisz kilka słów o sobie ..."
@@ -194,12 +200,16 @@ function Register() {
             checked={formData.termsAccepted}
             onChange={handleChange}
           />
-          Akceptuję warunki świadczenia usług.
+          <NavLink 
+          to={'/terms'}>
+            Akceptuję warunki świadczenia usług.
+          </NavLink>
         </label>
 
         {error && <p className={styles.error}>{error}</p>}
         <button type="submit">Zarejestruj się</button>
       </form>
+      </section>
     </div>
   )
 } else {
