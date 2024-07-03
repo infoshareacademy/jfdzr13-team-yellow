@@ -52,12 +52,13 @@ main .listings {
 }
 .search .searchForm__typeBtn {
   padding: 10px 20px;
-  color: #333;
-  transition: background-color 0.3s;
   flex: 1;
+  transition: background-color 0.3s;
   border-radius: var(--button-border-radius);
   background-color: inherit;
+  font-family: var(--font-primary);
   font-size: 18px;
+  color: var(--text-color);
 }
 .search .searchForm__typeBtnActive {
   background-color: var(--button-background);
@@ -100,7 +101,7 @@ main .listings {
 }
 .searchForm__textFields input:focus-visible {
   outline: var(--input-border-focus);
-  border-width: 0px;
+  border-color: transparent;
 }
 .searchForm__categoryWrap {
   display: flex;

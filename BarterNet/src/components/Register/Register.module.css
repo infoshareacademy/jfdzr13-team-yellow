@@ -1,47 +1,79 @@
 .registerContainer {
   display: flex;
-  flex-direction: column;
+  max-width: 1400px;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.sectionImage {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sectionImage__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sectionForm {
+  width: 50%;
+  padding: 15px 0;
+  display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  padding: 20px;
-  background: var(--background-color);
-  margin-top: 100px;
 }
 
 .registerForm {
-  padding: 40px;
-  border-radius: 25px;
-  box-shadow: var(--box-shadow);
-  max-width: 400px;
-  width: 100%;
+  width: 460px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
+  height: auto;
+  padding: 30px;
+  border: var(--input-border);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--button-border-radius);
 }
 
 .registerForm h1 {
-  color: var(--text-color);
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 20px;
+  margin: 0;
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-primary);
 }
 
 .registerForm input,
 .registerForm textarea {
+  width: calc(100% - 26px);
   padding: 12px;
   border: 2px solid var(--form-border-color);
   border-radius: 25px;
   font-size: 16px;
+  color: var(--text-color);
+}
+.registerForm input:hover,
+.registerForm textarea:hover {
+  border-color: #b3b3b3;
+}
+.registerForm input:focus-visible,
+.registerForm textarea:focus-visible {
+  outline: var(--input-border-focus);
+  border-color: transparent;
 }
 
+.selectLocation {
+  width: auto;
+}
 .registerForm button {
   padding: 10px 15px;
   background: var(--button-background);
   color: var(--button-text-color);
   border: none;
   border-radius: 25px;
-  font-size: 16px;
+  font-family: var(--font-primary);
+  font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -53,10 +85,24 @@
 .registerForm label {
   display: flex;
   align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  justify-content: flex-start;
   font-size: 14px;
   color: var(--text-color);
 }
-
+.registerForm label input {
+  width: auto;
+  cursor: pointer;
+}
+.registerForm label a {
+  text-decoration: none;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+.registerForm label a:hover {
+  text-decoration: underline;
+}
 .registerForm .error {
   color: red;
   font-size: 14px;
@@ -64,29 +110,43 @@
   margin-top: 10px;
 }
 
-/* Responsywność */
 @media (max-width: 1024px) {
+  .sectionImage {
+    display: none;
+  }
   .registerForm {
-    padding: 20px;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 0;
+    align-self: center;
+  }
+  .sectionForm {
+    width: 100%;
+    padding: 30px 10px;
+    align-self: center;
+  }
+  .registerForm input {
+    width: 350px;
+    padding: 0.8rem;
   }
 }
 
-@media (max-width: 720px) {
-  .registerForm {
-    width: 90%;
-    max-width: none;
+@media (max-width: 768px) {
+  .registerContainer {
+    width: 100%;
+    height: 100%;
   }
 }
-
-@media (max-width: 320px) {
+@media (max-width: 450px) {
   .registerForm {
-    padding: 15px;
+    padding: 30px 5px;
   }
-}
-
-/* Bardzo duże ekrany */
-@media (min-width: 1600px) {
-  .registerForm {
-    max-width: 800px;
+  .registerForm input {
+    width: 300px;
+  }
+  .sectionForm {
+    width: 100%;
+    padding: 30px 0;
+    align-self: center;
   }
 }
