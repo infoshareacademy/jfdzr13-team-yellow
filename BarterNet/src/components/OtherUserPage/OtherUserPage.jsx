@@ -78,7 +78,7 @@ const OtherUserPage = () => {
           recipientEmail={userDetails.email}
           recipientName={`${userDetails.firstName} ${userDetails.lastName}`}
           recipientId={userId}
-          adTitle={selectedAd.title} // Przekazanie tytułu ogłoszenia
+          adTitle={selectedAd.title}
         />
       )}
     </div>

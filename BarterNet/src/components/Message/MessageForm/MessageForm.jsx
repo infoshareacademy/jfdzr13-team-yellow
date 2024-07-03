@@ -11,6 +11,7 @@ function MessageForm({ recipientEmail, recipientName, recipientId, adTitle }) {
     message: adTitle ? `W sprawie ogłoszenia: ${adTitle}\n\n` : "",
   });
   const [formStatus, setFormStatus] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -19,13 +20,25 @@ function MessageForm({ recipientEmail, recipientName, recipientId, adTitle }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSending(true);
 
     try {
-      await addMessage(currentUser.uid, `${currentUser.firstName} ${currentUser.lastName}`, recipientId, recipientEmail, formData.message);
+      await addMessage(
+        currentUser.uid,
+        `${currentUser.firstName} ${currentUser.lastName}`,
+        recipientId,
+        recipientEmail,
+        formData.message
+      );
       setFormStatus("Wiadomość została wysłana pomyślnie!");
+      setFormData({
+        message: adTitle ? `W sprawie ogłoszenia: ${adTitle}\n\n` : "",
+      });
     } catch (error) {
       console.error("Błąd podczas wysyłania wiadomości: ", error);
       setFormStatus("Wystąpił błąd podczas wysyłania wiadomości.");
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -35,26 +48,6 @@ function MessageForm({ recipientEmail, recipientName, recipientId, adTitle }) {
         Wyślij wiadomość do {recipientName}
       </h1>
       <form onSubmit={handleSubmit}>
-        <label className={styles.messageFormLabel}>Imię i nazwisko:</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className={styles.messageFormInput}
-        />
-
-        <label className={styles.messageFormLabel}>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          className={styles.messageFormInput}
-        />
-
         <label className={styles.messageFormLabel}>Wiadomość:</label>
         <textarea
           name="message"
@@ -64,9 +57,15 @@ function MessageForm({ recipientEmail, recipientName, recipientId, adTitle }) {
           className={styles.messageFormTextarea}
         />
 
-        <button type="submit" className={styles.messageFormButton}>
-          WYŚLIJ WIADOMOŚĆ
-        </button>
+        <div className={styles.buttonContainer}>
+          <button
+            type="submit"
+            className={styles.messageFormButton}
+            disabled={isSending}
+          >
+            {isSending ? "Wysyłanie..." : "WYŚLIJ WIADOMOŚĆ"}
+          </button>
+        </div>
       </form>
       {formStatus && (
         <div

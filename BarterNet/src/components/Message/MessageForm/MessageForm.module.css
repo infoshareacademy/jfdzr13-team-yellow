@@ -1,5 +1,5 @@
 .messageFormContainer {
-  max-width: 600px;
+  max-width: 800px;
   margin: 20px auto;
   padding: 20px;
   border: var(--input-border);
@@ -24,8 +24,8 @@
 .messageFormInput,
 .messageFormTextarea {
   width: 100%;
-  padding: 5px;
-  margin-bottom: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
   border: var(--input-border);
   border-radius: 20px;
   box-sizing: border-box;
@@ -39,9 +39,15 @@
   outline: none;
 }
 
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 .messageFormButton {
   padding: var(--button-padding);
-  margin-top: 20px;
+  margin: 0 10px;
   background-color: var(--button-background);
   border-radius: var(--button-border-radius);
   color: var(--button-text-color);
@@ -51,18 +57,25 @@
   width: auto;
 }
 
+.messageFormButton:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
 .messageFormButton:hover {
   background-color: var(--accent-color);
 }
 
 .messageSuccess {
   color: green;
+  text-align: center;
   font-weight: bold;
   margin-top: 20px;
 }
 
 .messageError {
   color: red;
+  text-align: center;
   font-weight: bold;
   margin-top: 20px;
 }
