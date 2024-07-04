@@ -1,15 +1,17 @@
+import { deleteUser } from "firebase/auth";
+import { deleteDoc, doc } from "firebase/firestore";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contex/AuthProvider";
-import { auth, db } from "../../config/firebase";
-import { deleteUser, getAuth } from "firebase/auth";
-import { doc, deleteDoc } from "firebase/firestore";
 import Modal from "react-modal";
-import styles from "./MyAccount.module.css";
+import { Link, useNavigate } from "react-router-dom";
+import deleteUserIcon from "../../assets/icons/deleteUserIcon.png";
+import logoutIcon from "../../assets/icons/logoutIcon.png";
 import myAdsIcon from "../../assets/icons/myAdsIcon.png";
 import myProfileIcon from "../../assets/icons/myProfileIcon.png";
-import logoutIcon from "../../assets/icons/logoutIcon.png";
-import deleteUserIcon from "../../assets/icons/deleteUserIcon.png";
+import { auth, db } from "../../config/firebase";
+import { useAuth } from "../../contex/AuthProvider";
+import Content from "../Content/Content.component";
+import styles from "./MyAccount.module.css";
+
 
 const MyAccount = () => {
   const { logout, deleteAccount } = useAuth();
@@ -44,7 +46,7 @@ const MyAccount = () => {
   };
 
   return (
-    <div className={styles.accountContainer}>
+  <Content>
       <h1 className={styles.header}>Moje konto</h1>
       <div className={styles.backgroundContainer}>
       <div className={styles.tileContainer}>
@@ -153,7 +155,7 @@ const MyAccount = () => {
           </button>
         </div>
       </Modal>
-    </div>
+      </Content>
   );
 };
 

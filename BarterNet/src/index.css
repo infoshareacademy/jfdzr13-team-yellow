@@ -46,10 +46,10 @@
 }
 
 main {
-  flex: 1;
-  display: grid;
+  display: flex;
   place-content: center;
-  width: auto;
+  width: 100%;
+  padding: 20px 0px;
 }
 
 html,
@@ -64,4 +64,9 @@ body,
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
