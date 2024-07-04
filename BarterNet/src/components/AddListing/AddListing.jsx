@@ -4,11 +4,11 @@ import { useAuth } from "../../contex/AuthProvider";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import SelectLocation from "../../utils/SelectLocation/SelectLocation";
+import SelectLocation from "../../utils/SelectComponents/SelectLocation";
 import styles from "./AddListing.module.css";
 import { ClipLoader } from "react-spinners";
 import pica from "pica";
-import categories from '../../utils/categoriesList'
+import SelectCategory from "../../utils/SelectComponents/SelectCategory";
 
 function AddListing() {
   const { currentUser } = useAuth();
@@ -42,7 +42,8 @@ function AddListing() {
     setFiles(resizedFiles);
 
     const urls = resizedFiles.map((file) => URL.createObjectURL(file));
-    setPreviewUrls(urls);
+    setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
+    console.log(previewUrls)
   };
 
   const resizeImage = async (file) => {
@@ -144,8 +145,13 @@ function AddListing() {
       location: selectedOption ? selectedOption.value : "",
     }));
   };
+  const handleCategoryChange = (selectedOption) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      category: selectedOption ? selectedOption.value : "",
+    }));
+  };
 
-const categoryOptions = categories.map((obj) => obj.category)
   return (
     <div className={styles.addListingContainer}>
       <h1 className={styles.header}>Dodaj Ogłoszenie</h1>
@@ -172,20 +178,16 @@ const categoryOptions = categories.map((obj) => obj.category)
       <form onSubmit={handleSubmit} className={styles.addListingForm}>
         <label className={styles.addListingLabel}>
           Kategoria:
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-            className={`${styles.addListingInput} ${styles.addListingSelect}`}
-          >
-            <option value="">Wybierz kategorię</option>
-            {categoryOptions.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+          <SelectCategory
+            placeholder="Wybierz kategorię"
+            onChange={handleCategoryChange}
+            name="categories"
+            value={
+              formData.category
+                ? { value: formData.category, label: formData.category }
+                : null
+            }
+          />
         </label>
         <label className={styles.addListingLabel}>
           Lokalizacja:
@@ -220,9 +222,11 @@ const categoryOptions = categories.map((obj) => obj.category)
             className={styles.addListingTextarea}
           />
         </label>
+        <fieldset className={styles.addFotoContainer}>
         <label className={styles.addListingLabel}>
-          Zdjęcia:
-          <div className={styles.predefinedImages}>
+          Dodaj djęcia:
+          
+          <div className={styles.predefinedImagesContainer}>
             <button
               type="button"
               className={`${styles.imageOption} ${
@@ -319,6 +323,7 @@ const categoryOptions = categories.map((obj) => obj.category)
           />
           Wybierz pliki
         </label>
+        {previewUrls.length >0 && (
         <div className={styles.previewContainer}>
           {previewUrls.map((url, index) => (
             <img
@@ -328,7 +333,8 @@ const categoryOptions = categories.map((obj) => obj.category)
               className={styles.previewImage}
             />
           ))}
-        </div>
+        </div>)}
+        </fieldset>
         <button
           type="submit"
           disabled={loading}

@@ -1,71 +1,70 @@
 .addListingContainer {
+  width: 460px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  margin-top: 20px;
+  gap: 20px;
+  height: auto;
+  padding: 30px;
+  margin: 15px 0;
+  border: var(--input-border);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--button-border-radius);
 }
-
 .header {
-  color: var(--text-color);
-  font-size: 24px;
-  margin: 40px 0 40px 20px;
-  font-weight: bold;
-  width: 100%;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e0e1dd;
+  margin: 0;
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-primary);
 }
-
 .toggleButtons {
   display: flex;
-  width: 50%;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  justify-content: center;
+  justify-items: center;
+  gap: 5px;
+  background-color: var(--button-background-secondary);
+  border-radius: var(--button-border-radius);
+  font-weight: var(--button-font-weight);
 }
-
 .toggleButton {
   padding: 10px 20px;
-  border: none;
-  background-color: #e0e1dd;
-  color: #333;
-  font-weight: bold;
-  transition: background-color 0.3s;
   flex: 1;
-  text-align: center;
-  cursor: pointer;
+  transition: background-color 0.3s;
   border-radius: var(--button-border-radius);
-  margin: 0 5px;
+  background-color: inherit;
+  font-family: var(--font-primary);
+  font-size: 18px;
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
 }
-
 .toggleButton.active {
   background-color: var(--button-background);
-  color: white;
+  color: var(--button-text-color);
 }
-
 .addListingForm {
   width: 100%;
   max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-
 .addListingLabel {
   font-weight: bold;
-  margin-bottom: 10px;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   color: var(--text-color);
 }
-
 .addListingInput,
 .addListingTextarea,
 .addListingFileInput,
 .addListingSelect {
-  width: 100%;
-  padding: 10px;
-  border: var(--input-border);
+  padding: 12px;
+  border: 2px solid var(--form-border-color);
   border-radius: 25px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
+  font-size: 16px;
 }
-
 .addListingInput:focus,
 .addListingTextarea:focus,
 .addListingFileInput:focus,
@@ -73,18 +72,27 @@
   border: var(--input-border-focus);
   outline: none;
 }
-
 .addListingSelect {
   -webkit-appearance: none;
   -moz-appearance: none;
   background: url("/src/assets/custom-arrow.png") no-repeat right center;
 }
-
 .addListingTextarea {
   height: 100px;
   resize: none;
 }
-
+.addFotoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: var(--input-border);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--button-border-radius);
+}
+.predefinedImagesContainer {
+  display: flex;
+  justify-content: space-between;
+}
 .predefinedImage {
   width: 50px;
   height: 50px;
@@ -92,21 +100,19 @@
   margin: 10px;
   cursor: pointer;
 }
-
 .imageOption {
   border: none;
   background: none;
   cursor: pointer;
   padding: 0;
 }
-
 .imageOption.selected img {
   border: 2px solid #004085;
   border-radius: 5px;
+  margin: 8px;
 }
-
 .customFileUpload {
-  display: inline-block;
+  align-self: flex-start;
   padding: 5px 10px;
   font-size: 14px;
   font-family: var(--secondary-font);
@@ -116,18 +122,13 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  width: auto;
-  margin-bottom: 20px;
 }
-
 .customFileUpload:hover {
   background-color: #004085;
 }
-
 .customFileUpload input[type="file"] {
   display: none;
 }
-
 .addListingButton {
   padding: var(--button-padding);
   background-color: var(--button-background);
@@ -140,11 +141,9 @@
   display: block;
   margin-top: 20px;
 }
-
 .addListingButton:hover {
   background-color: #004085;
 }
-
 .previewContainer {
   display: flex;
   flex-wrap: wrap;
@@ -152,20 +151,17 @@
   gap: 10px;
   margin-bottom: 15px;
 }
-
 .previewImage {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
-
 .error {
   color: red;
   margin-top: 10px;
 }
-
 .message {
   margin-top: 20px;
   padding: 10px;
@@ -176,21 +172,21 @@
   text-align: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 530px) {
   .addListingContainer {
-    padding: 15px;
+    width: 380px;
   }
-
-  .header {
-    font-size: 24px;
+}
+@media (max-width: 450px) {
+  .addListingContainer {
+    width: 300px;
   }
-
-  .toggleButton {
-    margin: 0 5px;
-    padding: 8px 16px;
+  .predefinedImage {
+    width: 35px;
+    height: 35px;
   }
-
-  .addListingButton {
-    padding: 8px 16px;
+  .previewImage {
+    width: 60px;
+    height: 60px;
   }
 }

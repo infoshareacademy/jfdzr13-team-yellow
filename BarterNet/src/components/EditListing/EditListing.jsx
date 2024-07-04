@@ -4,7 +4,7 @@ import { useAuth } from "../../contex/AuthProvider";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import SelectLocation from "../../utils/SelectLocation/SelectLocation";
+import SelectLocation from "../../utils/SelectComponents/SelectLocation.jsx";
 import styles from "./EditListing.module.css";
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
