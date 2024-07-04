@@ -1,10 +1,25 @@
+/* Existing styles */
+.header {
+  color: var(--text-color);
+  font-weight: 800;
+  width: 100%;
+  font-size: 3rem;
+  font-family: var(--font-primary);
+  margin: 10px 0;
+}
+
+.gridSection {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  margin-bottom: 40px;
+}
+
 .gridContainer {
   color: black;
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
   grid-template-columns: 1fr 1fr 1fr;
-  margin: var(--default-margin);
-  padding: var(--default-padding);
 }
 
 @media (max-width: 1024px) {
@@ -17,4 +32,35 @@
   .gridContainer {
     grid-template-columns: 1fr;
   }
+}
+
+.emptyMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  padding: 20px;
+}
+
+.emptyMessage p {
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.emptyMessage button {
+  padding: var(--button-padding);
+  background-color: var(--button-background);
+  border-radius: var(--button-border-radius);
+  color: var(--button-text-color);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: auto;
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.emptyMessage button:hover {
+  background-color: var(--accent-color);
 }

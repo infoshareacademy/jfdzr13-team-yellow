@@ -47,7 +47,7 @@ body {
   color: var(--light-text-color);
   text-decoration: none;
   box-shadow: var(--box-shadow);
-  transition: transform 0.3s ease, var(--button-hover-effect);
+  transition: transform 0.3s ease;
 }
 
 .accountTile:hover {

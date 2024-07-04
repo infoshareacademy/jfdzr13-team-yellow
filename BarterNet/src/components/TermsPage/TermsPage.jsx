@@ -41,7 +41,7 @@ const TermsPage = () => {
         <p>2. Zmiany regulaminu będą publikowane na stronie aplikacji i wchodzą w życie z dniem ich publikacji.</p>
         <p>3. W sprawach nieuregulowanych niniejszym regulaminem mają zastosowanie przepisy prawa polskiego.</p>
       </div>
-    </div>
+      </div>
   );
 };
 

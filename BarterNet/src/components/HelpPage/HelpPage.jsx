@@ -50,7 +50,7 @@ const sections = [
       },
       {
         question: "Jak zaktualizować dane kontaktowe?",
-        answer: "Aby zaktualizować dane kontaktowe, przejdź do sekcji 'Mój Profil' i zedytuj dane"
+        answer: "Aby zaktualizować dane kontaktowe, przejdź do sekcji 'Mój Profil' i zedytuj dane."
       }
     ]
   },
@@ -68,7 +68,7 @@ const sections = [
             Jeśli zapomniałeś hasła, skorzystaj z opcji <Link to="/passwordReset">"Zapomniałem hasła"</Link> na stronie logowania.
           </>
         )
-      },
+      }
     ]
   }
 ];
@@ -76,7 +76,7 @@ const sections = [
 const HelpPage = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const toggleQuestion = index => {
+  const toggleQuestion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
@@ -89,10 +89,17 @@ const HelpPage = () => {
           <div className={styles.accordion}>
             {section.questions.map((item, index) => (
               <div key={index} className={styles.accordionItem}>
-                <div className={styles.accordionHeader} onClick={() => toggleQuestion(`${sectionIndex}-${index}`)}>
+                <div
+                  className={styles.accordionHeader}
+                  onClick={() => toggleQuestion(`${sectionIndex}-${index}`)}
+                >
                   {item.question}
                 </div>
-                <div className={`${styles.accordionContent} ${activeIndex === `${sectionIndex}-${index}` ? styles.active : ''}`}>
+                <div
+                  className={`${styles.accordionContent} ${
+                    activeIndex === `${sectionIndex}-${index}` ? styles.active : ''
+                  }`}
+                >
                   <div className={styles.accordionInnerContent}>{item.answer}</div>
                 </div>
               </div>
