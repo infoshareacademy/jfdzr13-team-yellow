@@ -82,7 +82,7 @@
 }
 .loginForm input:focus-visible {
   outline: var(--input-border-focus);
-  border-width: 0px;
+  border-color: transparent;
 }
 .forgotPassword {
   font-size: 16px;

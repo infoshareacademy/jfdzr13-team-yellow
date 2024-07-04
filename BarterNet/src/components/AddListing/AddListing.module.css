@@ -80,6 +80,7 @@
 .addListingTextarea {
   height: 100px;
   resize: none;
+  font-family: inherit;
 }
 .addFotoContainer {
   display: flex;

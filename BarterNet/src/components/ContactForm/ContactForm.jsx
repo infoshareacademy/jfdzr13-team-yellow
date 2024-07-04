@@ -66,10 +66,10 @@ const ContactForm = () => {
     <div className={styles.contactContainer}>
       <div className={styles.contactInfo}>
         <h1 className={styles.header}>Kontakt</h1>
-        <div>
+        <div className={styles.owners}>
           <h3>Nasze dane:</h3>
           <p>Właścicielem serwisu jest:</p>
-          <p>YELLOW TEAM: Joasia | Magda | Sebastian | Sylwia</p>
+          <p>YELLOW TEAM:<br/> Joasia | Magda | Sebastian | Sylwia</p>
         </div>
         <div className={styles.logoContainer}>
           <img src="src/components/ContactForm/assets/logo2.png" alt="Logo" className={styles.logo} />
@@ -79,7 +79,9 @@ const ContactForm = () => {
       <div className={styles.contactForm}>
         <h2>Wyślij nam wiadomość:</h2>
         <p>Zadaj pytanie już teraz. Skontaktuj się za pomocą formularza:</p>
-        <form onSubmit={handleSubmit}>
+        <form 
+        className={styles.form}
+        onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
             <label htmlFor="name">Imię i nazwisko:</label>
             <input
