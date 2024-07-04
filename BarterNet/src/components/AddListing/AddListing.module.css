@@ -72,10 +72,9 @@
   border: var(--input-border-focus);
   outline: none;
 }
-.addListingSelect {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background: url("/src/assets/custom-arrow.png") no-repeat right center;
+.addListingInput:hover,
+.addListingTextarea:hover {
+  border-color: #b3b3b3;
 }
 .addListingTextarea {
   height: 100px;
@@ -125,7 +124,7 @@
   transition: background-color 0.3s;
 }
 .customFileUpload:hover {
-  background-color: #004085;
+  background-color: var(--accent-color);
 }
 .customFileUpload input[type="file"] {
   display: none;
@@ -143,7 +142,7 @@
   margin-top: 20px;
 }
 .addListingButton:hover {
-  background-color: #004085;
+  background-color: var(--accent-color);
 }
 .previewContainer {
   display: flex;
