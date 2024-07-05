@@ -15,11 +15,6 @@ const MyListingItem = ({ index, title, content, image, userId, listingId }) => {
         <div className={styles.article__container}>
           <h2>{title}</h2>
           <p>{content}</p>
-          <div className={styles.buttonContainer}>
-            <a href={`/ad/${userId}/${listingId}`}>
-              <button className={styles.articleButton}>Edytuj</button>
-            </a>
-          </div>
         </div>
       </div>
     </a>
