@@ -7,8 +7,9 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import SelectLocation from "../../utils/SelectComponents/SelectLocation.jsx";
 import styles from "./EditListing.module.css";
 import { ClipLoader } from "react-spinners";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Toast from "../Toastify/ToastContainer.jsx";
 
 function EditListing() {
   const { currentUser } = useAuth();
@@ -66,8 +67,17 @@ function EditListing() {
     setFiles(selectedFiles);
 
     const urls = selectedFiles.map((file) => URL.createObjectURL(file));
-    setPreviewUrls(urls);
+    if (previewUrls.length <3) { 
+      setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
+    } else {
+      toast.error("Możesz dodać maksymalnie 3 zdjęcia", { duration: 3000});
+    }
+    console.log(previewUrls)
   };
+
+  //   const urls = selectedFiles.map((file) => URL.createObjectURL(file));
+  //   setPreviewUrls(urls);
+  // };
 
   const handlePredefinedImageClick = (imageUrl) => {
     setFormData((prevFormData) => {
@@ -137,6 +147,7 @@ function EditListing() {
 
   return (
     <div className={styles.editListingContainer}>
+      <Toast/>
       <h1 className={styles.header}>Edytuj Ogłoszenie</h1>
       {error && <p className={styles.error}>{error}</p>}
       <form onSubmit={handleSubmit} className={styles.editListingForm}>
@@ -191,7 +202,7 @@ function EditListing() {
           />
         </label>
         <label className={styles.editListingLabel}>
-          Zdjęcia:
+          Wybierz grafikę:
           <div className={styles.predefinedImages}>
             <button
               type="button"
@@ -287,7 +298,7 @@ function EditListing() {
             onChange={handleFileChange}
             className={styles.editListingFileInput}
           />
-          Wybierz pliki
+          lub dodaj własne zdjęcia
         </label>
         <div className={styles.previewContainer}>
           {previewUrls.map((url, index) => (
@@ -308,7 +319,7 @@ function EditListing() {
         </button>
       </form>
       {message && <div className={styles.message}>{message}</div>}
-      <ToastContainer />
+      {/* <Toast/> */}
     </div>
   );
 }

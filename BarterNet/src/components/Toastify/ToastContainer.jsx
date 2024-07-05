@@ -8,7 +8,7 @@ const Toast = () => {
     <ToastContainer
     className={styles.toast}
     position="bottom-center"
-    autoClose={11113000}
+    autoClose={3000}
     hideProgressBar={false}
     newestOnTop={false}
     closeOnClick
