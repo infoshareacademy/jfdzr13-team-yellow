@@ -123,6 +123,7 @@ function SingleAd() {
           recipientEmail={userDetails.email}
           recipientName={`${userDetails.firstName} ${userDetails.lastName}`}
           recipientId={userId}
+          adTitle={adDetails.title}
         />
       )}
     </div>

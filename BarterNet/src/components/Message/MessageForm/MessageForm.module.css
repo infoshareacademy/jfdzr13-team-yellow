@@ -1,5 +1,5 @@
 .messageFormContainer {
-  max-width: 600px;
+  max-width: 800px;
   margin: 20px auto;
   padding: 20px;
   border: var(--input-border);
@@ -12,25 +12,26 @@
   font-weight: bold;
   margin-bottom: 20px;
   color: var(--text-color);
+  font-family: var(--font-primary);
 }
 
 .messageFormLabel {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-weight: bold;
-  color: var(--text-color);
 }
 
 .messageFormInput,
 .messageFormTextarea {
   width: 100%;
-  padding: 5px;
-  margin-bottom: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
   border: var(--input-border);
   border-radius: 20px;
   box-sizing: border-box;
   font-size: 16px;
   color: var(--accent-color);
+  font-family: var(--font-primary);
 }
 
 .messageFormInput:focus,
@@ -39,9 +40,14 @@
   outline: none;
 }
 
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .messageFormButton {
   padding: var(--button-padding);
-  margin-top: 20px;
+  margin: 0 10px;
   background-color: var(--button-background);
   border-radius: var(--button-border-radius);
   color: var(--button-text-color);
@@ -51,23 +57,50 @@
   width: auto;
 }
 
+.messageFormButton:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
 .messageFormButton:hover {
   background-color: var(--accent-color);
 }
 
 .messageSuccess {
   color: green;
+  text-align: center;
   font-weight: bold;
   margin-top: 20px;
 }
 
 .messageError {
   color: red;
+  text-align: center;
   font-weight: bold;
   margin-top: 20px;
 }
 
 /* Responsywność dla urządzeń mobilnych */
+
+@media (max-width: 1024px) {
+  .messageFormContainer {
+    padding: 15px;
+  }
+
+  .messageFormHeader {
+    font-size: 22px;
+  }
+
+  .messageFormTextarea {
+    height: 90px;
+    font-size: 14px;
+  }
+
+  .messageFormButton {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
 
 @media (max-width: 768px) {
   .messageFormContainer {
@@ -78,13 +111,37 @@
     font-size: 20px;
   }
 
-  .messageFormInput,
   .messageFormTextarea {
-    font-size: 14px;
+    height: 80px;
+    font-size: 12px;
   }
 
   .messageFormButton {
-    padding: 8px 16px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 450px) {
+  .messageFormContainer {
+    padding: 10px;
+  }
+
+  .messageFormHeader {
+    font-size: 18px;
+  }
+
+  .messageFormLabel {
     font-size: 14px;
+  }
+
+  .messageFormTextarea {
+    height: 50px;
+    font-size: 10px;
+  }
+
+  .messageFormButton {
+    padding: 5px 10px;
+    font-size: 10px;
   }
 }

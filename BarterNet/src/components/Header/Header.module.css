@@ -70,12 +70,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--accent-color);
+  background-color: var(--primary-color);
   border-radius: 50%;
   border: none;
   padding: 10px;
   cursor: pointer;
   transition: 0.3s;
+  position: relative; 
 }
 .navButton2:hover {
   width: 150px;
@@ -85,7 +86,7 @@
   display: none;
   font-family: var(--font-primary);
   font-size: 1rem;
-  color: #fdedc7;
+  color: var(--light-text-color);
   font-weight: var(--button-font-weight);
 }
 .navButton2:hover span {
@@ -93,6 +94,16 @@
 }
 .navButton2:hover .icon {
   display: none;
+}
+
+.unreadIndicator {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
 }
 
 @media (max-width: 1024px) {
