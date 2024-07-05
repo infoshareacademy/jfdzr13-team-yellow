@@ -1,16 +1,16 @@
+import { addDoc, collection } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import pica from "pica";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contex/AuthProvider";
-import { collection, addDoc } from "firebase/firestore";
-import { db, storage } from "../../config/firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import SelectLocation from "../../utils/SelectComponents/SelectLocation";
-import styles from "./AddListing.module.css";
 import { ClipLoader } from "react-spinners";
-import pica from "pica";
-import SelectCategory from "../../utils/SelectComponents/SelectCategory";
-import Toast from "../Toastify/ToastContainer";
 import { toast } from "react-toastify";
+import { db, storage } from "../../config/firebase";
+import { useAuth } from "../../contex/AuthProvider";
+import SelectCategory from "../../utils/SelectComponents/SelectCategory";
+import SelectLocation from "../../utils/SelectComponents/SelectLocation";
+import Toast from "../Toastify/ToastContainer";
+import styles from "./AddListing.module.css";
 
 function AddListing() {
   const { currentUser } = useAuth();
@@ -41,16 +41,20 @@ function AddListing() {
   const handleFileChange = async (event) => {
     const selectedFiles = [...event.target.files];
     const resizedFiles = await Promise.all(selectedFiles.map(resizeImage));
-    setFiles(resizedFiles);
+    setFiles((prevFiles) => [...prevFiles, ...resizedFiles]);
 
     const urls = resizedFiles.map((file) => URL.createObjectURL(file));
-    if (previewUrls.length <3) { 
+    if (previewUrls.length + urls.length <= 3) {
       setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
     } else {
       toast.error("Możesz dodać maksymalnie 3 zdjęcia");
     }
   };
   const handleDeleteFile = (indexToRemove) => {
+    const newFiles = [...files];
+    newFiles.splice(indexToRemove, 1);
+    setFiles(newFiles);
+  
     const newPreviewUrls = [...previewUrls];
     newPreviewUrls.splice(indexToRemove, 1);
     setPreviewUrls(newPreviewUrls);
@@ -59,7 +63,7 @@ function AddListing() {
     const picaResizer = pica();
     const img = new Image();
     const canvas = document.createElement("canvas");
-    const maxDimension = 800; // Example max dimension
+    const maxDimension = 800; 
 
     return new Promise((resolve, reject) => {
       img.src = URL.createObjectURL(file);
@@ -343,7 +347,7 @@ function AddListing() {
               alt={`Preview ${index + 1}`}
               className={styles.previewImage}
             />
-            <button type='button' onClick={() => handleDeleteFile(index)}>usuń</button>
+            <button type='button' onClick={() => handleDeleteFile(index)}/>
             </div>
           ))}
         </div>)}
