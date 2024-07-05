@@ -4,6 +4,7 @@ import { getDoc, doc, collection, query, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import MessageForm from "../Message/MessageForm/MessageForm";
 import styles from "./OtherUserPage.module.css";
+import NoImage from "../../assets/pictures/no-image.png";
 
 const OtherUserPage = () => {
   const { userId } = useParams();
@@ -26,9 +27,9 @@ const OtherUserPage = () => {
 
         const adsQuery = query(collection(db, "users", userId, "listings"));
         const adsSnapshot = await getDocs(adsQuery);
-        const adsList = adsSnapshot.docs.map(doc => ({
+        const adsList = adsSnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
         }));
         setUserAds(adsList);
       } catch (err) {
@@ -52,24 +53,38 @@ const OtherUserPage = () => {
   return (
     <div className={styles.userPageContainer}>
       <div className={styles.userInfo}>
-        <img src={userDetails.avatarUrl} alt="Avatar" className={styles.avatar} />
+        <img
+          src={userDetails.avatarUrl}
+          alt="Avatar"
+          className={styles.avatar}
+        />
         <div>
           <h1>{`${userDetails.firstName} ${userDetails.lastName}`}</h1>
           <p>{userDetails.description}</p>
         </div>
       </div>
-      <h2>Ogłoszenia użytkownika</h2>
-      <div className={styles.adsContainer}>
-        {userAds.map(ad => (
+      <h2 className={styles.sectionTitle}>Ogłoszenia użytkownika</h2>
+      <div className={styles.gridContainer}>
+        {userAds.map((ad) => (
           <div key={ad.id} className={styles.adItem}>
-            <h3>{ad.title}</h3>
-            <p>{ad.description}</p>
-            <button 
-              className={styles.exchangeButton} 
-              onClick={() => handleExchangeClick(ad)}
-            >
-              WYMIEŃ SIĘ
-            </button>
+            <div
+              className={styles.adImage}
+              style={{
+                backgroundImage: `url(${
+                  ad.foto && ad.foto[0] ? ad.foto[0] : NoImage
+                })`,
+              }}
+            ></div>
+            <div className={styles.adContent}>
+              <h3>{ad.title}</h3>
+              <p>{ad.description}</p>
+              <button
+                className={styles.exchangeButton}
+                onClick={() => handleExchangeClick(ad)}
+              >
+                WYMIEŃ SIĘ
+              </button>
+            </div>
           </div>
         ))}
       </div>
