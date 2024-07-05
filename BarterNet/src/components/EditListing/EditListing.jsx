@@ -42,11 +42,9 @@ function EditListing() {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          console.log("Document data:", docSnap.data());
           setFormData(docSnap.data());
         } else {
           setError("Document does not exist.");
-          console.log("No such document!");
         }
       } catch (err) {
         setError(err.message);
@@ -72,7 +70,12 @@ function EditListing() {
     } else {
       toast.error("Możesz dodać maksymalnie 3 zdjęcia", { duration: 3000});
     }
-    console.log(previewUrls)
+  };
+
+  const handleDeleteFile = (indexToRemove) => {
+    const newPreviewUrls = [...previewUrls];
+    newPreviewUrls.splice(indexToRemove, 1);
+    setPreviewUrls(newPreviewUrls);
   };
 
   //   const urls = selectedFiles.map((file) => URL.createObjectURL(file));
@@ -302,12 +305,15 @@ function EditListing() {
         </label>
         <div className={styles.previewContainer}>
           {previewUrls.map((url, index) => (
+            <div key={index}>
             <img
               key={index}
               src={url}
               alt={`Preview ${index + 1}`}
               className={styles.previewImage}
             />
+            <button type='button' onClick={() => handleDeleteFile(index)}>usuń</button>
+            </div>
           ))}
         </div>
         <button
