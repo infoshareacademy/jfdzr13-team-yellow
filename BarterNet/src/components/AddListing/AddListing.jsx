@@ -49,9 +49,12 @@ function AddListing() {
     } else {
       toast.error("Możesz dodać maksymalnie 3 zdjęcia");
     }
-    console.log(previewUrls)
   };
-
+  const handleDeleteFile = (indexToRemove) => {
+    const newPreviewUrls = [...previewUrls];
+    newPreviewUrls.splice(indexToRemove, 1);
+    setPreviewUrls(newPreviewUrls);
+  };
   const resizeImage = async (file) => {
     const picaResizer = pica();
     const img = new Image();
@@ -333,12 +336,15 @@ function AddListing() {
         {previewUrls.length >0 && (
         <div className={styles.previewContainer}>
           {previewUrls.map((url, index) => (
+            <div key={index}>
             <img
               key={index}
               src={url}
               alt={`Preview ${index + 1}`}
               className={styles.previewImage}
             />
+            <button type='button' onClick={() => handleDeleteFile(index)}>usuń</button>
+            </div>
           ))}
         </div>)}
         </fieldset>
