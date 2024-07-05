@@ -6,8 +6,6 @@ import styles from "./MessageForm.module.css";
 function MessageForm({ recipientEmail, recipientName, recipientId, adTitle }) {
   const { currentUser } = useAuth();
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
     message: adTitle ? `W sprawie ogłoszenia: ${adTitle}\n\n` : "",
   });
   const [formStatus, setFormStatus] = useState("");
@@ -28,7 +26,8 @@ function MessageForm({ recipientEmail, recipientName, recipientId, adTitle }) {
         `${currentUser.firstName} ${currentUser.lastName}`,
         recipientId,
         recipientEmail,
-        formData.message
+        formData.message,
+        currentUser.email
       );
       setFormStatus("Wiadomość została wysłana pomyślnie!");
       setFormData({
