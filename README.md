@@ -22,7 +22,7 @@ Projekt został zrealizowany przy użyciu następujących technologii:
 
 1. Sklonuj repozytorium:
    ```sh
-   git clone https://github.com/your-username/barternet.git
+   git clone https://github.com/infoshareacademy/jfdzr13-team-yellow.git
    ```
 
 2. Przejdź do katalogu projektu:
@@ -48,10 +48,6 @@ Projekt został zrealizowany przy użyciu następujących technologii:
 
 Możesz zalogować się przy użyciu poniższych danych testowych:
 
-### Konto Administratora
-
-- **Email:** admin@barternet.com
-- **Hasło:** Test1234
 
 ### Konto Użytkownika
 
@@ -71,4 +67,3 @@ Ten projekt jest licencjonowany na warunkach licencji MIT.
 Zapraszamy do zgłaszania problemów oraz sugestii dotyczących projektu poprzez system zgłoszeń w repozytorium GitHub.
 ```
 
-Upewnij się, że zastąpisz `https://github.com/your-username/barternet.git` odpowiednim adresem URL repozytorium na GitHubie oraz dostosujesz dane do logowania do faktycznych danych testowych, które chcesz udostępnić.
