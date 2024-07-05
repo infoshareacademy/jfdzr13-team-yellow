@@ -1,8 +1,7 @@
 
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../contex/AuthProvider";
-
 import logo1 from "./assets/logo1.png";
 import logo2 from "./assets/logo2.png";
 import styles from "./Header.module.css";
@@ -13,7 +12,7 @@ import messagesIcon from '../../assets/icons/messagesIcon.png';
 
 const Header = () => {
   const { currentUser } = useAuth();
-
+  const location = useLocation()
 
   return (
     <header>
@@ -83,12 +82,16 @@ const Header = () => {
               );
             }
           })()}
-
         </div>
       </nav>
-      { (currentUser) && (
-          <div className={styles.navBottom}></div>
-        ) }
+      {((currentUser) || 
+      (!currentUser && 
+        (location.pathname === '/terms' || 
+        location.pathname === '/privacy-policy' ||
+        location.pathname === '/help' ||
+        location.pathname === '/contact'))) && (
+        <div className={styles.navBottom}></div>
+      )}
     </header>
   );
 };
