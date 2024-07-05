@@ -24,7 +24,7 @@ const ListingItem = ({ index, title, content, image, userId, listingId }) => {
             return (
               <>
                 <a href={`/ad/${userId}/${listingId}`}>
-                  <button className={styles.articleButton}>Wymień się</button>
+                  <button className={styles.articleButton}>WYMIEŃ SIĘ</button>
                 </a>
               </>
             );
@@ -32,7 +32,7 @@ const ListingItem = ({ index, title, content, image, userId, listingId }) => {
             return (
               <>
                 <a href="/register">
-                  <button className={styles.articleButton}>Wymień się</button>
+                  <button className={styles.articleButton}>WYMIEŃ SIĘ</button>
                 </a>
               </>
             );

@@ -60,12 +60,14 @@
   color: var(--button-text-color);
   border: none;
   cursor: pointer;
+  font-family: var(--font-primary);
+  font-weight: 800;
   transition: background-color 0.3s;
-  width: auto;
+  width: 100%;
 }
 
 .editButton:hover {
-  background-color: #004085;
+  background-color: var(--accent-color);
 }
 
 /* Style responsywne */

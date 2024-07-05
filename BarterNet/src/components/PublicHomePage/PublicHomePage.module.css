@@ -30,7 +30,6 @@ body {
 .hero p {
   font-size: 1.3rem;
 }
-
 .heroButtonContainer {
   position: relative;
   height: 100%;
@@ -70,27 +69,94 @@ body {
   display: flex;
   justify-content: center;
 }
+
 .heroButtonWrapper div a {
   margin: auto 0;
 }
 
 .heroButton {
   width: 100%;
-  background-color: var(--background-color);
+  background-color: #fff; /* Ustawienie białego tła */
   color: var(--text-color);
   border: none;
   padding: 20px 15px;
   cursor: pointer;
-  transition: var(--button-hover-effect);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* Dodanie animacji przejścia dla cienia */
   border-radius: 35px;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1.3rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* Dodanie bardziej wyraźnego cienia */
 }
 
 .heroButton:hover {
   color: var(--light-text-color);
   background: var(--accent-color);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35); /* Zmiana cienia przy najechaniu */
+}
+.heroButtonContainer {
+  position: relative;
+  height: 100%;
+}
+
+.heroButtonWrapper {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  bottom: -25px;
+  text-align: center;
+  display: inline-block;
+  background: radial-gradient(
+    circle at 55% 55%,
+    #023853 65%,
+    #739cb5 70%,
+    #023853 75%
+  );
+  padding: 3px;
+  padding: 10px;
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  box-shadow: 1px 16px 82px -2px rgba(2, 56, 83, 1);
+  transition: box-shadow 4s;
+}
+
+.heroButtonWrapper div {
+  margin: 5%;
+  padding: 5%;
+  background: linear-gradient(-30deg, #5c7b9e 5%, #739cb5 30%, #5c7b9e 100%);
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.heroButtonWrapper div a {
+  margin: auto 0;
+}
+
+.heroButton {
+  width: 100%;
+  background-color: whitesmoke;
+  color: var(--text-color);
+  border: none;
+  padding: 20px 15px;
+  cursor: pointer;
+  transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+  border-radius: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  box-shadow: 0 14px 10px rgba(0, 0, 0, 0.25);
+}
+
+.heroButton:hover {
+  color: var(--light-text-color);
+  background: var(--accent-color);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
 }
 
 body:has(.heroButton:hover) .heroButtonWrapper {
@@ -137,6 +203,7 @@ body:has(.heroButton:hover) .heroButtonWrapper div {
 .button:hover {
   background: var(--primary-color);
   color: var(--button-text-color);
+  transition: 0.3s;
 }
 
 .active {

@@ -71,7 +71,7 @@ const [error, setError] = useState('');
         <p><span className={styles.label}>Opis:</span> {profileData.description}</p>
       </div>
     </div>
-    <button onClick={handleEdit} className={styles.editButton}>Edytuj profil</button>
+    <button onClick={handleEdit} className={styles.editButton}>EDYTUJ PROFIL</button>
   </div>
   )
 }
