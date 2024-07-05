@@ -65,7 +65,16 @@ function SingleAd() {
       <div className={styles.adContent}>
         <div className={styles.adImageContainer}>
           {adDetails.foto && adDetails.foto.length > 0 && (
-            <img src={adDetails.foto[0]} alt="Ad" className={styles.adImage} />
+            <div className={styles.gallery}>
+              {adDetails.foto.map((url, index) => (
+                <img
+                  key={index}
+                  src={url}
+                  alt={`Ad image ${index}`}
+                  className={styles.adImage}
+                />
+              ))}
+            </div>
           )}
         </div>
         <div className={styles.description}>
@@ -129,4 +138,5 @@ function SingleAd() {
     </div>
   );
 }
+
 export default SingleAd;

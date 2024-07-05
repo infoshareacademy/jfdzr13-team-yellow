@@ -1,7 +1,8 @@
 .singleAdContainer {
   padding: 20px;
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .generalInfo {
@@ -19,7 +20,7 @@
 }
 
 .title {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
   color: var(--text-color);
   margin: 0;
@@ -30,6 +31,7 @@
   font-size: 14px;
   font-weight: bold;
   color: var(--text-color);
+  padding-left: 20px;
 }
 
 .adContent {
@@ -45,6 +47,13 @@
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 .adImage {
@@ -80,9 +89,8 @@
 
 .editButton:hover,
 .deleteButton:hover {
-  background-color:   var(  --accent-color);
+  background-color: var(--accent-color);
 }
-
 
 .editButton {
   background-color: var(--button-background);
@@ -170,5 +178,64 @@
 }
 
 .exchangeButton:hover {
-  background-color: var(  --accent-color);
+  background-color: var(--accent-color);
+}
+
+@media (max-width: 1024px) {
+  .singleAdContainer {
+    padding: 10px;
+    max-width: 90%;
+  }
+
+  .adContent {
+    flex-direction: column;
+  }
+
+  .gallery {
+    gap: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .singleAdContainer {
+    padding: 5px;
+    max-width: 90%;
+  }
+
+  .adContent {
+    padding: 10px;
+  }
+
+  .gallery {
+    gap: 5px;
+  }
+
+  .adImage {
+    width: 150px;
+  }
+}
+
+@media (max-width: 450px) {
+  .singleAdContainer {
+    padding: 5px;
+    max-width: 100%;
+  }
+  .title {
+    font-size: 20px;
+  }
+
+  .adMeta {
+    font-size: 10px;
+  }
+  .adContent {
+    padding: 5px;
+  }
+
+  .gallery {
+    gap: 2px;
+  }
+
+  .adImage {
+    width: 100px;
+  }
 }
