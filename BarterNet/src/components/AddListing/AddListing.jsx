@@ -9,6 +9,8 @@ import styles from "./AddListing.module.css";
 import { ClipLoader } from "react-spinners";
 import pica from "pica";
 import SelectCategory from "../../utils/SelectComponents/SelectCategory";
+import Toast from "../Toastify/ToastContainer";
+import { toast } from "react-toastify";
 
 function AddListing() {
   const { currentUser } = useAuth();
@@ -42,7 +44,11 @@ function AddListing() {
     setFiles(resizedFiles);
 
     const urls = resizedFiles.map((file) => URL.createObjectURL(file));
-    setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
+    if (previewUrls.length <3) { 
+      setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
+    } else {
+      toast.error("Możesz dodać maksymalnie 3 zdjęcia");
+    }
     console.log(previewUrls)
   };
 
@@ -154,6 +160,7 @@ function AddListing() {
 
   return (
     <div className={styles.addListingContainer}>
+       <Toast/>
       <h1 className={styles.header}>Dodaj Ogłoszenie</h1>
       <div className={styles.toggleButtons}>
         <button
@@ -224,7 +231,7 @@ function AddListing() {
         </label>
         <fieldset className={styles.addFotoContainer}>
         <label className={styles.addListingLabel}>
-          Dodaj djęcia:
+          Wybierz grafikę:
           
           <div className={styles.predefinedImagesContainer}>
             <button
@@ -321,7 +328,7 @@ function AddListing() {
             onChange={handleFileChange}
             className={styles.addListingFileInput}
           />
-          Wybierz pliki
+          lub dodaj własne zdjęcia
         </label>
         {previewUrls.length >0 && (
         <div className={styles.previewContainer}>

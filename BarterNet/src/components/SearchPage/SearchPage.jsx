@@ -3,9 +3,11 @@ import SelectLocation from '../../utils/SelectComponents/SelectLocation'
 import styles from './SearchPage.module.css'
 import ListingItem from '../ListingItem/ListingItem'
 import categories from '../../utils/categoriesList'
-import toast, { Toaster } from 'react-hot-toast'
 import { collection, onSnapshot, query, where } from 'firebase/firestore'
 import { db } from '../../config/firebase'
+import { useAuth } from '../../contex/AuthProvider'
+import Toast from '../Toastify/ToastContainer'
+import { toast } from 'react-toastify'
 
 const SearchPage = () => {
     const [fetchedListings, setFetchedListings] = useState([]) /* Lista wszystkich ogłoszeń, wszystkich userów ograniczona do typu ofert: "offer" lub "search"  */
@@ -20,6 +22,7 @@ const [searchParams, setSearchParams] = useState({
 const [isSomeParams, setIsSomeParams] =useState(false)
 
 const formRef = useRef(null)
+const {currentUser} = useAuth()
 
 useEffect(() => {
   const unsubscribe = onSnapshot(collection(db, 'users'), (snapshot) => {
@@ -31,10 +34,13 @@ useEffect(() => {
 
         onSnapshot(filteredListingsQuery, (querySnapshot) => {
           querySnapshot.forEach((listingDocument) => {
+            const listingData = listingDocument.data();
+            if (listingData.userId !== currentUser.uid) {
             listings.push({
               listingId: listingDocument.id,
-              ...listingDocument.data()
+              ...listingData
             });
+          }
           });
         });
       });
@@ -134,21 +140,13 @@ const handleSubmit = (e) => {
     setFilteredListings(result)
     formRef.current.reset();
     if (result.length === 0) {
-      toast("W tej chwili nie mamy żadnych ofert spełniających Twoje kryteria wyszukiwania.", { duration: 3000});
+      toast.error("W tej chwili nie mamy żadnych ofert spełniających Twoje kryteria wyszukiwania.", { duration: 3000});
     }  
 };
 
   return (
 <>
-<Toaster
-position='bottom-center'
-toastOptions={{
-  style: {
-    padding: '30px',
-    fontSize: '32px',
-  },
-}}
-/>
+<Toast/>
   <section className={styles.search}>
     <h1>Wyszukaj ogłoszenie</h1>
     <form 
