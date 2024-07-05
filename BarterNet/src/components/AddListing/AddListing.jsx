@@ -177,7 +177,7 @@ function AddListing() {
           }`}
           onClick={() => setListingType("offer")}
         >
-          Oferuję
+          OFERUJĘ
         </button>
         <button
           type="button"
@@ -186,7 +186,7 @@ function AddListing() {
           }`}
           onClick={() => setListingType("search")}
         >
-          Potrzebuję
+          POTRZEBUJĘ
         </button>
       </div>
       <form onSubmit={handleSubmit} className={styles.addListingForm}>
