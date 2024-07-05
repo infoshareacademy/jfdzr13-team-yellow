@@ -42,7 +42,7 @@ const Login = () => {
           </div>
           <Link to="/passwordreset" className={styles.forgotPassword}>Nie pamiętasz hasła?</Link>
           {error && <p className={styles.error}>{error}</p>}
-          <button type="submit" className={styles.loginButton}>Zaloguj</button>
+          <button type="submit" className={styles.loginButton}>ZALOGUJ</button>
           <Link to="/register" className={styles.registerLink}>Nie masz konta? Zarejestruj się</Link>
         </form>
         <div className={styles.loginFooter}>
