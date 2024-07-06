@@ -24,7 +24,7 @@
   border-radius: 10px;
   box-shadow: var(--box-shadow);
   color: var(--text-color);
-  background: var(--accent-color);
+  background:#D3D2C7;
   cursor: pointer;
 }
 
@@ -33,6 +33,7 @@
   padding: 5px;
   margin: 5px 0;
   color: var(--light-text-color);
+  font-weight: bold;
 }
 
 .messageItem p {
