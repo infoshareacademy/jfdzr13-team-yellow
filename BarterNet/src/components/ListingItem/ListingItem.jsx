@@ -1,45 +1,31 @@
-import React from "react";
-
+import { Link } from "react-router-dom";
 import { useAuth } from "../../contex/AuthProvider";
-
 import styles from "./ListingItem.module.css";
 
 const ListingItem = ({ index, title, content, image, userId, listingId }) => {
   const { currentUser } = useAuth();
 
   return (
-    <div
-      className={styles.article}
-      style={{
-        backgroundImage: `url(${image})`,
-        backgroundPosition: "top center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <div className={styles.article__container}>
-        <h2>{title}</h2>
-        <p>{content}</p>
-        {(() => {
-          if (currentUser) {
-            return (
-              <>
-                <a href={`/ad/${userId}/${listingId}`}>
-                  <button className={styles.articleButton}>WYMIEŃ SIĘ</button>
-                </a>
-              </>
-            );
-          } else {
-            return (
-              <>
-                <a href="/register">
-                  <button className={styles.articleButton}>WYMIEŃ SIĘ</button>
-                </a>
-              </>
-            );
-          }
-        })()}
-      </div>
-    </div>
+    <article className={styles.ListingItem}>
+      <Link
+        to={currentUser ? `/ad/${userId}/${listingId}` : "/login"}
+        className={styles.ListingItemLink}
+      >
+        <div
+          className={styles.ListingItemImage}
+          style={{
+            backgroundImage: `url(${image})`,
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        />
+        <div className={styles.ListingItemContainer}>
+          <h2>{title}</h2>
+          <p>{content}</p>
+        </div>
+      </Link>
+    </article>
   );
 };
 
