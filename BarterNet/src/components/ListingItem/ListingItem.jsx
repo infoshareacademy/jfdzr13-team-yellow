@@ -1,31 +1,36 @@
-import { Link } from "react-router-dom";
+import React from "react";
 import { useAuth } from "../../contex/AuthProvider";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./ListingItem.module.css";
 
 const ListingItem = ({ index, title, content, image, userId, listingId }) => {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    if (!currentUser) {
+      e.preventDefault();
+      console.log("Redirecting to login with targetUrl:", `/ad/${userId}/${listingId}`);
+      navigate("/login", { state: { from: `/ad/${userId}/${listingId}` } });
+    }
+  };
 
   return (
-    <article className={styles.ListingItem}>
-      <Link
-        to={currentUser ? `/ad/${userId}/${listingId}` : "/login"}
-        className={styles.ListingItemLink}
-      >
-        <div
-          className={styles.ListingItemImage}
-          style={{
-            backgroundImage: `url(${image})`,
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }}
-        />
-        <div className={styles.ListingItemContainer}>
-          <h2>{title}</h2>
-          <p>{content}</p>
-        </div>
-      </Link>
-    </article>
+    <Link
+      to={currentUser ? `/ad/${userId}/${listingId}` : "#"}
+      className={styles.articleLink}
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundPosition: "top center",
+        backgroundRepeat: "no-repeat",
+      }}
+      onClick={handleClick}
+    >
+      <div className={styles.articleContainer}>
+        <h2>{title}</h2>
+        <p>{content}</p>
+      </div>
+    </Link>
   );
 };
 
