@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getAdDetails, deleteAd } from "../../utils/firebaseUtils";
 import MessageForm from "../Message/MessageForm/MessageForm";
+import Content from "../Content/Content.component";
 import { useAuth } from "../../contex/AuthProvider";
 import styles from "./SingleAd.module.css";
 
@@ -52,14 +53,12 @@ function SingleAd() {
   const isOwner = currentUser && currentUser.uid === userId;
 
   return (
-    <div className={styles.singleAdContainer}>
+    <Content>
       <div className={styles.generalInfo}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>{adDetails.title}</h1>
-          <div className={styles.adMeta}>
-            <p>Kategoria: {adDetails.category}</p>
-            <p>Lokalizacja: {adDetails.location}</p>
-          </div>
+        <h2 className={styles.title}>{adDetails.title}</h2>
+        <div className={styles.adMeta}>
+          <p>Kategoria: {adDetails.category}</p>
+          <p>Lokalizacja: {adDetails.location}</p>
         </div>
       </div>
       <div className={styles.adContent}>
@@ -135,7 +134,7 @@ function SingleAd() {
           adTitle={adDetails.title}
         />
       )}
-    </div>
+    </Content>
   );
 }
 
