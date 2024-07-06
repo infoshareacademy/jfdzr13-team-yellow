@@ -207,7 +207,7 @@ function Register() {
         </label>
 
         {error && <p className={styles.error}>{error}</p>}
-        <button type="submit">Zarejestruj się</button>
+        <button type="submit">ZAREJESTRUJ</button>
       </form>
       </section>
     </div>

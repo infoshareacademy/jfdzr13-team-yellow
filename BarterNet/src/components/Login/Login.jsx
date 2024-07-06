@@ -46,7 +46,7 @@ const Login = () => {
           <Link to="/register" className={styles.registerLink}>Nie masz konta? Zarejestruj się</Link>
         </form>
         <div className={styles.loginFooter}>
-          <Link to="#" className={styles.footerLink}>Warunki świadczenia usług</Link> | <Link to="#" className={styles.footerLink}>Polityka prywatności</Link>
+          <Link to="/terms" className={styles.footerLink}>Warunki świadczenia usług</Link> | <Link to="/privacy-policy" className={styles.footerLink}>Polityka prywatności</Link>
         </div>
       </div>
       </section>
