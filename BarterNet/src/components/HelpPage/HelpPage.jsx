@@ -97,7 +97,7 @@ const HelpPage = () => {
                 </div>
                 <div
                   className={`${styles.accordionContent} ${
-                    activeIndex === `${sectionIndex}-${index}` ? styles.active : ''
+                    activeIndex === `${sectionIndex}-${index}` ? `${styles.active} ${styles.expand}` : `${styles.collapse}`
                   }`}
                 >
                   <div className={styles.accordionInnerContent}>{item.answer}</div>

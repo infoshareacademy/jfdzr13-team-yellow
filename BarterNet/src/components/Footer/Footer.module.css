@@ -1,5 +1,5 @@
 .footer {
-  background-color: #d1c0a8;
+  background-color: #e5e5df;
   width: 1600x;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
   font-family: var(--font-secondary);
@@ -14,6 +14,7 @@
   max-width: 1600px;
   padding: 0 40px;
   box-sizing: border-box;
+  margin-bottom: 20px;
 }
 
 .footerColumn {
@@ -25,7 +26,7 @@
   font-family: var(--font-primary);
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
-  color: white;
+  color: var(--primary-color);
 }
 
 .footer ul {
