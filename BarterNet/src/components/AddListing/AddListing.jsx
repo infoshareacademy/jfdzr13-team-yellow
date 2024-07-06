@@ -41,15 +41,20 @@ function AddListing() {
   const handleFileChange = async (event) => {
     const selectedFiles = [...event.target.files];
     const resizedFiles = await Promise.all(selectedFiles.map(resizeImage));
+    
+    const totalFiles = files.length + formData.foto.length + resizedFiles.length;
+    if (totalFiles > 3) {
+        toast.error("Możesz dodać maksymalnie 3 zdjęcia");
+        return;
+    }
+
     setFiles((prevFiles) => [...prevFiles, ...resizedFiles]);
 
     const urls = resizedFiles.map((file) => URL.createObjectURL(file));
-    if (previewUrls.length + urls.length <= 3) {
-      setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
-    } else {
-      toast.error("Możesz dodać maksymalnie 3 zdjęcia");
-    }
-  };
+    setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
+};
+
+  
   const handleDeleteFile = (indexToRemove) => {
     const newFiles = [...files];
     newFiles.splice(indexToRemove, 1);
@@ -59,98 +64,99 @@ function AddListing() {
     newPreviewUrls.splice(indexToRemove, 1);
     setPreviewUrls(newPreviewUrls);
   };
+  // 
+  
   const resizeImage = async (file) => {
     const picaResizer = pica();
     const img = new Image();
     const canvas = document.createElement("canvas");
-    const maxDimension = 800; 
+    const maxDimension = 800;
 
     return new Promise((resolve, reject) => {
-      img.src = URL.createObjectURL(file);
-      img.onload = async () => {
-        const scaleFactor = Math.min(
-          maxDimension / img.width,
-          maxDimension / img.height
-        );
-        canvas.width = img.width * scaleFactor;
-        canvas.height = img.height * scaleFactor;
+        img.src = URL.createObjectURL(file);
+        img.onload = async () => {
+            const scaleFactor = Math.min(
+                maxDimension / img.width,
+                maxDimension / img.height
+            );
+            canvas.width = img.width * scaleFactor;
+            canvas.height = img.height * scaleFactor;
 
-        await picaResizer.resize(img, canvas);
-        canvas.toBlob((blob) => {
-          if (blob) {
-            resolve(new File([blob], file.name, { type: file.type }));
-          } else {
-            reject(new Error("Image resizing failed"));
-          }
-        }, file.type);
-      };
-      img.onerror = (err) => {
-        reject(err);
-      };
+            await picaResizer.resize(img, canvas);
+            canvas.toBlob((blob) => {
+                if (blob) {
+                    resolve(new File([blob], file.name, { type: file.type }));
+                } else {
+                    reject(new Error("Image resizing failed"));
+                }
+            }, file.type);
+        };
+        img.onerror = (err) => {
+            reject(err);
+        };
     });
-  };
+};
 
-  const handlePredefinedImageClick = (imageUrl) => {
-    setFormData((prevFormData) => {
-      const newFoto = (prevFormData.foto || []).includes(imageUrl)
-        ? prevFormData.foto.filter((img) => img !== imageUrl)
-        : [...(prevFormData.foto || []), imageUrl];
-      return {
-        ...prevFormData,
-        foto: newFoto,
-      };
-    });
-  };
+const handlePredefinedImageClick = (imageUrl) => {
+  const isSelected = formData.foto.includes(imageUrl);
+  const newFoto = isSelected
+      ? formData.foto.filter((img) => img !== imageUrl)
+      : [...formData.foto, imageUrl];
+
+  if (newFoto.length + files.length > 3) {
+      toast.error("Możesz dodać maksymalnie 3 zdjęcia");
+      return;
+  }
+
+  setFormData((prevFormData) => ({
+      ...prevFormData,
+      foto: newFoto,
+  }));
+};
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
 
     try {
-      let imageUrls = await Promise.all(
-        [...files].map(async (file) => {
-          const fileRef = ref(
-            storage,
-            `images/${currentUser.uid}/${Date.now()}_${file.name}`
-          );
-          const snapshot = await uploadBytes(fileRef, file);
-          return await getDownloadURL(snapshot.ref);
-        })
-      );
+        const limitedFiles = files.slice(0, 3 - formData.foto.length);
 
-      const newListing = {
-        ...formData,
-        foto: [...(formData.foto || []), ...imageUrls],
-        type: listingType,
-        userId: currentUser.uid,
-      };
+        let imageUrls = await Promise.all(
+            limitedFiles.map(async (file) => {
+                const fileRef = ref(
+                    storage,
+                    `images/${currentUser.uid}/${Date.now()}_${file.name}`
+                );
+                const snapshot = await uploadBytes(fileRef, file);
+                return await getDownloadURL(snapshot.ref);
+            })
+        );
 
-      const listingsCollectionRef = collection(
-        db,
-        "users",
-        currentUser.uid,
-        "listings"
-      );
-      await addDoc(listingsCollectionRef, newListing);
+        const newListing = {
+            ...formData,
+            foto: [...formData.foto, ...imageUrls],
+            type: listingType,
+            userId: currentUser.uid,
+        };
 
-      setMessage("Twoje ogłoszenie zostało dodane pomyślnie!");
+        const listingsCollectionRef = collection(
+            db,
+            "users",
+            currentUser.uid,
+            "listings"
+        );
+        await addDoc(listingsCollectionRef, newListing);
 
-      setFormData({
-        category: "",
-        location: "",
-        title: "",
-        description: "",
-        foto: [],
-      });
-      setFiles([]);
-      setPreviewUrls([]);
-      navigate("/myAccount");
+        toast.success("Ogłoszenie zostało dodane");
+        setTimeout(() => navigate("/"), 2000);
     } catch (err) {
-      setMessage(`Wystąpił błąd: ${err.message}`);
-      console.error("Error adding listing: ", err);
+        console.error("Error adding listing: ", err);
+        setError("Failed to add listing. Please try again.");
+    } finally {
+        setLoading(false);
     }
-    setLoading(false);
-  };
+};
+
 
   const handleLocationChange = (selectedOption) => {
     setFormData((prevFormData) => ({
@@ -225,6 +231,8 @@ function AddListing() {
             onChange={handleChange}
             required
             className={styles.addListingInput}
+            placeholder="Wpisz tytuł (max 32 znaki)"
+            maxLength={32}
           />
         </label>
         <label className={styles.addListingLabel}>
@@ -368,5 +376,4 @@ function AddListing() {
     </div>
   );
 }
-
 export default AddListing;
