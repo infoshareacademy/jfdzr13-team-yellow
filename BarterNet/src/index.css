@@ -29,6 +29,7 @@
   --form-border-color: rgba(0, 0, 0, 0.1);
   --input-border: 2px solid var(--form-border-color);
   --input-border-focus: 3px solid #2684ff;
+  --input-text-color: #778da9;
 
   /* Ikony i grafika */
   --icon-color: var(--primary-color);

@@ -43,8 +43,8 @@ function EditListing() {
 
       if (docSnap.exists()) {
         const { category, location, title, description, foto } = docSnap.data();
-        setFormData({ category, location, title, description, foto: foto || [] });
-        setPreviewUrls(foto || []);
+        setFormData({ category, location, title, description, foto });
+        foto ? setPreviewUrls(foto) : setPreviewUrls([]);
       } else {
         setError("Document does not exist.");
       }
@@ -64,10 +64,10 @@ function EditListing() {
 
   const handleFileChange = (event) => {
     const selectedFiles = [...event.target.files];
-    setFiles(selectedFiles);
-  
     const urls = selectedFiles.map((file) => URL.createObjectURL(file));
-    if (previewUrls.length < 3) { 
+    
+    if (previewUrls.length + urls.length <= 3) {
+      setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
       setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
     } else {
       toast.error("Możesz dodać maksymalnie 3 zdjęcia", { duration: 3000 });
@@ -75,65 +75,77 @@ function EditListing() {
   };
 
   const handleDeleteFile = (indexToRemove) => {
+    // Zwalnianie zasobów użytych przez obiekt URL
+    const urlToDelete = previewUrls[indexToRemove];
+    URL.revokeObjectURL(urlToDelete);
+  
     const newFiles = [...files];
-    const newPreviewUrls = [...previewUrls];
-  
     newFiles.splice(indexToRemove, 1);
-    newPreviewUrls.splice(indexToRemove, 1);
-  
     setFiles(newFiles);
+  
+    const newPreviewUrls = [...previewUrls];
+    newPreviewUrls.splice(indexToRemove, 1);
     setPreviewUrls(newPreviewUrls);
+  
+    const updatedPhotos = [...formData.foto];
+    updatedPhotos.splice(indexToRemove, 1); 
+  
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      foto: updatedPhotos,
+    }));
   };
 
   const handlePredefinedImageClick = (imageUrl) => {
-    setFormData((prevFormData) => {
-      const newFoto = prevFormData.foto.includes(imageUrl)
-        ? prevFormData.foto.filter((img) => img !== imageUrl)
-        : [...prevFormData.foto, imageUrl];
-      return {
-        ...prevFormData,
-        foto: newFoto,
-      };
-    });
+    const isSelected = formData.foto.includes(imageUrl);
+    const newFoto = isSelected
+      ? formData.foto.filter((img) => img !== imageUrl)
+      : [...formData.foto, imageUrl];
+  
+    if (newFoto.length + files.length > 3) {
+      toast.error("Możesz dodać maksymalnie 3 zdjęcia");
+      return;
+    }
+  
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      foto: newFoto,
+    }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-  
-    try {
-      let imageUrls = [];
-  
-      if (files.length > 0) {
-        imageUrls = await Promise.all(
-          files.map(async (file) => {
-            const fileRef = ref(
-              storage,
-              `images/${currentUser.uid}/${Date.now()}_${file.name}`
-            );
-            const snapshot = await uploadBytes(fileRef, file);
-            return await getDownloadURL(snapshot.ref);
-          })
-        );
-      }
 
-      const updatedListing = {
-        ...formData,
-        foto: [...previewUrls, ...imageUrls],
-      };
-  
-      const docRef = doc(db, "users", currentUser.uid, "listings", id);
-      await updateDoc(docRef, updatedListing);
-      setMessage("Ogłoszenie zostało zaktualizowane pomyślnie!");
-      navigate("/myAccount");
+    try {
+        const docRef = doc(db, "users", currentUser.uid, "listings", id);
+
+        if (files.length > 0) {
+            const fotoUrls = [];
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const storageRef = ref(storage, `listing-fotos/${currentUser.uid}/${id}/${file.name}`);
+                const snapshot = await uploadBytes(storageRef, file);
+                const downloadURL = await getDownloadURL(snapshot.ref);
+                fotoUrls.push(downloadURL);
+            }
+            await updateDoc(docRef, {
+                ...formData,
+                foto: [...formData.foto, ...fotoUrls],
+            });
+        } else {
+            await updateDoc(docRef, formData);
+        }
+
+        toast.success("Ogłoszenie zostało zaktualizowane");
+        setTimeout(() => navigate("/MyAds"), 2000);
     } catch (err) {
-      setMessage(`Wystąpił błąd: ${err.message}`);
-      toast.error(`Wystąpił błąd: ${err.message}`);
-      console.error("Error updating listing:", err);
+        setError(err.message);
+        console.error("Error updating document:", err);
+    } finally {
+        setLoading(false);
     }
-  
-    setLoading(false);
-  };
+};
 
   const handleLocationChange = (selectedOption) => {
     setFormData((prevFormData) => ({
@@ -189,6 +201,8 @@ function EditListing() {
             onChange={handleChange}
             required
             className={styles.editListingInput}
+            placeholder="Wpisz tytuł (max 32 znaki)"
+            maxLength={32}
           />
         </label>
         <label className={styles.editListingLabel}>
@@ -300,20 +314,32 @@ function EditListing() {
           />
           lub dodaj własne zdjęcia
         </label>
-        {previewUrls.length >0 && (
-        <div className={styles.previewContainer}>
-        {previewUrls.map((url, index) => (
-            <div key={index}>
-            <img
-              key={index}
-              src={url}
-              alt={`Preview ${index + 1}`}
-              className={styles.previewImage}
-            />
-            <button type='button' onClick={() => handleDeleteFile(index)}/>
-            </div>
-          ))}
-        </div>)}
+        {previewUrls.length > 0 && (
+  <div className={styles.previewContainer}>
+    {previewUrls.map((url, index) => {
+      const isPredefined = [
+        "/src/assets/other/image1.png",
+        "/src/assets/other/image2.png",
+        "/src/assets/other/image3.png",
+        "/src/assets/other/image4.png",
+        "/src/assets/other/image5.png",
+      ].includes(url);
+      if (isPredefined) {
+        return null;
+      }
+      return (
+        <div key={index}>
+          <img
+            src={url}
+            alt={`Preview ${index + 1}`}
+            className={styles.previewImage}
+          />
+          <button type='button' onClick={() => handleDeleteFile(index)}/>
+        </div>
+      );
+    })}
+  </div>
+)}
         </fieldset>
         <button
           type="submit"

@@ -50,7 +50,6 @@ useEffect(() => {
       console.error('Error fetching data:', error);
     }
   );
-console.log(fetchedListings)
   return () => unsubscribe();
 }, [searchParams.type]);
 
@@ -58,9 +57,9 @@ console.log(fetchedListings)
         (searchParams.location || searchParams.category || searchParams.keyword) ? setIsSomeParams(true)  : setIsSomeParams(false) && setFilteredListings([])
     },[searchParams])
 
-    useEffect(() =>{
-      isSomeParams ? setIsButtonDisabled(false) : setIsButtonDisabled(true)
-    },[isSomeParams])
+    // useEffect(() =>{
+    //   isSomeParams ? setIsButtonDisabled(false) : setIsButtonDisabled(true)
+    // },[isSomeParams])
 
 const setListingType = (type) => {
     setSearchParams((prev) => {
@@ -121,6 +120,7 @@ const clearFilter = (key) => {
     }));
   };
     
+
 const handleSubmit = (e) => {
     e.preventDefault();
     let finalyList = [];
@@ -144,15 +144,25 @@ const handleSubmit = (e) => {
     }  
 };
 
+const handleDisabledButtonClick = (event) =>{
+  event.preventDefault()
+  if (!isSomeParams) {
+    toast.error("Wprowadź conajmniej jeden parametr wyszukiwania");
+  } else {
+    handleSubmit(event)
+  }
+};
+
   return (
 <>
 <Toast/>
-  <section className={styles.search}>
+<div className={styles.searchContainer}>
+    <section className={styles.search}>
     <h1>Wyszukaj ogłoszenie</h1>
     <form 
       id={'search'} 
       className={styles.searchForm} 
-      onSubmit={handleSubmit} 
+      // onSubmit={handleSubmit} 
       ref={formRef}>
         <fieldset className={styles.searchForm__filter}>
           {(searchParams.keyword) && ( 
@@ -218,17 +228,15 @@ const handleSubmit = (e) => {
           </div>
         </fieldset>
         <button 
-          className={`${styles.searchForm__submitBtn} ${isButtonDisabled ? styles.searchForm__submitBtnDisabled : '' }`}
-          disabled={isButtonDisabled}
-        ><h2>Szukaj</h2></button>
+          className={`${styles.searchForm__submitBtn} ${!isSomeParams ? styles.searchForm__submitBtnDisabled : '' }`}
+          onClick={handleDisabledButtonClick}
+        ><h2>SZUKAJ</h2></button>
     </form>
   </section>
   {filteredListings.length > 0 && (
   <section className={styles.listings}>
-    
     <h1>Ogłoszenia</h1> 
       <div className={styles.listings__group}> 
-        
         {filteredListings.map((obj, index) => (
           <ListingItem
           key={index}
@@ -242,6 +250,7 @@ const handleSubmit = (e) => {
       </div> 
       
   </section>)} 
+  </div>
 </>
 )}
 

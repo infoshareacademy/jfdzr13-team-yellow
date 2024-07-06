@@ -1,7 +1,37 @@
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { locations } from '../locationsList';
-import styles from './SelectLocation.module.css';
+
+const customStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    padding: '3px',
+    border: `2px solid ${state.isFocused ? '#000' : 'var(--form-border-color)'}`,
+    borderRadius: '25px',
+    cursor: 'pointer',
+    
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: '#778da9',
+    fontSize: '16px',
+    fontFamily: 'Roboto, Arial, sans-serif',
+    fontWeight: 'normal',
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    // color: '#778da999',
+    fontSize: '16px',
+    fontFamily: 'Roboto, Arial, sans-serif',
+    fontWeight: 'normal',
+  }),
+  options: (provided) => ({
+    ...provided,
+    border: `2px solid ${state.isFocused ? '#000' : 'var(--form-border-color)'}`,
+    borderRadius: '25px',
+  }),
+};
+
 
 const SelectLocation = ({placeholder, onChange, name, value}) => {
   const [options, setOptions] = useState([]);
@@ -27,7 +57,7 @@ const SelectLocation = ({placeholder, onChange, name, value}) => {
   };
 
 
-  return <Select className={styles.select} options={options} placeholder={placeholder} onChange={onChange} onInputChange={handleInputChange} name={name} value={value} inputValue={inputValue}
+  return <Select styles={customStyles} options={options} placeholder={placeholder} onChange={onChange} onInputChange={handleInputChange} name={name} value={value} inputValue={inputValue}
   isClearable isSearchable/>;
 };
 

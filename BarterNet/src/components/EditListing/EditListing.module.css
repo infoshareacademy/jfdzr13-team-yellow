@@ -43,18 +43,20 @@
   border: 2px solid var(--form-border-color);
   border-radius: 25px;
   font-size: 16px;
+  color: var(--input-text-color);
+  cursor: pointer;
+}
+.editListingInput:hover,
+.editListingTextarea:hover {
+  border-color: #b3b3b3;
 }
 
-.editListingInput:focus,
-.editListingTextarea:focus,
-.editListingFileInput:focus,
-.editListingSelect:focus {
+.editListingInput:focus-visible,
+.editListingTextarea:focus-visible,
+.editListingFileInput:focus-visible,
+.editListingSelect:focus-visible {
   border: var(--input-border-focus);
   outline: none;
-}
-.addListingInput:hover,
-.addListingTextarea:hover {
-  border-color: #b3b3b3;
 }
 
 .editListingSelect {
@@ -155,6 +157,7 @@
   align-self: flex-end;
   width: 25px;
   height: 25px;
+  background-color: inherit;
   background-image: url("../../assets/icons/delete.png");
   background-size: 50%;
   background-repeat: no-repeat;
