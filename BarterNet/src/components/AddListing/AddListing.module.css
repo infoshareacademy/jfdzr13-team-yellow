@@ -151,6 +151,24 @@
   gap: 10px;
   margin-bottom: 15px;
 }
+.previewContainer div {
+  display: flex;
+  flex-direction: column;
+}
+.previewContainer div button {
+  align-self: flex-end;
+  width: 25px;
+  height: 25px;
+  background-image: url("../../assets/icons/delete.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+}
+.previewContainer div button:hover {
+  background-size: 100%;
+}
+
 .previewImage {
   width: 100px;
   height: 100px;
