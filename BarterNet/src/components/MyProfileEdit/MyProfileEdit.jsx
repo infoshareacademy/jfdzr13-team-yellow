@@ -151,24 +151,28 @@ function MyProfileEdit() {
           />
         </label>
         <label>
-          Avatar:
+        Zdjęcie:
+        <span className={styles.editProfileFileInput}>
+          Wybierz plik
           <input
             type="file"
             name="avatar"
             accept="image/*"
             onChange={handleChange}
           />
-        </label>
+        </span>
+      </label>
         <label>
           Opis:
           <textarea
+            type="text"
             name="description"
             value={formData.description}
             onChange={handleChange}
           />
         </label>
         <button type="submit" className={styles.saveButton} disabled={loading}>
-          Zapisz
+          ZAPISZ
         </button>
       </form>
       {error && <p className={styles.error}>{error}</p>}
