@@ -1,9 +1,7 @@
-
-import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../contex/AuthProvider";
 import { useState, useEffect } from "react";
-import { getUnreadMessagesCount  } from "../../utils/messageUtils";
+import { getUnreadMessagesCount } from "../../utils/messageUtils";
 import logo1 from "./assets/logo1.png";
 import logo2 from "./assets/logo2.png";
 import styles from "./Header.module.css";
@@ -14,7 +12,7 @@ import messagesIcon from "../../assets/icons/messagesIcon.png";
 
 const Header = () => {
   const { currentUser } = useAuth();
-  const location = useLocation()
+  const location = useLocation();
   const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
@@ -97,13 +95,19 @@ const Header = () => {
                   </NavLink>
 
                   <NavLink to="/messages">
-                  <button className={styles.navButton2}>
-                    <img src={messagesIcon} alt="Messages icon" className={styles.icon} />
-                    {unreadCount > 0 && <div className={styles.unreadIndicator}></div>}
-                    <span>WIADOMOŚCI</span>
-                  </button>
-                </NavLink>
-                  
+                    <button className={styles.navButton2}>
+                      <img
+                        src={messagesIcon}
+                        alt="Messages icon"
+                        className={styles.icon}
+                      />
+                      {unreadCount > 0 && (
+                        <div className={styles.unreadIndicator}></div>
+                      )}
+                      <span>WIADOMOŚCI</span>
+                    </button>
+                  </NavLink>
+
                   <NavLink to="/myaccount">
                     <button className={styles.navButton2}>
                       <img
@@ -124,12 +128,12 @@ const Header = () => {
           })()}
         </div>
       </nav>
-      {((currentUser) || 
-      (!currentUser && 
-        (location.pathname === '/terms' || 
-        location.pathname === '/privacy-policy' ||
-        location.pathname === '/help' ||
-        location.pathname === '/contact'))) && (
+      {(currentUser ||
+        (!currentUser &&
+          (location.pathname === "/terms" ||
+            location.pathname === "/privacy-policy" ||
+            location.pathname === "/help" ||
+            location.pathname === "/contact"))) && (
         <div className={styles.navBottom}></div>
       )}
     </header>
