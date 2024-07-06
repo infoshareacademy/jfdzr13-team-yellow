@@ -1,13 +1,13 @@
-import React from "react";
+// import React from "react";
 import { useAuth } from "../../contex/AuthProvider";
-
+import { Link } from "react-router-dom";
 import styles from "./MyListingItem.module.css";
 
 const MyListingItem = ({ index, title, content, image, userId, listingId }) => {
   const { currentUser } = useAuth();
 
   return (
-    <a href={`/ad/${userId}/${listingId}`}>
+    <Link to={`/ad/${userId}/${listingId}`} className={styles.link}>
       <div
         className={styles.article}
         style={{ backgroundImage: `url(${image})` }}
@@ -17,7 +17,7 @@ const MyListingItem = ({ index, title, content, image, userId, listingId }) => {
           <p>{content}</p>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

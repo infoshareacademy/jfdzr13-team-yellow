@@ -1,45 +1,36 @@
 import React from "react";
-
 import { useAuth } from "../../contex/AuthProvider";
-
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./ListingItem.module.css";
 
 const ListingItem = ({ index, title, content, image, userId, listingId }) => {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    if (!currentUser) {
+      e.preventDefault();
+      console.log("Redirecting to login with targetUrl:", `/ad/${userId}/${listingId}`);
+      navigate("/login", { state: { from: `/ad/${userId}/${listingId}` } });
+    }
+  };
 
   return (
-    <div
-      className={styles.article}
+    <Link
+      to={currentUser ? `/ad/${userId}/${listingId}` : "#"}
+      className={styles.articleLink}
       style={{
         backgroundImage: `url(${image})`,
         backgroundPosition: "top center",
         backgroundRepeat: "no-repeat",
       }}
+      onClick={handleClick}
     >
-      <div className={styles.article__container}>
+      <div className={styles.articleContainer}>
         <h2>{title}</h2>
         <p>{content}</p>
-        {(() => {
-          if (currentUser) {
-            return (
-              <>
-                <a href={`/ad/${userId}/${listingId}`}>
-                  <button className={styles.articleButton}>WYMIEŃ SIĘ</button>
-                </a>
-              </>
-            );
-          } else {
-            return (
-              <>
-                <a href="/register">
-                  <button className={styles.articleButton}>WYMIEŃ SIĘ</button>
-                </a>
-              </>
-            );
-          }
-        })()}
       </div>
-    </div>
+    </Link>
   );
 };
 

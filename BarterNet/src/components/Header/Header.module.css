@@ -76,7 +76,7 @@
   padding: 10px;
   cursor: pointer;
   transition: 0.3s;
-  position: relative; 
+  position: relative;
 }
 .navButton2:hover {
   width: 150px;
@@ -95,14 +95,21 @@
 .navButton2:hover .icon {
   display: none;
 }
+.icon {
+  transition: transform 0.1s ease-in-out;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
 
 .unreadIndicator {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 10px;
-  height: 10px;
-  background-color: green;
+  top: 5px;
+  right: 5px;
+  width: 11px;
+  height: 11px;
+  background-color: rgb(26, 245, 26);
   border-radius: 50%;
 }
 
