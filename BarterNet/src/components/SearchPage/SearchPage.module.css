@@ -7,6 +7,10 @@
   border: none;
   cursor: pointer;
 }
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+}
 main .search,
 main .listings {
   margin: 20px 0;
@@ -60,6 +64,10 @@ main .listings {
   font-size: 18px;
   color: var(--text-color);
 }
+.search .searchForm__typeBtn:hover {
+  background-color: var(--accent-color);
+  color: var(--button-text-color);
+}
 .search .searchForm__typeBtnActive {
   background-color: var(--button-background);
   color: var(--button-text-color);
@@ -68,6 +76,7 @@ main .listings {
 .searchForm__filter {
   display: flex;
   height: 28px;
+  gap: 5px;
 }
 .searchForm__filterBtn {
   padding: 3px 15px;
@@ -83,6 +92,8 @@ main .listings {
 .searchForm__textFields {
   display: flex;
   justify-content: space-between;
+  color: var(--text-color);
+  font-family: var(--font-primary);
 }
 .searchForm__textFields label {
   display: flex;
@@ -90,7 +101,11 @@ main .listings {
   gap: 10px;
   width: 500px;
 }
-.searchForm__textFields input {
+.searchForm__searchField {
+  color: var(--input-text-color);
+  font-family: var(--font-primary);
+}
+.searchForm__textFields label input {
   padding: 12px;
   border: 2px solid var(--form-border-color);
   border-radius: 25px;
@@ -126,19 +141,26 @@ main .listings {
   text-align: center;
   gap: 50px;
 }
+.searchForm__categoryBtn:hover {
+  background-color: var(--primary-color);
+}
 .searchForm__categoryBtnActive {
   background-color: var(--primary-color);
 }
 .searchForm__categoryBtn span {
   padding-top: 100px;
   width: 120px;
+  color: var(--text-color);
 }
 .searchForm__submitBtn {
-  align-self: flex-end;
-  padding: 10px 20px;
+  align-self: center;
+  padding: 10px 120px;
   background-color: var(--button-background);
   border-radius: var(--button-border-radius);
   color: var(--button-text-color);
+}
+.searchForm__submitBtn:hover {
+  background-color: var(--accent-color);
 }
 .searchForm__submitBtn:active {
   background-color: var(--accent-color);
