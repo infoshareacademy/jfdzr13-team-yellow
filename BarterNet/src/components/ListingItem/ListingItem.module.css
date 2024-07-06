@@ -1,4 +1,4 @@
-.article {
+.articleLink {
   background-color: var(--primary-color);
   background-repeat: no-repeat;
   background-size: contain;
@@ -6,17 +6,18 @@
   width: 100%;
   height: 450px;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   border-radius: 25px;
   overflow: hidden;
   transition: transform 0.6s ease-in-out;
+  text-decoration: none;
 }
 
-.article:hover {
+.articleLink:hover {
   transform: scale(1.05);
 }
 
-.article__container {
+.articleContainer {
   background-color: var(--primary-color);
   padding: 30px;
   border-radius: 25px;
@@ -24,12 +25,13 @@
   width: 100%;
   overflow: hidden;
 }
-.article__container p {
+
+.articleContainer p {
   opacity: 0;
   height: 0;
 }
 
-.article:hover .article__container p {
+.articleLink:hover .articleContainer p {
   opacity: 1;
   height: auto;
 }
@@ -38,20 +40,57 @@ h2 {
   font-family: var(--font-primary);
 }
 
-.articleButton {
-  margin: 0;
-  background-color: var(--background-color);
-  color: var(--primary-color);
-  border: none;
-  padding: var(--button-padding);
-  cursor: pointer;
-  transition: var(--button-hover-effect);
-  border-radius: var(--button-border-radius);
-  font-weight: var(--button-font-weight);
-  font-size: var(--button-font-size);
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .articleLink {
+    height: 400px;
+  }
+
+  .articleContainer {
+    padding: 25px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 16px;
+  }
 }
 
-.articleButton:hover {
-  background: var(--accent-color);
-  color: var(--button-text-color);
+@media (max-width: 768px) {
+  .articleLink {
+    height: 350px;
+  }
+
+  .articleContainer {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 450px) {
+  .articleLink {
+    height: 300px;
+  }
+
+  .articleContainer {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  p {
+    font-size: 12px;
+  }
 }

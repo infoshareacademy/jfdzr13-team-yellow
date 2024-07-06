@@ -2,18 +2,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  margin-top: 20px;
+  width: 500px;
+  max-width: 1200px;
+  padding: 30px;
+  border: var(--input-border);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--button-border-radius);
 }
 
 .header {
   color: var(--text-color);
-  font-size: 24px;
-  margin: 40px 0 40px 20px;
+  font-size: 32px;
   font-weight: bold;
   width: 100%;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e0e1dd;
+  padding-bottom: 10px;
 }
 
 .editForm {
@@ -21,9 +23,22 @@
   max-width: 500px;
 }
 
+.avatarPreview {
+  margin-top: 10px;
+}
+
+.avatarPreview img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--form-border-color);
+}
+
 .editForm label {
   font-weight: bold;
   margin-bottom: 10px;
+  padding: 10px;
   display: block;
   color: var(--text-color);
 }
@@ -34,10 +49,29 @@
 .editForm textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #e0e1dd;
+  border: 2px solid var(--form-border-color);
   border-radius: 20px;
-  margin-bottom: 15px;
+  margin: 5px;
   color: #778da9;
+  font-family: var(--secondary-font);
+  cursor: pointer;
+}
+
+.editForm input:focus,
+.editForm textarea:focus {
+  border: var(--input-border-focus);
+  outline: none;
+}
+
+.editForm input:focus-visible,
+.editForm textarea:focus-visible {
+  outline: var(--input-border-focus);
+  border-color: transparent;
+}
+
+.editForm input:hover,
+.editForm textarea:hover {
+  border-color: #b3b3b3;
 }
 
 .editForm input[type="file"] {
@@ -46,21 +80,44 @@
   padding-left: 10px;
 }
 
-.saveButton {
+.editProfileFileInput {
   padding: 10px 20px;
-  margin-top: 20px;
+  font-size: 14px;
   background-color: var(--button-background);
   border-radius: var(--button-border-radius);
   color: var(--button-text-color);
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  display: block;
+  margin: 10px;
+  display: inline-block;
   text-align: center;
 }
 
+.editProfileFileInput:hover {
+  background-color: var(--accent-color);
+}
+
+.editProfileFileInput input[type="file"] {
+  display: none;
+}
+
+.saveButton {
+  padding: var(--button-padding);
+  background-color: var(--button-background);
+  border-radius: var(--button-border-radius);
+  color: var(--button-text-color);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: auto;
+  display: block;
+  margin-top: 20px;
+  width: 100%;
+}
+
 .saveButton:hover {
-  background-color: #004085;
+  background-color: var(--accent-color);
 }
 
 .saveButton:disabled {
@@ -74,22 +131,51 @@
 
 /* Media Queries */
 
+@media (max-width: 1024px) {
+  .editContainer {
+    width: 80%;
+    padding: 20px;
+  }
+
+  .header {
+    font-size: 28px;
+  }
+
+  .editForm {
+    max-width: 100%;
+  }
+
+  .editForm input[type="text"],
+  .editForm input[type="email"],
+  .editForm input[type="tel"],
+  .editForm textarea {
+    padding: 8px;
+  }
+
+  .saveButton {
+    padding: 10px 20px;
+  }
+}
+
 @media (max-width: 768px) {
+  .editContainer {
+    width: 90%;
+    padding: 20px;
+  }
+
   .header {
     font-size: 24px;
     margin: 20px 0;
   }
 
   .editForm {
-    width: 90%;
-    max-width: none;
+    width: 100%;
   }
 
   .editForm input[type="text"],
   .editForm input[type="email"],
   .editForm input[type="tel"],
-  .editForm textarea,
-  .editForm input[type="file"] {
+  .editForm textarea {
     padding: 8px;
   }
 
@@ -98,12 +184,28 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 450px) {
   .editContainer {
+    width: 100%;
     padding: 10px;
+  }
+
+  .header {
+    font-size: 20px;
   }
 
   .editForm label {
     font-size: 14px;
+  }
+
+  .editForm input[type="text"],
+  .editForm input[type="email"],
+  .editForm input[type="tel"],
+  .editForm textarea {
+    padding: 6px;
+  }
+
+  .saveButton {
+    padding: 6px 12px;
   }
 }

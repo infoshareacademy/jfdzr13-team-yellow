@@ -7,3 +7,22 @@
   width: 100%;
   max-width: 1600px;
 }
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 15px;
+    max-width: 90%;
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+    max-width: 95%;
+  }
+}
+@media (max-width: 450px) {
+  .container {
+    padding: 10px;
+    max-width: 100%;
+  }
+}
