@@ -20,6 +20,7 @@ function MyProfileEdit() {
   });
 
   const [avatar, setAvatar] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -44,7 +45,9 @@ function MyProfileEdit() {
   const handleChange = (event) => {
     const { name, value, files } = event.target;
     if (name === "avatar") {
-      setAvatar(files[0]);
+      const file = files[0];
+      setAvatar(file);
+      setAvatarPreview(URL.createObjectURL(file));
     } else {
       setFormData((prevData) => ({
         ...prevData,
@@ -53,44 +56,41 @@ function MyProfileEdit() {
     }
   };
 
-  const validateEmail = (email) =>
-    /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+  const validateEmail = (email) => /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
   const validatePhone = (phone) => /^\d{3}-\d{3}-\d{3}$/.test(phone);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!validateEmail(formData.email)) {
-      setError("Please enter a valid email address.");
+      setError("Proszę podać poprawny adres email.");
       return;
     }
     if (!validatePhone(formData.phone)) {
-      setError("Phone number must be in format XXX-XXX-XXX.");
+      setError("Numer telefonu musi mieć format XXX-XXX-XXX.");
       return;
     }
 
     setLoading(true);
 
     try {
+      let avatarUrl = formData.avatarUrl;
       if (avatar) {
         const avatarRef = ref(
           storage,
           `avatars/${currentUser.uid}/${avatar.name}`
         );
         const snapshot = await uploadBytes(avatarRef, avatar);
-        const avatarUrl = await getDownloadURL(snapshot.ref);
-        setFormData((prevData) => ({ ...prevData, avatarUrl }));
-
-        formData.avatarUrl = avatarUrl;
+        avatarUrl = await getDownloadURL(snapshot.ref);
       }
 
       const docRef = doc(db, "users", currentUser.uid);
-      await updateDoc(docRef, { ...formData, avatarUrl: formData.avatarUrl });
+      await updateDoc(docRef, { ...formData, avatarUrl });
 
       navigate("/myProfile");
     } catch (error) {
       console.error("Error updating profile: ", error);
-      setError("Failed to update profile.");
+      setError("Nie udało się zaktualizować profilu.");
     } finally {
       setLoading(false);
     }
@@ -151,17 +151,22 @@ function MyProfileEdit() {
           />
         </label>
         <label>
-        Zdjęcie:
-        <span className={styles.editProfileFileInput}>
-          Wybierz plik
-          <input
-            type="file"
-            name="avatar"
-            accept="image/*"
-            onChange={handleChange}
-          />
-        </span>
-      </label>
+          Zdjęcie:
+          <span className={styles.editProfileFileInput}>
+            Wybierz plik
+            <input
+              type="file"
+              name="avatar"
+              accept="image/*"
+              onChange={handleChange}
+            />
+          </span>
+        </label>
+        {avatarPreview && (
+          <div className={styles.avatarPreview}>
+            <img src={avatarPreview} alt="Avatar Preview" />
+          </div>
+        )}
         <label>
           Opis:
           <textarea
