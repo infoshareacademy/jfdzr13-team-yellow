@@ -75,7 +75,7 @@
   border: none;
   padding: 10px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.1s;
   position: relative;
 }
 .navButton2:hover {

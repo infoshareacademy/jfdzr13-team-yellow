@@ -114,7 +114,7 @@ const MyAds = () => {
             ))
           ) : (
             <div className={styles.emptyMessage}>
-              <p>Jeszcze nie ogłoszeń. Może chciałbyś dodać?</p>
+              <p>Jeszcze nie masz ogłoszeń. Może chciałbyś dodać?</p>
               <button onClick={() => navigate("/addlisting")}>DODAJ OGŁOSZENIE</button>
             </div>
           )}
