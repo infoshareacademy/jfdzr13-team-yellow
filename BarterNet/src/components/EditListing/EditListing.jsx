@@ -11,12 +11,16 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Toast from "../Toastify/ToastContainer.jsx";
 import SelectCategory from "../../utils/SelectComponents/SelectCategory.jsx";
-
+// Importing icons
+import Image1 from "../../assets/other/image1.png";
+import Image2 from "../../assets/other/image2.png";
+import Image3 from "../../assets/other/image3.png";
+import Image4 from "../../assets/other/image4.png";
+import Image5 from "../../assets/other/image5.png";
 function EditListing() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const { id } = useParams();
-
   const [formData, setFormData] = useState({
     category: "",
     location: "",
@@ -29,43 +33,36 @@ function EditListing() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [previewUrls, setPreviewUrls] = useState([]);
-
   useEffect(() => {
     if (!currentUser) {
       navigate("/login");
       return;
     }
-
-  const fetchData = async () => {
-    try {
-      const docRef = doc(db, "users", currentUser.uid, "listings", id);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        const { category, location, title, description, foto } = docSnap.data();
-        setFormData({ category, location, title, description, foto });
-        foto ? setPreviewUrls(foto) : setPreviewUrls([]);
-      } else {
-        setError("Document does not exist.");
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, "users", currentUser.uid, "listings", id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const { category, location, title, description, foto } = docSnap.data();
+          setFormData({ category, location, title, description, foto });
+          foto ? setPreviewUrls(foto) : setPreviewUrls([]);
+        } else {
+          setError("Document does not exist.");
+        }
+      } catch (err) {
+        setError(err.message);
+        console.error("Error fetching document:", err);
       }
-    } catch (err) {
-      setError(err.message);
-      console.error("Error fetching document:", err);
-    }
-  };
-
-  fetchData();
-}, [currentUser, id, navigate]);
-
+    };
+    fetchData();
+  }, [currentUser, id, navigate]);
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
   const handleFileChange = (event) => {
     const selectedFiles = [...event.target.files];
     const urls = selectedFiles.map((file) => URL.createObjectURL(file));
-    
     if (previewUrls.length + urls.length <= 3) {
       setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
       setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
@@ -73,80 +70,66 @@ function EditListing() {
       toast.error("Możesz dodać maksymalnie 3 zdjęcia", { duration: 3000 });
     }
   };
-
   const handleDeleteFile = (indexToRemove) => {
-    // Zwalnianie zasobów użytych przez obiekt URL
     const urlToDelete = previewUrls[indexToRemove];
     URL.revokeObjectURL(urlToDelete);
-  
     const newFiles = [...files];
     newFiles.splice(indexToRemove, 1);
     setFiles(newFiles);
-  
     const newPreviewUrls = [...previewUrls];
     newPreviewUrls.splice(indexToRemove, 1);
     setPreviewUrls(newPreviewUrls);
-  
     const updatedPhotos = [...formData.foto];
-    updatedPhotos.splice(indexToRemove, 1); 
-  
+    updatedPhotos.splice(indexToRemove, 1);
     setFormData((prevFormData) => ({
       ...prevFormData,
       foto: updatedPhotos,
     }));
   };
-
   const handlePredefinedImageClick = (imageUrl) => {
     const isSelected = formData.foto.includes(imageUrl);
     const newFoto = isSelected
       ? formData.foto.filter((img) => img !== imageUrl)
       : [...formData.foto, imageUrl];
-  
     if (newFoto.length + files.length > 3) {
       toast.error("Możesz dodać maksymalnie 3 zdjęcia");
       return;
     }
-  
     setFormData((prevFormData) => ({
       ...prevFormData,
       foto: newFoto,
     }));
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-
     try {
-        const docRef = doc(db, "users", currentUser.uid, "listings", id);
-
-        if (files.length > 0) {
-            const fotoUrls = [];
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const storageRef = ref(storage, `listing-fotos/${currentUser.uid}/${id}/${file.name}`);
-                const snapshot = await uploadBytes(storageRef, file);
-                const downloadURL = await getDownloadURL(snapshot.ref);
-                fotoUrls.push(downloadURL);
-            }
-            await updateDoc(docRef, {
-                ...formData,
-                foto: [...formData.foto, ...fotoUrls],
-            });
-        } else {
-            await updateDoc(docRef, formData);
+      const docRef = doc(db, "users", currentUser.uid, "listings", id);
+      if (files.length > 0) {
+        const fotoUrls = [];
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const storageRef = ref(storage, `listing-fotos/${currentUser.uid}/${id}/${file.name}`);
+          const snapshot = await uploadBytes(storageRef, file);
+          const downloadURL = await getDownloadURL(snapshot.ref);
+          fotoUrls.push(downloadURL);
         }
-
-        toast.success("Ogłoszenie zostało zaktualizowane", { duration: 3000 });
-        setTimeout(() => navigate("/MyAds"), 3000); // Zmieniono na 3000 ms
+        await updateDoc(docRef, {
+          ...formData,
+          foto: [...formData.foto, ...fotoUrls],
+        });
+      } else {
+        await updateDoc(docRef, formData);
+      }
+      toast.success("Ogłoszenie zostało zaktualizowane", { duration: 3000 });
+      setTimeout(() => navigate("/MyAds"), 3000); // Zmieniono na 3000 ms
     } catch (err) {
-        setError(err.message);
-        console.error("Error updating document:", err);
+      setError(err.message);
+      console.error("Error updating document:", err);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
-
+  };
   const handleLocationChange = (selectedOption) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -159,10 +142,9 @@ function EditListing() {
       category: selectedOption ? selectedOption.value : "",
     }));
   };
-  
   return (
     <div className={styles.editListingContainer}>
-      <Toast/>
+      <Toast />
       <h1 className={styles.header}>Edytuj Ogłoszenie</h1>
       {error && <p className={styles.error}>{error}</p>}
       <form onSubmit={handleSubmit} className={styles.editListingForm}>
@@ -215,143 +197,139 @@ function EditListing() {
           />
         </label>
         <fieldset className={styles.editFotoContainer}>
-        <label className={styles.editListingLabel}>
-          Wybierz grafikę:
-          <div className={styles.predefinedImagesContainer}>
-            <button
-              type="button"
-              className={`${styles.imageOption} ${
-                formData.foto && formData.foto.includes("/src/assets/other/image1.png")
-                  ? styles.selected
-                  : ""
-              }`}
-              onClick={() =>
-                handlePredefinedImageClick("/src/assets/other/image1.png")
-              }
-            >
-              <img
-                src="/src/assets/other/image1.png"
-                alt="Image 1"
-                className={styles.predefinedImage}
-              />
-            </button>
-            <button
-              type="button"
-              className={`${styles.imageOption} ${
-                formData.foto && formData.foto.includes("/src/assets/other/image2.png")
-                  ? styles.selected
-                  : ""
-              }`}
-              onClick={() =>
-                handlePredefinedImageClick("/src/assets/other/image2.png")
-              }
-            >
-              <img
-                src="/src/assets/other/image2.png"
-                alt="Image 2"
-                className={styles.predefinedImage}
-              />
-            </button>
-            <button
-              type="button"
-              className={`${styles.imageOption} ${
-                formData.foto && formData.foto.includes("/src/assets/other/image3.png")
-                  ? styles.selected
-                  : ""
-              }`}
-              onClick={() =>
-                handlePredefinedImageClick("/src/assets/other/image3.png")
-              }
-            >
-              <img
-                src="/src/assets/other/image3.png"
-                alt="Image 3"
-                className={styles.predefinedImage}
-              />
-            </button>
-            <button
-              type="button"
-              className={`${styles.imageOption} ${
-                formData.foto && formData.foto.includes("/src/assets/other/image4.png")
-                  ? styles.selected
-                  : ""
-              }`}
-              onClick={() =>
-                handlePredefinedImageClick("/src/assets/other/image4.png")
-              }
-            >
-              <img
-                src="/src/assets/other/image4.png"
-                alt="Image 4"
-                className={styles.predefinedImage}
-              />
-            </button>
-            <button
-              type="button"
-              className={`${styles.imageOption} ${
-                formData.foto && formData.foto.includes("/src/assets/other/image5.png")
-                  ? styles.selected
-                  : ""
-              }`}
-              onClick={() =>
-                handlePredefinedImageClick("/src/assets/other/image5.png")
-              }
-            >
-              <img
-                src="/src/assets/other/image5.png"
-                alt="Image 5"
-                className={styles.predefinedImage}
-              />
-            </button>
-          </div>
-        </label>
-        <label className={styles.customFileUpload}>
-          <input
-            type="file"
-            multiple
-            onChange={handleFileChange}
-            className={styles.editListingFileInput}
-          />
-          lub dodaj własne zdjęcia
-        </label>
-        {previewUrls.length > 0 && (
-  <div className={styles.previewContainer}>
-    {previewUrls.map((url, index) => {
-      const isPredefined = [
-        "/src/assets/other/image1.png",
-        "/src/assets/other/image2.png",
-        "/src/assets/other/image3.png",
-        "/src/assets/other/image4.png",
-        "/src/assets/other/image5.png",
-      ].includes(url);
-      if (isPredefined) {
-        return null;
-      }
-      return (
-        <div key={index}>
-          <img
-            src={url}
-            alt={`Preview ${index + 1}`}
-            className={styles.previewImage}
-          />
-          <button type='button' onClick={() => handleDeleteFile(index)}/>
-        </div>
-      );
-    })}
-  </div>
-)}
+          <label className={styles.editListingLabel}>
+            Wybierz grafikę:
+            <div className={styles.predefinedImagesContainer}>
+              <button
+                type="button"
+                className={`${styles.imageOption} ${
+                  formData.foto && formData.foto.includes(Image1)
+                    ? styles.selected
+                    : ""
+                }`}
+                onClick={() => handlePredefinedImageClick(Image1)}
+              >
+                <img
+                  src={Image1}
+                  alt="Image 1"
+                  className={styles.predefinedImage}
+                />
+              </button>
+              <button
+                type="button"
+                className={`${styles.imageOption} ${
+                  formData.foto && formData.foto.includes(Image2)
+                    ? styles.selected
+                    : ""
+                }`}
+                onClick={() => handlePredefinedImageClick(Image2)}
+              >
+                <img
+                  src={Image2}
+                  alt="Image 2"
+                  className={styles.predefinedImage}
+                />
+              </button>
+              <button
+                type="button"
+                className={`${styles.imageOption} ${
+                  formData.foto && formData.foto.includes(Image3)
+                    ? styles.selected
+                    : ""
+                }`}
+                onClick={() => handlePredefinedImageClick(Image3)}
+              >
+                <img
+                  src={Image3}
+                  alt="Image 3"
+                  className={styles.predefinedImage}
+                />
+              </button>
+              <button
+                type="button"
+                className={`${styles.imageOption} ${
+                  formData.foto && formData.foto.includes(Image4)
+                    ? styles.selected
+                    : ""
+                }`}
+                onClick={() => handlePredefinedImageClick(Image4)}
+              >
+                <img
+                  src={Image4}
+                  alt="Image 4"
+                  className={styles.predefinedImage}
+                />
+              </button>
+              <button
+                type="button"
+                className={`${styles.imageOption} ${
+                  formData.foto && formData.foto.includes(Image5)
+                    ? styles.selected
+                    : ""
+                }`}
+                onClick={() => handlePredefinedImageClick(Image5)}
+              >
+                <img
+                  src={Image5}
+                  alt="Image 5"
+                  className={styles.predefinedImage}
+                />
+              </button>
+            </div>
+          </label>
+          <label className={styles.customFileUpload}>
+            <input
+              type="file"
+              multiple
+              onChange={handleFileChange}
+              className={styles.editListingFileInput}
+            />
+            lub dodaj własne zdjęcia
+          </label>
+          {previewUrls.length > 0 && (
+            <div className={styles.previewContainer}>
+              {previewUrls.map((url, index) => {
+                const isPredefined = [
+                  Image1,
+                  Image2,
+                  Image3,
+                  Image4,
+                  Image5,
+                ].includes(url);
+                if (isPredefined) {
+                  return null;
+                }
+                return (
+                  <div key={index}>
+                    <img
+                      src={url}
+                      alt={`Preview ${index + 1}`}
+                      className={styles.previewImage}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteFile(index)}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </fieldset>
         <button
           type="submit"
           disabled={loading}
           className={styles.editListingButton}
         >
-          {loading ? <ClipLoader size={20} color={"#ffffff"} /> : "ZAKTUALIZUJ OGŁOSZENIE"}
+          {loading ? (
+            <ClipLoader size={20} color={"#FFFFFF"} />
+          ) : (
+            "ZAKTUALIZUJ OGŁOSZENIE"
+          )}
         </button>
       </form>
       {message && <div className={styles.message}>{message}</div>}
     </div>
   );
 }
-
 export default EditListing;
