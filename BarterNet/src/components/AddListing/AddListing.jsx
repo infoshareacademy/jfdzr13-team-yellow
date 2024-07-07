@@ -11,6 +11,11 @@ import SelectCategory from "../../utils/SelectComponents/SelectCategory";
 import SelectLocation from "../../utils/SelectComponents/SelectLocation";
 import Toast from "../Toastify/ToastContainer";
 import styles from "./AddListing.module.css";
+import Image1 from "../../assets/other/image1.png";
+import Image2 from "../../assets/other/image2.png";
+import Image3 from "../../assets/other/image3.png";
+import Image4 from "../../assets/other/image4.png";
+import Image5 from "../../assets/other/image5.png";
 
 function AddListing() {
   const { currentUser } = useAuth();
@@ -252,16 +257,16 @@ const handlePredefinedImageClick = (imageUrl) => {
             <button
               type="button"
               className={`${styles.imageOption} ${
-                formData.foto.includes("/src/assets/other/image1.png")
+                formData.foto.includes(Image1)
                   ? styles.selected
                   : ""
               }`}
               onClick={() =>
-                handlePredefinedImageClick("/src/assets/other/image1.png")
+                handlePredefinedImageClick(Image1)
               }
             >
               <img
-                src="/src/assets/other/image1.png"
+                src={Image1}
                 alt="Image 1"
                 className={styles.predefinedImage}
               />
@@ -269,16 +274,16 @@ const handlePredefinedImageClick = (imageUrl) => {
             <button
               type="button"
               className={`${styles.imageOption} ${
-                formData.foto.includes("/src/assets/other/image2.png")
+                formData.foto.includes(Image2)
                   ? styles.selected
                   : ""
               }`}
               onClick={() =>
-                handlePredefinedImageClick("/src/assets/other/image2.png")
+                handlePredefinedImageClick(Image2)
               }
             >
               <img
-                src="/src/assets/other/image2.png"
+                src={Image2}
                 alt="Image 2"
                 className={styles.predefinedImage}
               />
@@ -286,16 +291,16 @@ const handlePredefinedImageClick = (imageUrl) => {
             <button
               type="button"
               className={`${styles.imageOption} ${
-                formData.foto.includes("/src/assets/other/image3.png")
+                formData.foto.includes(Image3)
                   ? styles.selected
                   : ""
               }`}
               onClick={() =>
-                handlePredefinedImageClick("/src/assets/other/image3.png")
+                handlePredefinedImageClick(Image3)
               }
             >
               <img
-                src="/src/assets/other/image3.png"
+                src={Image3}
                 alt="Image 3"
                 className={styles.predefinedImage}
               />
@@ -303,16 +308,16 @@ const handlePredefinedImageClick = (imageUrl) => {
             <button
               type="button"
               className={`${styles.imageOption} ${
-                formData.foto.includes("/src/assets/other/image4.png")
+                formData.foto.includes(Image4)
                   ? styles.selected
                   : ""
               }`}
               onClick={() =>
-                handlePredefinedImageClick("/src/assets/other/image4.png")
+                handlePredefinedImageClick(Image4)
               }
             >
               <img
-                src="/src/assets/other/image4.png"
+                src={Image4}
                 alt="Image 4"
                 className={styles.predefinedImage}
               />
@@ -320,16 +325,16 @@ const handlePredefinedImageClick = (imageUrl) => {
             <button
               type="button"
               className={`${styles.imageOption} ${
-                formData.foto.includes("/src/assets/other/image5.png")
+                formData.foto.includes(Image5)
                   ? styles.selected
                   : ""
               }`}
               onClick={() =>
-                handlePredefinedImageClick("/src/assets/other/image5.png")
+                handlePredefinedImageClick(Image5)
               }
             >
               <img
-                src="/src/assets/other/image5.png"
+                src={Image5}
                 alt="Image 5"
                 className={styles.predefinedImage}
               />

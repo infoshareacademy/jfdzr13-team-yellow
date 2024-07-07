@@ -4,7 +4,7 @@ import styles from './ContactForm.module.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Toast from '../Toastify/ToastContainer.jsx'; // Zaktualizuj ścieżkę importu, jeśli jest inna
-
+import logo from '../ContactForm/assets/logo2.png'
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -76,7 +76,7 @@ const ContactForm = () => {
           <p>YELLOW TEAM:<br/> Joasia | Magda | Sebastian | Sylwia</p>
         </div>
         <div className={styles.logoContainer}>
-          <img src="src/components/ContactForm/assets/logo2.png" alt="Logo" className={styles.logo} />
+          <img src={logo} alt="Logo" className={styles.logo} />
         </div>
         <p>&copy; 2024 by YELLOW TEAM</p>
       </div>
