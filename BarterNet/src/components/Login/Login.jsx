@@ -4,33 +4,36 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../config/firebase';
 import styles from './Login.module.css';
 import bgImage from './assets/login_background.webp';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Toast from '../Toastify/ToastContainer.jsx'; 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/UserHomePage');
+      toast.success('Logowanie udane');
+      setTimeout(() => navigate('/UserHomePage'), 3000);
     } catch (error) {
       console.error('Login failed:', error);
-      setError('Logowanie nieudane: ' + error.message);
+      toast.error('Logowanie nieudane: ' + error.message);
     }
   };
 
   return (
     <div className={styles.wrap}>
+      <Toast />
       <div className={styles.loginLeft}>
         <img src={bgImage} alt="Background" className={styles.loginImage} />
       </div>
       <section className={styles.loginRight}>
       <div className={styles.loginContainer}>
         <h1 className={styles.loginTitle}>Logowanie</h1>
-        {/* <p className={styles.loginSubtitle}>Wpisz poniżej swój adres email oraz hasło</p> */}
         <form onSubmit={handleLogin} className={styles.loginForm}>
           <div className={styles.inputGroup}>
             <label htmlFor="email">Email</label>
@@ -41,7 +44,6 @@ const Login = () => {
             <input type="password" id="password" placeholder="Wpisz hasło" value={password} onChange={(e) => setPassword(e.target.value)} required />
           </div>
           <Link to="/passwordreset" className={styles.forgotPassword}>Nie pamiętasz hasła?</Link>
-          {error && <p className={styles.error}>{error}</p>}
           <button type="submit" className={styles.loginButton}>ZALOGUJ</button>
           <Link to="/register" className={styles.registerLink}>Nie masz konta? Zarejestruj się</Link>
         </form>

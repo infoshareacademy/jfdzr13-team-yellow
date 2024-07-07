@@ -137,8 +137,8 @@ function EditListing() {
             await updateDoc(docRef, formData);
         }
 
-        toast.success("Ogłoszenie zostało zaktualizowane");
-        setTimeout(() => navigate("/MyAds"), 2000);
+        toast.success("Ogłoszenie zostało zaktualizowane", { duration: 3000 });
+        setTimeout(() => navigate("/MyAds"), 3000); // Zmieniono na 3000 ms
     } catch (err) {
         setError(err.message);
         console.error("Error updating document:", err);
@@ -350,7 +350,6 @@ function EditListing() {
         </button>
       </form>
       {message && <div className={styles.message}>{message}</div>}
-      {/* <Toast/> */}
     </div>
   );
 }
