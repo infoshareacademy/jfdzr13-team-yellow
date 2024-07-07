@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import styles from './ContactForm.module.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Toast from '../Toastify/ToastContainer.jsx'; // Zaktualizuj ścieżkę importu, jeśli jest inna
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -45,10 +48,10 @@ const ContactForm = () => {
       emailjs.sendForm('service_yellow', 'template_yj9mnxb', e.target, 'K0aAUIQ0dk0YO_ZyO')
         .then((result) => {
           console.log(result.text);
-          alert('Wiadomość została wysłana!');
+          toast.success('Wiadomość została wysłana!');
         }, (error) => {
           console.log(error.text);
-          alert('Wystąpił błąd podczas wysyłania wiadomości.');
+          toast.error('Wystąpił błąd podczas wysyłania wiadomości.');
         });
 
       // Reset formularza po wysłaniu
@@ -64,6 +67,7 @@ const ContactForm = () => {
 
   return (
     <div className={styles.contactContainer}>
+      <Toast />
       <div className={styles.contactInfo}>
         <h1 className={styles.header}>Kontakt</h1>
         <div className={styles.owners}>

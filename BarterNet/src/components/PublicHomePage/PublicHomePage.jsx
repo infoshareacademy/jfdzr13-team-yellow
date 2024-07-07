@@ -1,14 +1,14 @@
+import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 import { db } from "../../config/firebase";
-import styles from "./PublicHomePage.module.css";
 import ListingItem from "../ListingItem/ListingItem.jsx";
+import styles from "./PublicHomePage.module.css";
 
-import NoImage from "./assets/no-image.png";
 import Icon1 from "./assets/Icon1.png";
 import Icon2 from "./assets/Icon2.png";
 import Icon3 from "./assets/Icon3.png";
+import NoImage from "./assets/no-image.png";
 
 // Function to fetch random listings from Firebase
 const fetchRandomListings = async (numListings) => {
@@ -73,7 +73,7 @@ const PublicHomePage = () => {
   }, []);
 
   if (listings.length === 0) {
-    return <div>Loading...</div>;
+    return <div>Ładowanie...</div>;
   }
 
   return (

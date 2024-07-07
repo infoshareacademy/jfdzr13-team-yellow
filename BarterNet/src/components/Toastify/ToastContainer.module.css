@@ -1,5 +1,21 @@
 .toast {
-  font-size: 32px;
-  width: 500px;
-  line-height: 1.2em;
+  font-size: 14px;
+  width: auto;
+  line-height: 1.5em;
+  border-radius: 8px;
+  color: #333;
+  padding: 16px;
+}
+
+.Toastify__toast--light {
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+.Toastify__toast-body {
+  display: flex;
+}
+
+.Toastify__progress-bar--light {
+  background-color: #007bff;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../../config/firebase';
+import Content from "../Content/Content.component";
 import styles from './PasswordsReset.module.css';
 
 const PasswordsReset = () => {
@@ -18,6 +19,7 @@ const PasswordsReset = () => {
   };
 
   return (
+    <Content>
     <div className={styles.wrap}>
       <div className={styles.loginRight}>
         <div className={styles.loginContainer}>
@@ -43,6 +45,7 @@ const PasswordsReset = () => {
         </div>
       </div>
     </div>
+    </Content>
   );
 };
 
