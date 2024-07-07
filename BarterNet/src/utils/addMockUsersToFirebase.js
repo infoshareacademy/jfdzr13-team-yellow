@@ -29,7 +29,8 @@ export const addMockUsersToFirebase = async () => {
           lastName: mUser.lastName,
           city: mUser.city,
           phone: mUser.phone,
-          description: mUser.description
+          description: mUser.description,
+          avatarUrl: mUser.avatarUrl // Add avatarUrl here
         });
       }
 
