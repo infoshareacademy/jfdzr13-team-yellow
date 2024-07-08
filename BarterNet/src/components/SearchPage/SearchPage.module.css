@@ -180,3 +180,176 @@ main .listings {
   gap: 15px;
   grid-template-columns: repeat(3, 1fr);
 }
+
+
+@media (max-width: 1024px) {
+  main .search,
+  main .listings {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .searchForm__textFields label {
+    width: 100%;
+  }
+
+  .listings__group {
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  main .search,
+  main .listings {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .searchForm__textFields {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .searchForm__textFields label {
+    width: 100%;
+  }
+
+  .searchForm__categoryWrap {
+    height: auto;
+  }
+
+  .listings__group {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 450px) {
+  .search h1,
+  .listings h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .searchForm__typeBtn {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+
+  .searchForm__textFields label input {
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .searchForm__filter {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .searchForm__filterBtn {
+    font-size: 10px;
+    padding: 3px 10px;
+  }
+
+  .searchForm__submitBtn {
+    padding: 10px 60px;
+    width: 80%;
+  }
+
+  .searchForm__categoryButtons {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .searchForm__categoryBtn {
+    width: 60px;
+    height: 60px;
+  }
+
+  .searchForm__categoryBtn span {
+    padding-top: 70px;
+    width: 100px;
+  }
+
+  .listings__group {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 375px) {
+  .search h1,
+  .listings h1 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .searchForm__typeBtn {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .searchForm__textFields label input {
+    font-size: 12px;
+    padding: 8px;
+    width: 100%;
+  }
+
+  .searchForm__filterBtn {
+    font-size: 8px;
+    padding: 2px 8px;
+  }
+
+  .searchForm__submitBtn {
+    padding: 8px 40px;
+    width: 80%;
+  }
+
+  .searchForm__categoryButtons {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .searchForm__categoryBtn {
+    width: 50px;
+    height: 50px;
+  }
+
+  .searchForm__categoryBtn span {
+    padding-top: 50px;
+    width: 80px;
+  }
+
+  .listings__group {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .search,
+  .listings {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .searchForm__textFields {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .searchForm__textFields label {
+    width: 100%;
+  }
+
+  .searchForm__categoryWrap {
+    height: auto;
+    gap: 5px;
+  }
+}

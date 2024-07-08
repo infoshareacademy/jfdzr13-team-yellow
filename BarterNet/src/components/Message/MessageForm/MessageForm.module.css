@@ -5,6 +5,7 @@
   border: var(--input-border);
   border-radius: 10px;
   box-shadow: var(--box-shadow);
+  background-color: #f1f1f1;
 }
 
 .messageFormHeader {
@@ -80,8 +81,6 @@
   margin-top: 20px;
 }
 
-/* Responsywność dla urządzeń mobilnych */
-
 @media (max-width: 1024px) {
   .messageFormContainer {
     padding: 15px;
@@ -143,5 +142,35 @@
   .messageFormButton {
     padding: 5px 10px;
     font-size: 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .messageFormContainer {
+    padding: 8px;
+  }
+
+  .messageFormHeader {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .messageFormLabel {
+    font-size: 12px;
+  }
+
+  .messageFormInput,
+  .messageFormTextarea {
+    font-size: 10px;
+    padding: 8px;
+  }
+
+  .messageFormTextarea {
+    height: 40px;
+  }
+
+  .messageFormButton {
+    padding: 4px 8px;
+    font-size: 9px;
   }
 }
