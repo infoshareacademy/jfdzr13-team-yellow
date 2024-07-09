@@ -137,7 +137,6 @@ textarea {
   }
   .contactInfo,
   .contactForm {
-    /* flex: 1; */
     display: flex;
     flex-direction: column;
     width: calc(100% - 22px);
@@ -163,5 +162,58 @@ textarea {
 @media (max-width: 522px) {
   .contactContainer {
     width: 350px;
+  }
+  .contactForm,
+  .contactInfo {
+    width: 100%;
+    padding: 10px;
+  }
+  .contactInfo h1,
+  .contactInfo h3 {
+    font-size: 1.2rem;
+  }
+  .contactForm h2 {
+    font-size: 1.2rem;
+  }
+  .formGroup label {
+    font-size: 16px;
+  }
+  .formGroup input,
+  .formGroup textarea {
+    font-size: 14px;
+  }
+  .submitButton {
+    font-size: 16px;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .contactContainer {
+    width: 100%;
+    padding: 10px;
+  }
+  .contactForm,
+  .contactInfo {
+    width: 100%;
+    padding: 10px;
+  }
+  .contactInfo h1,
+  .contactInfo h3 {
+    font-size: 1rem;
+  }
+  .contactForm h2 {
+    font-size: 1rem;
+  }
+  .formGroup label {
+    font-size: 14px;
+  }
+  .formGroup input,
+  .formGroup textarea {
+    font-size: 12px;
+  }
+  .submitButton {
+    font-size: 14px;
+    padding: 6px 8px;
   }
 }

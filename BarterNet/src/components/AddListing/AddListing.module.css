@@ -196,6 +196,23 @@
   text-align: center;
 }
 
+@media (max-width: 1024px) {
+  .addListingContainer {
+    width: 80%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 720px) {
+  .header {
+    font-size: 2rem;
+  }
+
+  .addListingContainer {
+    width: 90%;
+  }
+}
+
 @media (max-width: 530px) {
   .addListingContainer {
     width: 380px;
@@ -212,5 +229,38 @@
   .previewImage {
     width: 60px;
     height: 60px;
+  }
+}
+
+@media (max-width: 375px) {
+  .addListingContainer {
+    width: 300px;
+  }
+
+  .header {
+    font-size: 1.5rem;
+  }
+
+  .predefinedImage {
+    width: 30px;
+    height: 30px;
+  }
+
+  .previewImage {
+    width: 50px;
+    height: 50px;
+  }
+
+  .toggleButton {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+
+  .addListingInput,
+  .addListingTextarea,
+  .addListingFileInput,
+  .addListingSelect {
+    font-size: 14px;
+    padding: 10px;
   }
 }

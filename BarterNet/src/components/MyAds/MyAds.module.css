@@ -22,18 +22,6 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-@media (max-width: 1024px) {
-  .gridContainer {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 720px) {
-  .gridContainer {
-    grid-template-columns: 1fr;
-  }
-}
-
 .emptyMessage {
   display: flex;
   flex-direction: column;
@@ -63,4 +51,57 @@
 
 .emptyMessage button:hover {
   background-color: var(--accent-color);
+}
+
+@media (max-width: 1024px) {
+  .gridContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 450px) {
+  .header {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .emptyMessage p {
+    font-size: 0.875rem;
+  }
+
+  .emptyMessage button {
+    font-size: 0.875rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .header {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .gridContainer {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .emptyMessage p {
+    font-size: 0.75rem;
+  }
+
+  .emptyMessage button {
+    font-size: 0.75rem;
+    padding: 8px;
+  }
 }

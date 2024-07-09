@@ -216,4 +216,91 @@
   .adImage {
     width: 100px;
   }
+  .description {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .editButton,
+  .deleteButton {
+    padding: 8px;
+    margin: 5px;
+  }
+
+  .exchangeButton {
+    padding: 8px;
+    margin-top: 10px;
+  }
 }
+
+@media (max-width: 375px) {
+  .generalInfo {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .adMeta {
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .adContent {
+    padding: 5px;
+  }
+
+  .gallery {
+    gap: 2px;
+  }
+
+  .adImage {
+    width: 90px;
+  }
+
+  .description {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .editButton,
+  .deleteButton {
+    font-size: 12px;
+    padding: 5px;
+    margin: 5px;
+  }
+
+  .exchangeButton {
+    font-size: 14px;
+    padding: 5px;
+    margin-top: 10px;
+  }
+  
+  .modalContent {
+    padding: 15px;
+  }
+
+  .confirmButton,
+  .cancelButton {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+
+  .userInfo {
+    margin-top: 10px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .userName {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+

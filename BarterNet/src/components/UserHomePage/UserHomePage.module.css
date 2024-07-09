@@ -85,7 +85,48 @@ body {
   font-family: var(--font-secondary);
 }
 
+@media (max-width: 1024px) {
+  .backgroundContainer {
+    height: 600px;
+  }
+  .tileContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .backgroundContainer {
+    height: 500px;
+  }
+  .accountContainer {
+    padding: 20px;
+  }
+  .tileContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .accountTile {
+    padding: 30px;
+  }
+  .tileLabel {
+    font-size: 1.2rem;
+  }
+  .tileDescription {
+    font-size: 0.8rem;
+  }
+  .icon {
+    width: 25px;
+    height: 25px;
+    padding: 7px;
+  }
+}
+
 @media (max-width: 720px) {
+  .backgroundContainer {
+    height: 700px;
+  }
+
   .tileContainer {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -104,24 +145,23 @@ body {
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 450px) {
+  .backgroundContainer {
+    height: 600px;
+  }
   .tileContainer {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 15px;
   }
-
   .accountTile {
     padding: 20px;
   }
-
   .tileLabel {
     font-size: 1rem;
   }
-
   .tileDescription {
     font-size: 0.7rem;
   }
-
   .icon {
     width: 20px;
     height: 20px;
