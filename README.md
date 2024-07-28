@@ -1,15 +1,15 @@
-# BarterNet
+# Opis
 
-BarterNet to platforma wymiany usług i rzeczy, umożliwiająca użytkownikom dodawanie ogłoszeń oraz komunikację między sobą poprzez wysyłanie wiadomości.
+BarterNet to platforma nieodpłatnej wymiany usług i rzeczy, umożliwiająca użytkownikom dodawanie ogłoszeń oraz komunikację między sobą poprzez wysyłanie wiadomości.
 
 ## Funkcjonalności
 
-- **Rejestracja i logowanie:** Użytkownicy mogą tworzyć konta, logować się oraz zarządzać swoim profilem.
+- **Rejestracja i logowanie:** Użytkownicy mogą tworzyć oraz usuwać konta, logować się, resetować hasło, a także zarządzać swoim profilem, w tym edytować swoje dane.
 - **Dodawanie ogłoszeń:** Użytkownicy mogą dodawać nowe ogłoszenia, edytować je oraz usuwać.
-- **Wyszukiwanie ogłoszeń:** Użytkownicy mogą przeglądać i wyszukiwać dostępne ogłoszenia.
+- **Wyszukiwanie ogłoszeń:** Użytkownicy mogą przeglądać i wyszukiwać dostępne ogłoszenia w oparciu o filtry: słowo kluczowe, kategoria, lokalizacja.
 - **Wiadomości:** Użytkownicy mogą wysyłać i odbierać wiadomości dotyczące ogłoszeń.
 
-## Technologia
+## Stos Technologiczny
 
 Projekt został zrealizowany przy użyciu następujących technologii:
 
@@ -18,45 +18,25 @@ Projekt został zrealizowany przy użyciu następujących technologii:
 - **EmailJS:** Usługa do wysyłania wiadomości e-mail z poziomu aplikacji webowej.
 - **CSS:** Kaskadowe arkusze stylów do stylizacji komponentów.
 
-## Instalacja
+Projekt został wykonany przy zastosowaniu metodologii SCRUM w oparciu o narzędzie JIRA.
 
-1. Sklonuj repozytorium:
-   ```sh
-   git clone https://github.com/infoshareacademy/jfdzr13-team-yellow.git
-   ```
+## Strona Projektu
 
-2. Przejdź do katalogu projektu:
-   ```sh
-   cd barternet
-   ```
-
-3. Zainstaluj zależności:
-   ```sh
-   npm install
-   ```
-
-4. Skonfiguruj Firebase:
-   - Utwórz projekt na Firebase.
-   - Skopiuj plik konfiguracyjny Firebase do `src/config/firebase.js`.
-
-5. Uruchom aplikację:
-   ```sh
-   npm start
-   ```
-
-## Dane do logowania
-
-Możesz zalogować się przy użyciu poniższych danych testowych:
-
-
-### Konto Użytkownika
-
-- **Email:** user1@barternet.com
-- **Hasło:** Test1234
+Strona projektu jest opublikowana pod adresem: [Barternet](https://barternet.netlify.app/)
 
 ## Autorzy
 
-Projekt został zrealizowany przez zespół **Yellow Team** w ramach kursu programowania.
+Projekt został zrealizowany przez zespół **Yellow Team** w składzie:
+
+- Sylwia Konopacka-Bąk
+  - Email: [sylwia.konopacka.bak@gmail.com](mailto:sylwia.konopacka.bak@gmail.com)
+  - LinkedIn: [Sylwia Konopacka-Bąk](https://www.linkedin.com/in/sylwia-konopacka-b%C4%85k/)
+- Magdalena Głowienka
+  - Email: [magdalena.glowienka92@gmail.com](mailto:magdalena.glowienka92@gmail.com)
+  - LinkedIn: [Magdalena Głowienka](https://www.linkedin.com/in/magdalena-g%C5%82owienka-868685102/)
+- Sebastian Glonek
+  - Email: [sebastian.glonek86@gmail.com](mailto:sebastian.glonek86@gmail.com)
+  - LinkedIn: [Sebastian Glonek](https://www.linkedin.com/in/sebastian-glonek-54b469287/)
 
 ## Licencja
 
@@ -65,5 +45,7 @@ Ten projekt jest licencjonowany na warunkach licencji MIT.
 ---
 
 Zapraszamy do zgłaszania problemów oraz sugestii dotyczących projektu poprzez system zgłoszeń w repozytorium GitHub.
-```
 
+---
+
+Dziękujemy za zainteresowanie naszym projektem!
